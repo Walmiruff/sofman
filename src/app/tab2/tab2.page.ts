@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store, select } from '@ngrx/store';
+import { Observable } from 'rxjs';
 
 import { AppState } from '../store/models/app-state.model';
 import { selectAllOrdens } from '../store/selectors/ordem.selectors';
@@ -12,6 +13,7 @@ import { selectAllOrdens } from '../store/selectors/ordem.selectors';
 })
 export class Tab2Page implements OnInit {
 
+  ordens$: Observable<any>;
 
   constructor(
     private store: Store<AppState>,
@@ -19,10 +21,11 @@ export class Tab2Page implements OnInit {
 
 
   ngOnInit() {
-    const ordens$ = this.store
+    this.ordens$ = this.store
     .pipe(
       select(selectAllOrdens)
-    )
+    );
+
   }
 
 }

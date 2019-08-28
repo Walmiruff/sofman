@@ -31,10 +31,12 @@
   </ion-row>
 
 <ng-container *ngIf="ordens$ | async as ordens; else elseTemplate">
-  <div *ngFor="let ordem of ordens['entities']">
+  <div *ngFor="let ordem of ordens">
     <p> <a [routerLink]="[ '/tabs/tab2', ordem.id ]">{{ ordem.id }}.</a> {{ ordem.filial }}</p>
   </div>
 </ng-container>
+
+
 <ng-template #elseTemplate>
  Carregando...
 </ng-template>
