@@ -1,9 +1,43 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>
-      Tab Two
-    </ion-title>
+    <ion-row>
+      <div>
+        <img class="logo" src="assets/img/logosmall.png">
+      </div>
+        <ion-title>
+          Ordem de Serviço
+        </ion-title>
+    </ion-row>
   </ion-toolbar>
 </ion-header>
 
-<ion-content></ion-content>
+<ion-content fullscreen class="ion-padding">
+  <ion-row>
+  
+      <div class="wrapper">
+        <ion-icon name="barcode"></ion-icon>
+      </div>
+ 
+    <ion-col size="10">
+      <div class="container">
+        <ion-searchbar animated placeholder="Pesquisar Ordens"></ion-searchbar>
+      </div>
+    </ion-col>
+   
+      <div class="wrapper">
+        <ion-icon name="funnel"></ion-icon>
+      </div>
+   
+  </ion-row>
+
+<ng-container *ngIf="ordens$ | async as ordens; else elseTemplate">
+  <div *ngFor="let ordem of ordens['entities']">
+    <p> <a [routerLink]="[ '/tabs/tab2', ordem.id ]">{{ ordem.id }}.</a> {{ ordem.filial }}</p>
+  </div>
+</ng-container>
+<ng-template #elseTemplate>
+ Carregando...
+</ng-template>
+ 
+
+</ion-content>
