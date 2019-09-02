@@ -6,6 +6,7 @@ import { AppState } from '../store/models/app-state.model';
 import { selectAllOrdens } from '../store/selectors/ordem.selectors';
 
 
+
 @Component({
   selector: 'app-tab2',
   templateUrl: 'tab2.page.html',

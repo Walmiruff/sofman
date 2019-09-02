@@ -1,14 +1,15 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>tab2-details</ion-title>
+    <ion-title>Ordem Detalhes</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
 
-  <ng-container *ngIf="ordem$ | async as ordem ; else elseTemplate">
-        <div *ngFor="let item  of ordem | filterOrdem: ordemId">
-               <p>{{ item.id }}</p>
+  <ng-container *ngIf="ordens$ | async as ordens ; else elseTemplate">
+        <div *ngFor="let entities  of ordens | filterOrdem: ordemId" (click)="openModal()">
+               <p>{{ entities.id }}</p>
+               <p>{{ entities.observacao }}</p>
         </div>
   </ng-container>
   <ng-template #elseTemplate>

@@ -3,7 +3,7 @@ import { OrdensState } from '../reducers/ordem.reducer';
 
 import * as fromOrdem from '../reducers/ordem.reducer';
 
-export const selectOrdensState = createFeatureSelector<OrdensState>("ordens");
+export const selectOrdensState = createFeatureSelector<OrdensState>('ordem');
 
 
 export const selectAllOrdens = createSelector(

@@ -1,5 +1,6 @@
-import { Action, UPDATE } from '@ngrx/store';
+import { Action } from '@ngrx/store';
 import { IOrdem } from './../models/ordem.model';
+import { Update } from '@ngrx/entity';
 
 export enum OrdemActionTypes {
     ALLORDEMREQUESTED = '[ORDEM TAB2] All Ordem Requested',
@@ -21,12 +22,7 @@ export class ALLORDEMLOADED implements Action {
 
 export class UPDATEORDEM implements Action {
     readonly type = OrdemActionTypes.UPDATEORDEM;
-    constructor (
-        public payload:{
-            id: string | number,
-            changes: Partial<IOrdem>
-         }
-    ){}
+    constructor ( public payload: { ordem: Update<IOrdem>}){}
 }
 
 

@@ -1,5 +1,5 @@
 export interface IOrdem {
-      id: number;
+      id: string | number;
       filial: string;
       ordem:  string |number;
       data: string | Date;

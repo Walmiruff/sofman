@@ -10,7 +10,7 @@ export interface OrdensState extends EntityState<IOrdem> {
 export const adapter: EntityAdapter<IOrdem> = createEntityAdapter<IOrdem>();
 
 
-export const initialOrdemState: OrdensState = adapter.getInitialState()
+export const initialOrdemState: OrdensState = adapter.getInitialState();
 
 
 export function OrdemReducer(state = initialOrdemState, action: OrdemAction): OrdensState {
@@ -18,10 +18,7 @@ export function OrdemReducer(state = initialOrdemState, action: OrdemAction): Or
         case OrdemActionTypes.ALLORDEMLOADED:
             return adapter.addAll(action.payload.ordens , state);
         case OrdemActionTypes.UPDATEORDEM:
-            return Object.assign({}, state, {
-                id: action.payload.id,
-                changes: action.payload.changes
-            })
+            return adapter.updateOne(action.payload.ordem, state);
         default:
             return state;
     }
@@ -29,5 +26,8 @@ export function OrdemReducer(state = initialOrdemState, action: OrdemAction): Or
 }
 
 export const {
-    selectAll
+    selectAll,
+    selectEntities,
+    selectIds,
+    selectTotal
 } = adapter.getSelectors();

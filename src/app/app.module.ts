@@ -11,6 +11,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+import { Tab2FormPageModule } from './tab2-form/tab2-form.module';
 
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
@@ -28,6 +29,7 @@ import { MaterialReducer } from './store/reducers/apontamento_de_materiais.reduc
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    Tab2FormPageModule,
     IonicModule.forRoot(),
     StoreModule.forRoot({
       ordem: OrdemReducer,

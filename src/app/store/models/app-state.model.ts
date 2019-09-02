@@ -5,9 +5,9 @@ import { IImg } from './img.model';
 import { ITarefa } from './tarefa.model';
 
 export interface AppState {
-    readonly ordem: IOrdem[];
-    readonly material: IAptMaterial[];
-    readonly hora: IAptHora[];
-    readonly img: IImg[];
-    readonly tarefa: ITarefa[]; 
+    readonly ordens: IOrdem[];
+    readonly materiais: IAptMaterial[];
+    readonly horas: IAptHora[];
+    readonly imgs: IImg[];
+    readonly tarefas: ITarefa[]; 
 }

@@ -9,7 +9,7 @@ import { IOrdem } from 'src/app/store/models/ordem.model';
 })
 export class OrdemService {
 
-  private url = environment.api + 'ordens/' ;
+  private url = environment.api + 'ordens/' ; // api mySql
 
   constructor(private http: HttpClient) { }
 
@@ -17,7 +17,5 @@ export class OrdemService {
    return  this.http.get<IOrdem[]>(this.url);
   }
 
-  findOrdemById(id: number) {
-    return  this.http.get<IOrdem>(this.url + id);
-   }
+  
 }
