@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavParams, ModalController } from '@ionic/angular';
+import { ModalController } from '@ionic/angular';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Update } from '@ngrx/entity';
 import { Store } from '@ngrx/store';
@@ -20,7 +20,6 @@ export class Tab2FormPage implements OnInit {
   formulario: FormGroup;
 
   constructor(
-    private navParams: NavParams,
     private modalController: ModalController,
     private formBuilder: FormBuilder,
     private store: Store<AppState>,

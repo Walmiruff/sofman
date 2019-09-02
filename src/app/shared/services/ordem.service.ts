@@ -16,6 +16,5 @@ export class OrdemService {
   getOrdem() {
    return  this.http.get<IOrdem[]>(this.url);
   }
-
   
 }

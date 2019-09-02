@@ -35,7 +35,6 @@ export class Tab2DetailsPage implements OnInit {
         select(selectAllOrdens)
       );
 
-
   }
 
   async openModal() {

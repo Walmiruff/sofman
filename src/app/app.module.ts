@@ -12,6 +12,12 @@ import { AppComponent } from './app.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { Tab2FormPageModule } from './tab2-form/tab2-form.module';
+import { environment } from '../environments/environment';
+
+import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireModule } from '@angular/fire';
+
 
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
@@ -31,6 +37,9 @@ import { MaterialReducer } from './store/reducers/apontamento_de_materiais.reduc
     HttpClientModule,
     Tab2FormPageModule,
     IonicModule.forRoot(),
+    AngularFireDatabaseModule,
+    AngularFirestoreModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
     StoreModule.forRoot({
       ordem: OrdemReducer,
       material: MaterialReducer
