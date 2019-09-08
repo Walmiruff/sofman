@@ -1,0 +1,59 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Editar Ordem</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+
+<form [formGroup]="formulario"  class="appointment-form2">
+
+  
+  <ion-list lines="full" class="ion-no-margin ion-no-padding">
+   
+    <ion-item>
+      <ion-label position="stacked">Código</ion-label>
+      <ion-input type="text" formControlName="codigo" id="codigo"></ion-input>
+    </ion-item>
+
+  
+    <ion-item>
+      <ion-label position="stacked">Data</ion-label>
+      <ion-datetime  displayFormat="DD MM YYYY" formControlName="data" id="data"></ion-datetime>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Descrição</ion-label>
+      <ion-input type="text" formControlName="descricao" id="descricao"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Quantidade</ion-label>
+      <ion-input type="text" formControlName="quantidade" id="quantidade"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Valor</ion-label>
+      <ion-input type="text" formControlName="valor" id="valor"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Nº Série Antig</ion-label>
+      <ion-input type="text" formControlName="n_serie_antiga" id="n_serie_antiga"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Nº Série Novo</ion-label>
+      <ion-input formControlName="n_serie_novo" id="n_serie_novo"></ion-input>
+    </ion-item>
+
+  </ion-list>
+
+  <div class="ion-padding">
+    <ion-button expand="block" (click)="send()" class="ion-no-margin">Salvar</ion-button>
+  </div>
+
+</form>
+
+</ion-content>

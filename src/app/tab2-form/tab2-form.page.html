@@ -5,30 +5,78 @@
 </ion-header>
 
 <ion-content>
-{{passedId}}
+
 
 <form [formGroup]="formulario"  class="appointment-form2">
 
-  <ion-row>
+  
+  <ion-list lines="full" class="ion-no-margin ion-no-padding">
+   
+    <ion-item>
+      <ion-label position="stacked">Filial</ion-label>
+      <ion-input type="text" formControlName="filial" id="filial"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Ordem</ion-label>
+      <ion-input type="text" formControlName="ordem" id="ordem"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Data</ion-label>
+      <ion-datetime  displayFormat="DD MM YYYY" formControlName="data" id="data"></ion-datetime>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Equipamento</ion-label>
+      <ion-input type="text" formControlName="equipamento" id="equipamento"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Tipo MNT</ion-label>
+      <ion-input type="text" formControlName="tipo_de_mnt" id="tipo_de_mnt"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Descrição</ion-label>
+      <ion-input type="text" formControlName="descricao" id="descricao"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Solicitante</ion-label>
+      <ion-input type="text" formControlName="solicitante" id="solicitante"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Data Prog</ion-label>
+      <ion-datetime displayFormat="DD MM YYYY HH:mm" formControlName="data_prog" id="data_prog"></ion-datetime>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Data Solic</ion-label>
+      <ion-datetime displayFormat="DD MM YYYY HH:mm" formControlName="data_solic" id="data_solic"></ion-datetime>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Setor Solic</ion-label>
+      <ion-input type="text" formControlName="setor_solic" id="setor_solic"></ion-input>
+    </ion-item>
     
-    <ion-col size="12">
-      <input type="text"   formControlName="observacao" id="observacao"  placeholder="observações">
-    </ion-col>
+    <ion-item>
+      <ion-label position="stacked" >Observações</ion-label>
+      <ion-textarea  formControlName="observacao" id="observacao"></ion-textarea>
+    </ion-item>
 
+    <ion-item>
+      <ion-label position="stacked">Status OS</ion-label>
+      <ion-input type="text" formControlName="status_da_os" id="status_da_os"></ion-input>
+    </ion-item>
+ 
+  </ion-list>
 
-  </ion-row>
-
-
-
-  <ion-row>
-
-    <ion-col size="12">
-      <button round Class="btn btn-primary" (click)="sendOrdem()">Salvar</button>
-    </ion-col>
-
-
-  </ion-row>
-
+  <div class="ion-padding">
+    <ion-button expand="block" (click)="sendOrdem()" class="ion-no-margin">Salvar</ion-button>
+  </div>
 
 </form>
 

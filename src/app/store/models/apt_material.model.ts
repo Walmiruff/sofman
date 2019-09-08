@@ -1,4 +1,5 @@
 export interface IAptMaterial {
+    id: string | number;
     codigo: number;
     data: string | Date;
     fk: number;

@@ -43,6 +43,26 @@ const routes: Routes = [
         ]
       },
       {
+        path: 'tab2/:ordemid/apt-mat',
+        children: [
+          {
+            path: '',
+            loadChildren: () =>
+              import('../tab2-apt-mat/tab2-apt-mat.module').then(m => m.Tab2AptMatPageModule)
+          }
+        ]
+      },
+      {
+        path: 'tab2/:ordemid/apt-hora',
+        children: [
+          {
+            path: '',
+            loadChildren: () =>
+              import('../tab2-apt-hora/tab2-apt-hora.module').then(m => m.Tab2AptHoraPageModule)
+          }
+        ]
+      },
+      {
         path: '',
         redirectTo: '/tabs/tab1',
         pathMatch: 'full'
@@ -55,4 +75,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class TabsPageRoutingModule {}
+export class TabsPageRoutingModule { }

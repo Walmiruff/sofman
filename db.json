@@ -48,8 +48,9 @@
   ],
   "apontamento_de_materiais": [
     {
+      "id": 1,
       "codigo": 39068,
-      "data": "",
+      "data": "29/09/2017",
       "fk": 1,
       "descricao": "Difusor tamanho 5",
       "quantidade": 1,
@@ -58,8 +59,9 @@
       "n_serie_novo": ""
     },
     {
+      "id": 2,
       "codigo": 39069,
-      "data": "",
+      "data": "29/09/2017",
       "fk": 1,
       "descricao": "Fita Black Type",
       "quantidade": 2,
@@ -68,9 +70,10 @@
       "n_serie_novo": ""
     },
     {
+      "id": 3,
       "codigo": 39070,
-      "data": "",
-      "fk": 2,
+      "data": "29/09/2017",
+      "fk": 1,
       "descricao": "Difusor tamanho 5",
       "quantidade": 1,
       "valor": "R$ 12,00",
@@ -78,9 +81,10 @@
       "n_serie_novo": ""
     },
     {
+      "id": 4,
       "codigo": 39071,
       "data": "",
-      "fk": 2,
+      "fk": 1,
       "descricao": "Fita Black Type",
       "quantidade": 2,
       "valor": "R$ 12,00",
@@ -88,6 +92,7 @@
       "n_serie_novo": ""
     },
     {
+      "id": 5,
       "codigo": 39072,
       "data": "",
       "fk": 3,
@@ -98,6 +103,7 @@
       "n_serie_novo": ""
     },
     {
+      "id": 6,
       "codigo": 39073,
       "data": "",
       "fk": 3,
@@ -162,12 +168,12 @@
   ],
   "img": [
     {
-      "id":1,
+      "id": 1,
       "url": "",
       "obs": "teste envio de imagem"
     },
     {
-      "id":2,
+      "id": 2,
       "url": "",
       "obs": "teste envio de imagem2"
     },
@@ -178,19 +184,19 @@
       "obs": "teste envio de imagem"
     },
     {
-      "id":4,
+      "id": 4,
       "fk": 2,
       "url": "",
       "obs": "teste envio de imagem2"
     },
     {
-      "id":5,
+      "id": 5,
       "fk": 3,
       "url": "",
       "obs": "teste envio de imagem"
     },
     {
-      "id":6,
+      "id": 6,
       "fk": 3,
       "url": "",
       "obs": "teste envio de imagem2"

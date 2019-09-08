@@ -1,4 +1,7 @@
 export const environment = {
+  
+  api: 'http://localhost:3000/',// mudar para api mySql
+
   production: true,
   firebaseConfig : {
     apiKey: "AIzaSyBWWGKd6Mr3YWYYfLErAg9d8ZoHC93450s",

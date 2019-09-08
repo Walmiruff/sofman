@@ -1,11 +1,14 @@
 import { Action } from '@ngrx/store';
-import { IOrdem } from './../models/ordem.model';
 import { Update } from '@ngrx/entity';
+
+import { IOrdem } from './../models/ordem.model';
 
 export enum OrdemActionTypes {
     ALLORDEMREQUESTED = '[ORDEM TAB2] All Ordem Requested',
     ALLORDEMLOADED = '[ORDEM API] All Ordem Loaded',
-    UPDATEORDEM = '[ORDEM UPDATE] Update Ordem'   
+    ADDORDEM = '[ORDEM ADD] Add Material',
+    UPDATEORDEM = '[ORDEM UPDATE] Update Ordem',
+    REMOVEORDEM = '[ORDEM REMOVE] Remove Ordem'   
 }
 
 export class ALLORDEMREQUESTED implements Action {
@@ -19,6 +22,16 @@ export class ALLORDEMLOADED implements Action {
     constructor(public payload: { ordens:IOrdem[]}) {}
 }
 
+export class ADDORDEM implements Action{
+    readonly type = OrdemActionTypes.ADDORDEM;
+    constructor (public payload: { ordem: IOrdem }) {}
+}
+
+export class REMOVEORDEM implements Action{
+    readonly type = OrdemActionTypes.REMOVEORDEM;
+    constructor ( public payload: {id: number}){}
+}
+
 
 export class UPDATEORDEM implements Action {
     readonly type = OrdemActionTypes.UPDATEORDEM;
@@ -26,4 +39,4 @@ export class UPDATEORDEM implements Action {
 }
 
 
-export type OrdemAction = ALLORDEMREQUESTED | ALLORDEMLOADED | UPDATEORDEM;
+export type OrdemAction =  ADDORDEM | REMOVEORDEM | ALLORDEMREQUESTED | ALLORDEMLOADED | UPDATEORDEM;

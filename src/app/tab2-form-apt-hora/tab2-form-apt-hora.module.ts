@@ -1,17 +1,18 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 
 import { IonicModule } from '@ionic/angular';
 
-import { Tab2DetailsPage } from './tab2-details.page';
-import { FilterOrdemPipe } from '../shared/pipes/filter-ordem.pipe';
+import { Tab2FormAptHoraPage } from './tab2-form-apt-hora.page';
+
 
 const routes: Routes = [
   {
     path: '',
-    component: Tab2DetailsPage,
+    component: Tab2FormAptHoraPage
   }
 ];
 
@@ -19,9 +20,10 @@ const routes: Routes = [
   imports: [
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
     IonicModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [Tab2DetailsPage, FilterOrdemPipe]
+  declarations: [Tab2FormAptHoraPage]
 })
-export class Tab2DetailsPageModule {}
+export class Tab2FormAptHoraPageModule {}

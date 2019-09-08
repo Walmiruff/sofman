@@ -1,0 +1,115 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-row>
+      <div>
+        <img class="logo" src="assets/img/logosmall.png">
+      </div>
+      <ion-title>
+        Apontamento de Materiais
+      </ion-title>
+    </ion-row>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ng-container *ngIf="materiais$ | async as materiais ; else elseTemplate">
+
+    <ion-list>
+      <ion-item *ngFor="let entities of materiais | filter: ordemId">
+        <ion-grid>
+
+            <ion-row>
+                <ion-col size="5">
+                  <ion-label>Codigo</ion-label>
+                </ion-col>
+                <ion-col size="7">
+                    <P class="custom"> {{ entities.codigo }}</P>
+                </ion-col>
+             </ion-row>
+
+              <ion-row>
+                  <ion-col size="5">
+                    <ion-label>Data</ion-label>
+                  </ion-col>
+                  <ion-col size="7">
+                      <P class="custom"> {{ entities.data }}</P>
+                  </ion-col>
+              </ion-row>
+
+              <ion-row>
+                  <ion-col size="5">
+                    <ion-label>Descrição</ion-label>
+                  </ion-col>
+                  <ion-col size="7">
+                      <P class="custom"> {{ entities.descricao }}</P>
+                  </ion-col>
+              </ion-row>
+
+              <ion-row>
+                  <ion-col size="5">
+                    <ion-label>Quantidade</ion-label>
+                  </ion-col>
+                  <ion-col size="7">
+                      <P class="custom"> {{ entities.quantidade }}</P>
+                  </ion-col>
+              </ion-row>
+
+              <ion-row>
+                  <ion-col size="5">
+                    <ion-label>Valor</ion-label>
+                  </ion-col>
+                  <ion-col size="7">
+                      <P class="custom"> {{ entities.valor }}</P>
+                  </ion-col>
+              </ion-row>
+
+              <ion-row>
+                  <ion-col size="5">
+                    <ion-label>Nº Série Antig</ion-label>
+                  </ion-col>
+                  <ion-col size="5">
+                      <P class="custom"> {{ entities.n_serie_antiga }}</P>
+                  </ion-col>
+
+                  <ion-col size="2">
+                      <ion-button color="medium"  (click)="openModalUpdate(entities.id)">
+                          <ion-icon name="refresh"></ion-icon>
+                        </ion-button>
+                  </ion-col>
+              </ion-row>
+
+
+              <ion-row>
+                  <ion-col size="5">
+                    <ion-label>Nº Série Novo</ion-label>
+                  </ion-col>
+                  <ion-col size="5">
+                      <P class="custom"> {{ entities.n_serie_novo }}</P>
+                  </ion-col>
+                  <ion-col size="2">
+                        <ion-button color="medium" (click)="openConfirmRemove(entities.id)">
+                          <ion-icon name="trash"></ion-icon>
+                        </ion-button>
+                  </ion-col>
+              </ion-row>
+
+        </ion-grid>
+      </ion-item>
+    </ion-list>
+
+    <ion-fab horizontal="end" vertical="top" slot="fixed" edge>
+        <ion-fab-button (click)="openModalCreate()">
+          <ion-icon name="add"></ion-icon>
+        </ion-fab-button>
+    </ion-fab>
+
+  </ng-container>
+  <ng-template #elseTemplate>
+
+  </ng-template>
+
+
+
+
+</ion-content>

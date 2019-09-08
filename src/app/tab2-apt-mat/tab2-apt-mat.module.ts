@@ -1,27 +1,27 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
-import { Tab2DetailsPage } from './tab2-details.page';
-import { FilterOrdemPipe } from '../shared/pipes/filter-ordem.pipe';
+import { Tab2AptMatPage } from './tab2-apt-mat.page';
+import { SharedPipesModule } from '../shared/pipes/shared-pipes.module';
+
 
 const routes: Routes = [
   {
     path: '',
-    component: Tab2DetailsPage,
+    component: Tab2AptMatPage
   }
 ];
 
 @NgModule({
   imports: [
     CommonModule,
-    FormsModule,
     IonicModule,
+    SharedPipesModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [Tab2DetailsPage, FilterOrdemPipe]
+  declarations: [Tab2AptMatPage]
 })
-export class Tab2DetailsPageModule {}
+export class Tab2AptMatPageModule {}
