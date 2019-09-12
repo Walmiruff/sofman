@@ -23,6 +23,8 @@
           <ion-input required formControlName="senha" type="password"></ion-input>
         </ion-item>
 
+
+
         <div class="ion-padding">
           <!-- <ion-button [routerLink]="[ '/tabs/tab1' ]" expand="block" type="submit" class="ion-no-margin">Entrar
           </ion-button> -->
@@ -32,6 +34,8 @@
         </div>
       </ion-list>
     </form>
-
-
+    <code>
+      LAT = {{lat}} <br> LONG = {{long}}
+    </code>
+    <ion-button a href='https://www.google.com/maps/@{{lat}},{{long}},15z'> Abri mapa</ion-button>
   </ion-content>
