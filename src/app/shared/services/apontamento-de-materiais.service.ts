@@ -8,12 +8,11 @@ import { IAptMaterial } from 'src/app/store/models/apt_material.model';
   providedIn: 'root'
 })
 export class ApontamentoDeMateriaisService {
-
-  private url = environment.api + 'apontamento_de_materiais/' ;
-
-  constructor(private http: HttpClient) { }
+  private url = environment.api + 'apontamentomaterial.php'; //
+  //private url = environment.api + 'apontamento_de_materiais/'
+  constructor(private http: HttpClient) {}
 
   getAptMaterial() {
-    return  this.http.get<IAptMaterial[]>(this.url);
-   }
+    return this.http.get<IAptMaterial[]>(this.url);
+  }
 }
