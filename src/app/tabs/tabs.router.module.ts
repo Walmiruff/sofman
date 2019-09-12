@@ -63,6 +63,16 @@ const routes: Routes = [
         ]
       },
       {
+        path: 'tab2/:ordemid/tarefa',
+        children: [
+          {
+            path: '',
+            loadChildren: () =>
+              import('../tab2-tarefa/tab2-tarefa.module').then(m => m.Tab2TarefaPageModule)
+          }
+        ]
+      },
+      {
         path: '',
         redirectTo: '/tabs/tab1',
         pathMatch: 'full'

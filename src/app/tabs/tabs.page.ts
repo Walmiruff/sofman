@@ -6,7 +6,7 @@ import { AppState } from '../store/models/app-state.model';
 import { ALLORDEMREQUESTED } from '../store/actions/ordem.action';
 import { ALLMATREQUESTED } from '../store/actions/apontamento_de_materiais.action';
 import { ALLHORAREQUESTED } from '../store/actions/apontamento_de_horas.action';
-
+import { ALLTAREFAREQUESTED } from '../store/actions/tarefas.action';
 
 @Component({
   selector: 'app-tabs',
@@ -25,6 +25,7 @@ export class TabsPage implements OnInit {
     this.store.dispatch(new ALLORDEMREQUESTED());
     this.store.dispatch(new ALLMATREQUESTED());
     this.store.dispatch(new ALLHORAREQUESTED());
+    this.store.dispatch(new ALLTAREFAREQUESTED());
   }
 
 
