@@ -3,16 +3,18 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  api: 'http://localhost:3000/',
+  // api: 'http://localhost:3000/',
+  api: 'http://localhost/web-server-softman/',
+
   production: false,
-  firebaseConfig : {
-    apiKey: "AIzaSyBWWGKd6Mr3YWYYfLErAg9d8ZoHC93450s",
-    authDomain: "sofman-15-09.firebaseapp.com",
-    databaseURL: "https://sofman-15-09.firebaseio.com",
-    projectId: "sofman-15-09",
-    storageBucket: "",
-    messagingSenderId: "726160937064",
-    appId: "1:726160937064:web:a70d7bdc505b3998"
+  firebaseConfig: {
+    apiKey: 'AIzaSyBWWGKd6Mr3YWYYfLErAg9d8ZoHC93450s',
+    authDomain: 'sofman-15-09.firebaseapp.com',
+    databaseURL: 'https://sofman-15-09.firebaseio.com',
+    projectId: 'sofman-15-09',
+    storageBucket: '',
+    messagingSenderId: '726160937064',
+    appId: '1:726160937064:web:a70d7bdc505b3998'
   }
 };
 
