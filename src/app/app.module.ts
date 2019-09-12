@@ -11,18 +11,17 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-
 import { environment } from '../environments/environment';
 
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireModule } from '@angular/fire';
-
+/** Geolocation */
+import { Geolocation } from '@ionic-native/geolocation/ngx';
 
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-
 
 import { OrdemReducer } from './store/reducers/ordem.reducer';
 import { MaterialReducer } from './store/reducers/apontamento_de_materiais.reducer';
@@ -61,20 +60,16 @@ import { Tab2FormTarefaPageModule } from './tab2-form-tarefa/tab2-form-tarefa.mo
       hora: HoraReducer,
       tarefa: TarefaReducer
     }),
-    EffectsModule.forRoot([
-      OrdemEffects,
-      MaterialEffects,
-      HoraEffects,
-      TarefaEffects
-    ]),
+    EffectsModule.forRoot([OrdemEffects, MaterialEffects, HoraEffects, TarefaEffects]),
     StoreDevtoolsModule.instrument(),
     AppRoutingModule
   ],
   providers: [
     StatusBar,
     SplashScreen,
+    Geolocation,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}
