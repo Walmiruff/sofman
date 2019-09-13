@@ -19,6 +19,9 @@ import { AngularFireModule } from '@angular/fire';
 /** Geolocation */
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 
+/** Barcode */
+import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
+
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
@@ -67,6 +70,7 @@ import { Tab2FormTarefaPageModule } from './tab2-form-tarefa/tab2-form-tarefa.mo
   providers: [
     StatusBar,
     SplashScreen,
+    BarcodeScanner,
     Geolocation,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],

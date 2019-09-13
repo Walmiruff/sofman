@@ -8,8 +8,8 @@ import { IOrdem } from 'src/app/store/models/ordem.model';
   providedIn: 'root'
 })
 export class OrdemService {
-  // private url = environment.api + 'ordens/'; // api mySql ordensservico
-  private url = environment.api + 'ordensservico.php';
+  private url = environment.api + 'ordens/'; // api mySql ordensservico
+  // private url = environment.api + 'ordensservico.php';
   constructor(private http: HttpClient) {}
 
   getOrdem() {

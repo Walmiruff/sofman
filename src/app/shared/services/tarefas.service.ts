@@ -8,9 +8,9 @@ import { ITarefa } from 'src/app/store/models/tarefa.model';
   providedIn: 'root'
 })
 export class TarefasService {
-  private url = environment.api + 'retornotarefas.php';
+  //private url = environment.api + 'retornotarefas.php';
 
-  //private url = environment.api + 'tarefas/';
+  private url = environment.api + 'tarefas/';
 
   constructor(private http: HttpClient) {}
 

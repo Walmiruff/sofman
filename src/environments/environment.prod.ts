@@ -1,6 +1,6 @@
 export const environment = {
-  // api: 'http://localhost:3000/',// mudar para api mySql
-  api: 'http://localhost/web-server-softman/',
+  api: 'http://localhost:3000/', // mudar para api mySql
+  // api: 'http://localhost/web-server-softman/',
 
   production: true,
   firebaseConfig: {
