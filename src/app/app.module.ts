@@ -16,9 +16,9 @@ import { environment } from '../environments/environment';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireModule } from '@angular/fire';
+
 /** Geolocation */
 import { Geolocation } from '@ionic-native/geolocation/ngx';
-
 /** Barcode */
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 
