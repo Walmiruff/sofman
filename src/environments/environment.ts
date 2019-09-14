@@ -3,7 +3,7 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  api: 'http://localhost:3000/',
+  api: 'http://localhost:3000/', // mudar para api mySql
   // api: 'http://localhost/web-server-softman/',
 
   production: false,

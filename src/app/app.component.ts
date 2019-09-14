@@ -29,7 +29,7 @@ export class AppComponent {
       if (this.platform.is('cordova')) {
       }
 
-      this.statusBar.styleDefault();
+      this.statusBar.styleBlackOpaque();
       this.splashScreen.hide();
     });
   }
