@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { ModalController } from '@ionic/angular';
 import { Update } from '@ngrx/entity';
@@ -10,6 +10,7 @@ import { UPDATEORDEM, ADDORDEM } from '../store/actions/ordem.action';
 import { selectAllOrdens } from '../store/selectors/ordem.selectors';
 
 import { FirebaseService } from '../shared/services/firebase.service';
+import { SignaturePad } from 'angular2-signaturepad/signature-pad';
 
 @Component({
   selector: 'app-tab2-form',
@@ -17,6 +18,22 @@ import { FirebaseService } from '../shared/services/firebase.service';
   styleUrls: ['./tab2-form.page.scss']
 })
 export class Tab2FormPage implements OnInit {
+  @ViewChild(SignaturePad, { static: false }) public signaturePad: SignaturePad;
+
+  @ViewChild(SignaturePad, { static: false }) public signaturePad2: SignaturePad;
+
+  signature = '';
+  isDrawing = false;
+
+  public signaturePadOptions: Object = {
+    // Check out https://github.com/szimek/signature_pad
+    minWidth: 2,
+    canvasWidth: 400,
+    canvasHeight: 100,
+    backgroundColor: '#f6fbff',
+    penColor: '#000000'
+  };
+
   passedId = null;
   formulario: FormGroup;
   ordens: IOrdem[];
@@ -101,5 +118,41 @@ export class Tab2FormPage implements OnInit {
   async closeModal() {
     const modalclose = await this.modalController.dismiss();
     return modalclose;
+  }
+  drawComplete() {
+    this.isDrawing = false;
+  }
+
+  drawStart() {
+    this.isDrawing = true;
+  }
+
+  savePadCliente() {
+    this.signature = this.signaturePad.toDataURL();
+    localStorage.setItem('savedSignature', this.signature);
+    this.signaturePad.clear();
+    // let toast = this.toastCtrl.create({
+    //   message: 'New Signature saved.',
+    //   duration: 3000
+    // });
+    // toast.present();
+  }
+  clearPad() {
+    this.signaturePad.clear();
+  }
+
+  savePadFuncionario() {
+    this.signature = this.signaturePad.toDataURL();
+    localStorage.setItem('savedSignature', this.signature);
+    this.signaturePad.clear();
+    // let toast = this.toastCtrl.create({
+    //   message: 'New Signature saved.',
+    //   duration: 3000
+    // });
+    // toast.present();
+  }
+
+  clearPadFuncionario() {
+    this.signaturePad2.clear();
   }
 }

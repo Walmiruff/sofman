@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { LoadingController, Platform } from '@ionic/angular';
-import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
+import { Platform, NavController } from '@ionic/angular';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
+import { MessageService } from '../shared/services/message.service';
+import { ApiService } from './../shared/services/api.service';
 
 @Component({
   selector: 'app-login',
@@ -11,69 +13,115 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
   styleUrls: ['./login.page.scss']
 })
 export class LoginPage implements OnInit {
+  private url = environment.api + 'login.php'; //
   public lat;
   public long;
 
-  login;
-  senha;
+  public type = 'password';
+  public showPass = false;
+  public loading;
+  public headers;
   form: FormGroup;
   constructor(
     private http: HttpClient,
-    private loadingCtrl: LoadingController,
-    private fb: FormBuilder,
+
+    private formBuilder: FormBuilder,
     private geolocation: Geolocation,
-    private platform: Platform
+    private platform: Platform,
+    private navctrl: NavController,
+    private api: ApiService,
+    public message: MessageService
   ) {
     if (platform.is('cordova')) {
       this.initLocation(this.lat, this.long);
     }
+    this.form = this.formBuilder.group({
+      login: [''],
+      senha: ['']
+    });
   }
 
-  private url = environment.api + 'login.php'; //
   ngOnInit() {
-    if (this.lat !== null && this.long !== null) {
-      this.form = this.fb.group({
-        login: [],
-        senha: [],
-        lat: this.lat,
-        long: this.long
-      });
+    if (this.api.getCredentials().login) {
+      this.navctrl.navigateForward('tabs/tab1');
+    } else {
+      return;
+    }
+  }
+  async login() {
+    const headers = new HttpHeaders();
+    headers.set('Accept', 'application/json');
+    headers.set('Content-Type', 'application/json');
+    try {
+      const data = {
+        login: this.form.value.login,
+        senha: this.form.value.senha
+      };
+      await this.message.showLoading('Verificando dados...', 'loading-login');
+      this.http.post(this.url, data, { headers }).subscribe(
+        (resp: any) => {
+          if (resp.login) {
+            const user = resp;
+            this.api.setCredentials(user.id, user.login, user.nome, user.email);
+            this.message.hideLoading('loading-login');
+            setTimeout(() => {
+              this.navctrl.navigateForward('tabs/tab1');
+            }, 100);
+          }
+        },
+        err => {
+          this.message.hideLoading('loading-login');
+          this.message.alert('Atenção', 'Ocorreu um erro ao efetuar login', 'OK');
+          return;
+        }
+      );
+    } catch (error) {}
+  }
+
+  async logar() {
+    const headers = new HttpHeaders();
+    headers.set('Accept', 'application/json');
+    headers.set('Content-Type', 'application/json');
+
+    const data = {
+      login: this.form.value.login,
+      senha: this.form.value.senha
+    };
+
+    await this.message.showLoading('Verificando dados...', 'loading-login');
+
+    this.http.post(this.url, data, { headers }).subscribe(
+      (res: any) => {
+        console.log(res);
+        if (res.id !== 0) {
+          setTimeout(() => {
+            this.navctrl.navigateForward('tabs/tab1');
+          }, 100);
+        } else {
+          this.message.hideLoading('loading-login');
+          this.message.alert('Atenção', 'Ocorreu um erro ao efetuar login', 'OK');
+          return;
+        }
+        this.message.hideLoading('loading-login');
+      },
+      erro => {
+        console.log(erro);
+        this.message.alert('Atenção', 'Ocorreu um erro ao efetuar login', 'OK');
+        this.message.hideLoading('loading-login');
+      }
+    );
+  }
+
+  showPassword() {
+    this.showPass = !this.showPass;
+
+    if (this.showPass) {
+      this.type = 'text';
+    } else {
+      this.type = 'password';
     }
   }
 
-  async postLogin(login, senha) {
-    const data = {
-      login,
-      senha,
-      lat: this.lat,
-      long: this.long
-    };
-    const headers = new HttpHeaders();
-    headers.set('Contetn-Type', 'application/json');
-    const islogin = this.http.post(this.url, data, { headers });
-    return islogin;
-  }
-  async doLogin() {
-    this.postLogin(this.login, this.senha).then(res => {
-      alert(JSON.stringify(res));
-    });
-    // localStorage.setItem('login', this.form.value.login);
-    // localStorage.setItem('senha', this.form.value.senha);
-    // let loading = await this.loadingCtrl.create({
-    //   message: 'Aguarde estamos verificando suas credenciais...'
-    // });
-    // loading.present();
-    // this.postLogin(this.login, this.senha).subscribe(
-    //   resp => {
-    //     console.log('Resposta apos login -->', JSON.stringify(resp));
-    //     localStorage.setItem('dadosUser', JSON.stringify(resp));
-    //     loading.dismiss();
-    //   },
-    //   error => {
-    //     console.log(error);
-    //   }
-    // );
-  }
   /** Funcao geolocation */
   async initLocation(lat, long) {
     try {

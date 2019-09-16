@@ -1,8 +1,14 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router, CanLoad, Route  } from '@angular/router';
+import {
+  CanActivate,
+  ActivatedRouteSnapshot,
+  RouterStateSnapshot,
+  Router,
+  CanLoad,
+  Route
+} from '@angular/router';
 import { Observable } from 'rxjs';
-
-
+import { ApiService } from './../services/api.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,15 +16,21 @@ import { Observable } from 'rxjs';
 export class AuthGuard implements CanActivate {
   codigoUsuario: string;
 
-  constructor(private router: Router) {
-    this.codigoUsuario = "1" // id do login do mySQL
+  constructor(private router: Router, private api: ApiService) {
+    //if (this.api.getCredentials().iduser) {
+    this.codigoUsuario = api.getCredentials().iduser; // id do login do mySQL
+    // }
+    console.log('CanGuard id user' + api.getCredentials().iduser);
   }
 
-  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
+  canActivate(
+    route: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot
+  ): Observable<boolean> | Promise<boolean> | boolean {
     return this.verificarAcesso();
   }
 
-  canLoad( route: Route ): Observable<boolean> | Promise<boolean> | boolean {
+  canLoad(route: Route): Observable<boolean> | Promise<boolean> | boolean {
     return this.verificarAcesso();
   }
 

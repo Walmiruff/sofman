@@ -46,13 +46,15 @@ import { Tab2FormTarefaPageModule } from './tab2-form-tarefa/tab2-form-tarefa.mo
   entryComponents: [],
   imports: [
     BrowserModule,
+
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    Tab2FormPageModule,
-    Tab2FormAptMatPageModule,
-    Tab2FormAptHoraPageModule,
-    Tab2FormTarefaPageModule,
+
+    // Tab2FormPageModule,
+    // Tab2FormAptMatPageModule,
+    //Tab2FormAptHoraPageModule,
+    //Tab2FormTarefaPageModule,
     IonicModule.forRoot(),
     AngularFireDatabaseModule,
     AngularFirestoreModule,

@@ -3,16 +3,25 @@ import { environment } from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 
 import { IOrdem } from 'src/app/store/models/ordem.model';
+import { ApiService } from './api.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class OrdemService {
-  private url = environment.api + 'ordens/'; // api mySql ordensservico
-  // private url = environment.api + 'ordensservico.php';
-  constructor(private http: HttpClient) {}
+  private url = environment.api + '?ordensservico&'; // api mySql ordensservico
 
+  constructor(private http: HttpClient, private api: ApiService) {}
   getOrdem() {
-    return this.http.get<IOrdem[]>(this.url);
+    const idcliente = this.api.getCredentials().iduser;
+    const logincliente = this.api.getCredentials().login;
+
+    if (idcliente && logincliente) {
+      return this.http.get<IOrdem[]>(
+        `${this.url}idcliente=${idcliente}&logincliente=${logincliente}`
+      );
+    } else {
+      return;
+    }
   }
 }

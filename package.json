@@ -31,6 +31,7 @@
     "@ngrx/entity": "^8.2.0",
     "@ngrx/store": "^8.2.0",
     "@ngrx/store-devtools": "^8.2.0",
+    "angular2-signaturepad": "^2.9.0",
     "cordova-android": "^8.0.0",
     "cordova-plugin-geolocation": "^4.0.2",
     "core-js": "^2.5.4",

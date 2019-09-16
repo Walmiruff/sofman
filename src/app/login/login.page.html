@@ -3,7 +3,7 @@
   <ion-content fullscreen>
 
 
-    <form [formGroup]="form" (submit)="doLogin()">
+    <form [formGroup]="form" (ngSubmit)="login()">
 
       <div class="container">
         <img src="assets/img/logo.png">
@@ -14,13 +14,22 @@
         <ion-item>
           <ion-label position="stacked">Login <ion-text color="danger">*</ion-text>
           </ion-label>
-          <ion-input required formControlName="login" type="text"></ion-input>
+          <ion-input required formControlName="login" value="suporte-tenco" type="text"></ion-input>
         </ion-item>
 
         <ion-item>
           <ion-label position="stacked">Senha <ion-text color="danger">*</ion-text>
           </ion-label>
-          <ion-input required formControlName="senha" type="password"></ion-input>
+          <ion-input required formControlName="senha" type="{{ type }}">
+
+          </ion-input>
+          <ion-button slot="end" class="eye" *ngIf="!showPass" (click)="showPassword()" fill="clear">
+            <ion-icon name="eye"></ion-icon>
+          </ion-button>
+          <ion-button slot="end" class="eye" *ngIf="showPass" (click)="showPassword()" fill="clear">
+            <ion-icon name="eye-off"></ion-icon>
+          </ion-button>
+
         </ion-item>
 
 
@@ -29,8 +38,8 @@
           <ion-button [routerLink]="[ '/tabs/tab1' ]" expand="block" type="submit" class="ion-no-margin">Entrar
           </ion-button>
 
-          <!--   <ion-button expand="block" type="submit" class="ion-no-margin">Entrar
-              </ion-button>-->
+          <ion-button expand="block" type="submit" class="ion-no-margin">Entrar Login
+          </ion-button>
         </div>
       </ion-list>
     </form>

@@ -6,13 +6,21 @@ import { FormsModule } from '@angular/forms';
 import { TabsPageRoutingModule } from './tabs.router.module';
 
 import { TabsPage } from './tabs.page';
+import { Tab2FormAptMatPageModule } from '../tab2-form-apt-mat/tab2-form-apt-mat.module';
+import { Tab2FormAptHoraPageModule } from '../tab2-form-apt-hora/tab2-form-apt-hora.module';
+import { Tab2FormTarefaPageModule } from '../tab2-form-tarefa/tab2-form-tarefa.module';
+import { Tab2FormPageModule } from '../tab2-form/tab2-form.module';
 
 @NgModule({
   imports: [
     IonicModule,
     CommonModule,
     FormsModule,
-    TabsPageRoutingModule
+    TabsPageRoutingModule,
+    Tab2FormPageModule,
+    Tab2FormAptMatPageModule,
+    Tab2FormAptHoraPageModule,
+    Tab2FormTarefaPageModule
   ],
   declarations: [TabsPage]
 })

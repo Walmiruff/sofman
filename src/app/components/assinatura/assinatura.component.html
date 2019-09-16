@@ -1,0 +1,19 @@
+<ion-row [ngClass]="{'drawing-active': isDrawing}">
+  <ion-col></ion-col>
+  <ion-col>
+    <signature-pad [options]="signaturePadOptions" (onBeginEvent)="drawStart()" (onEndEvent)="drawComplete()">
+    </signature-pad>
+  </ion-col>
+  <ion-col></ion-col>
+
+</ion-row>
+<ion-button expand="block" color="danger" (click)="clearPad()">Clear</ion-button>
+<ion-button expand="block" color="secondary" (click)="savePad()">Save</ion-button>
+
+<ion-col>
+  <ion-col></ion-col>
+  <ion-col width-80>
+    <img [src]="signature" />
+  </ion-col>
+  <ion-col></ion-col>
+</ion-col>

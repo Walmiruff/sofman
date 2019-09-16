@@ -3,8 +3,9 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  api: 'http://localhost:3000/', // mudar para api mySql
+  // api: 'http://localhost:3000/', // mudar para api mySql
   // api: 'http://localhost/web-server-softman/',
+  api: 'https://posts.vix.br/apisoftman/',
 
   production: false,
   firebaseConfig: {
