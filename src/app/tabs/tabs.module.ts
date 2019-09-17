@@ -20,8 +20,9 @@ import { Tab2FormPageModule } from '../tab2-form/tab2-form.module';
     Tab2FormPageModule,
     Tab2FormAptMatPageModule,
     Tab2FormAptHoraPageModule,
-    Tab2FormTarefaPageModule
+    Tab2FormTarefaPageModule,
+
   ],
   declarations: [TabsPage]
 })
-export class TabsPageModule {}
+export class TabsPageModule { }

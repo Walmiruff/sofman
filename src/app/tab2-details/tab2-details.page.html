@@ -1,15 +1,15 @@
 <ion-header>
-    <ion-toolbar>
-      <ion-row>
-        <div>
-          <img class="logo" src="assets/img/logosmall.png">
-        </div>
-        <ion-title>
-            Ordem Detalhes
-        </ion-title>
-      </ion-row>
-    </ion-toolbar>
-  </ion-header>
+  <ion-toolbar>
+    <ion-row>
+      <div>
+        <img class="logo" src="assets/img/logosmall.png">
+      </div>
+      <ion-title>
+        Ordem Detalhes
+      </ion-title>
+    </ion-row>
+  </ion-toolbar>
+</ion-header>
 
 <ion-content>
 
@@ -127,14 +127,14 @@
     <ion-grid>
       <ion-row>
         <ion-col size="6">
-          <div [routerLink]="['apt-mat']">
+          <div class="apt-mat" [routerLink]="['apt-mat']">
             <ion-icon name="cube"></ion-icon>
             <span>Apontamento de Materiais</span>
           </div>
         </ion-col>
 
         <ion-col size="6">
-          <div [routerLink]="['apt-hora']">
+          <div class="apt-hora" [routerLink]="['apt-hora']">
             <ion-icon name="time"></ion-icon>
             <span>Apontamento de Horas</span>
           </div>
@@ -143,14 +143,14 @@
 
       <ion-row>
         <ion-col size="6">
-          <div>
-            <ion-icon [routerLink]="['tarefa']" name="hammer"></ion-icon>
+          <div class="tarefas" [routerLink]="['tarefa']">
+            <ion-icon name="hammer"></ion-icon>
             <span>Retorno de Tarefas</span>
           </div>
         </ion-col>
 
         <ion-col size="6">
-          <div>
+          <div class="images" [routerLink]="['']">
             <ion-icon name="images"></ion-icon>
             <span>Gerenciamento de Imagens</span>
           </div>

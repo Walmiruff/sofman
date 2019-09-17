@@ -28,6 +28,7 @@ export class Tab2FormPage implements OnInit {
   signaturefuncionario = '';
   signaturecliente = '';
   isDrawing = false;
+  title = 'Adicionar nova Ordem'
 
   public signaturePadOptions: Object = {
     // Check out https://github.com/szimek/signature_pad
@@ -52,6 +53,7 @@ export class Tab2FormPage implements OnInit {
   ngOnInit() {
     this.configurarFormulario();
     if (this.passedId !== null) {
+      this.title = 'Editando...';
       this.store.pipe(select(selectAllOrdens)).subscribe(ordens => {
         this.ordens = ordens.filter(ordens => ordens.id === this.passedId);
         this.formulario.patchValue({

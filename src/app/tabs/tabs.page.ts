@@ -42,7 +42,6 @@ export class TabsPage implements OnInit {
           console.log('Confirm Cancel: blah');
           localStorage.clear();
           this.navctrl.navigateRoot('login');
-
         },
 
       }
