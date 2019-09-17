@@ -48,37 +48,8 @@ export class LoginPage implements OnInit {
       return;
     }
   }
-  async login() {
-    const headers = new HttpHeaders();
-    headers.set('Accept', 'application/json');
-    headers.set('Content-Type', 'application/json');
-    try {
-      const data = {
-        login: this.form.value.login,
-        senha: this.form.value.senha
-      };
-      await this.message.showLoading('Verificando dados...', 'loading-login');
-      this.http.post(this.url, data, { headers }).subscribe(
-        (resp: any) => {
-          if (resp.login) {
-            const user = resp;
-            this.api.setCredentials(user.id, user.login, user.nome, user.email);
-            this.message.hideLoading('loading-login');
-            setTimeout(() => {
-              this.navctrl.navigateForward('tabs/tab1');
-            }, 100);
-          }
-        },
-        err => {
-          this.message.hideLoading('loading-login');
-          this.message.alert('Atenção', 'Ocorreu um erro ao efetuar login', 'OK');
-          return;
-        }
-      );
-    } catch (error) {}
-  }
+  login() {
 
-  async logar() {
     const headers = new HttpHeaders();
     headers.set('Accept', 'application/json');
     headers.set('Content-Type', 'application/json');
@@ -87,30 +58,43 @@ export class LoginPage implements OnInit {
       login: this.form.value.login,
       senha: this.form.value.senha
     };
+    try {
+      this.message.showLoading('Verificando dados...', 'loading-login');
 
-    await this.message.showLoading('Verificando dados...', 'loading-login');
+      this.http.post(this.url, data, { headers }).subscribe(
 
-    this.http.post(this.url, data, { headers }).subscribe(
-      (res: any) => {
-        console.log(res);
-        if (res.id !== 0) {
-          setTimeout(() => {
-            this.navctrl.navigateForward('tabs/tab1');
-          }, 100);
-        } else {
-          this.message.hideLoading('loading-login');
-          this.message.alert('Atenção', 'Ocorreu um erro ao efetuar login', 'OK');
+        async (resp: any) => {
+          console.log(resp);
+          if (resp.login) {
+            const user = await resp;
+            this.api.setCredentials(user.id, user.login, user.nome, user.email);
+            setTimeout(() => {
+              this.navctrl.navigateForward('tabs/tab1');
+              this.message.hideLoading('loading-login');
+
+            }, 2500);
+          } else if (resp.message !== 'sucesso') {
+
+            this.message.hideLoading('loading-login');
+            this.message.alerts('Atenção', 'Ocorreu um erro ao efetuar login', 'OK');
+
+          }
+        },
+        err => {
+          console.log(err)
+          this.message.alerts('Atenção', 'Ocorreu um erro ao efetuar login', 'OK');
           return;
         }
-        this.message.hideLoading('loading-login');
-      },
-      erro => {
-        console.log(erro);
-        this.message.alert('Atenção', 'Ocorreu um erro ao efetuar login', 'OK');
-        this.message.hideLoading('loading-login');
-      }
-    );
+      );
+    } catch (error) {
+      console.log(error)
+    } finally {
+      this.message.hideLoading('loading-login');
+
+    }
   }
+
+
 
   showPassword() {
     this.showPass = !this.showPass;

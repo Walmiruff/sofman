@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { ModalController } from '@ionic/angular';
 import { Update } from '@ngrx/entity';
@@ -18,11 +18,15 @@ import { SignaturePad } from 'angular2-signaturepad/signature-pad';
   styleUrls: ['./tab2-form.page.scss']
 })
 export class Tab2FormPage implements OnInit {
-  @ViewChild(SignaturePad, { static: false }) public signaturePad: SignaturePad;
+  @ViewChild("Assfuncionario", { static: true }) public assfunc: SignaturePad;
 
-  @ViewChild(SignaturePad, { static: false }) public signaturePad2: SignaturePad;
+  @ViewChild("Assinaturacliente", { static: true }) public assclient: SignaturePad;
 
-  signature = '';
+
+  public showAssinatura = true;
+
+  signaturefuncionario = '';
+  signaturecliente = '';
   isDrawing = false;
 
   public signaturePadOptions: Object = {
@@ -43,13 +47,13 @@ export class Tab2FormPage implements OnInit {
     private formBuilder: FormBuilder,
     private store: Store<AppState>,
     private firebaseService: FirebaseService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.configurarFormulario();
     if (this.passedId !== null) {
       this.store.pipe(select(selectAllOrdens)).subscribe(ordens => {
-        this.ordens = ordens.filter(ordens => ordens.id == this.passedId);
+        this.ordens = ordens.filter(ordens => ordens.id === this.passedId);
         this.formulario.patchValue({
           filial: this.ordens[0].filial,
           ordem: this.ordens[0].ordem,
@@ -119,40 +123,55 @@ export class Tab2FormPage implements OnInit {
     const modalclose = await this.modalController.dismiss();
     return modalclose;
   }
-  drawComplete() {
+
+  drawCompleteFunc() {
     this.isDrawing = false;
   }
 
-  drawStart() {
+  drawStartFunc() {
     this.isDrawing = true;
   }
-
-  savePadCliente() {
-    this.signature = this.signaturePad.toDataURL();
-    localStorage.setItem('savedSignature', this.signature);
-    this.signaturePad.clear();
+  async savePadFunc() {
+    this.signaturefuncionario = await this.assfunc.toDataURL();
+    localStorage.setItem('savedSignaturefunc', this.signaturefuncionario);
+    this.assfunc.clear();
     // let toast = this.toastCtrl.create({
     //   message: 'New Signature saved.',
     //   duration: 3000
     // });
     // toast.present();
   }
-  clearPad() {
-    this.signaturePad.clear();
+  clearPadFunc() {
+    this.assfunc.clear();
   }
 
-  savePadFuncionario() {
-    this.signature = this.signaturePad.toDataURL();
-    localStorage.setItem('savedSignature', this.signature);
-    this.signaturePad.clear();
+  drawCompleteClient() {
+    this.isDrawing = false;
+  }
+
+  drawStartClient() {
+    this.isDrawing = true;
+  }
+  async savePadClient() {
+    this.signaturecliente = await this.assclient.toDataURL();
+    localStorage.setItem('savedSignature', this.signaturecliente);
+    this.assclient.clear();
     // let toast = this.toastCtrl.create({
     //   message: 'New Signature saved.',
     //   duration: 3000
     // });
     // toast.present();
   }
+  async clearPadClient() {
+    this.assclient.clear();
+  }
+  checkValue(e) {
+    if (e.detail.checked) {
+      this.showAssinatura = false;
 
-  clearPadFuncionario() {
-    this.signaturePad2.clear();
+    } else {
+      this.showAssinatura = true;
+
+    }
   }
 }

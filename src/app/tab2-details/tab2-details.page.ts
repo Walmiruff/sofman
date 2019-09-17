@@ -28,7 +28,7 @@ export class Tab2DetailsPage implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private router: Router, 
+    private router: Router,
     private store: Store<AppState>,
     private firebaseService: FirebaseService,
     private modalController: ModalController,
@@ -37,24 +37,26 @@ export class Tab2DetailsPage implements OnInit {
 
   ngOnInit() {
     this.ordemId = this.route.snapshot.params['ordemid'];
+    console.log(this.ordemId);
+
     this.ordens$ = this.store
-    .pipe(
+      .pipe(
         select(selectAllOrdens)
-        );
+      );
   }
 
   async openModalUpdate() {
     const modal = await this.modalController.create({
       component: Tab2FormPage,
-      componentProps:{
-        passedId: this.ordemId 
+      componentProps: {
+        passedId: this.ordemId
       }
     });
     return modal.present()
   }
 
 
-async  openConfirmRemove(){
+  async  openConfirmRemove() {
     const alert = await this.alertController.create({
       header: 'Sofman',
       message: '<strong>Deseja remover Ordem?</strong>',
@@ -67,7 +69,7 @@ async  openConfirmRemove(){
         {
           text: 'Remover',
           handler: () => {
-            this.firebaseService.crudFirebase( {id: this.ordemId} , 'ordem-remove');
+            this.firebaseService.crudFirebase({ id: this.ordemId }, 'ordem-remove');
             this.store.dispatch(new REMOVEORDEM({ id: Number(this.ordemId) }));
             this.router.navigate(['/tabs/tab2']);
           }

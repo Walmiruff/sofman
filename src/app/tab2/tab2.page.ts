@@ -26,14 +26,15 @@ export class Tab2Page implements OnInit {
     private barcodescanner: BarcodeScanner,
     private platform: Platform,
     private ordemservice: OrdemService
-  ) {}
+  ) { }
 
   ngOnInit() {
+
     this.ordens$ = this.store.pipe(select(selectAllOrdens));
-    this.ordemservice.getOrdem().subscribe((data: any) => {
-      this.ordensList = data;
-      console.log(data);
-    });
+    // this.ordemservice.getOrdem().subscribe((data: any) => {
+    //   this.ordensList = data;
+    //   console.log(data);
+    // });
   }
 
   async openModalCreate() {
@@ -55,6 +56,6 @@ export class Tab2Page implements OnInit {
             this.barcode = JSON.stringify(e);
           });
       }
-    } catch (error) {}
+    } catch (error) { }
   }
 }

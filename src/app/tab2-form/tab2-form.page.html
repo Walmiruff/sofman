@@ -82,51 +82,58 @@
       </ion-item>
 
     </ion-list>
-    <div #assinaturacliente>
-      <ion-row [ngClass]="{'drawing-active': isDrawing}">
-        <ion-col>Cliente Assinatura</ion-col>
-        <ion-col>
-          <signature-pad [options]="signaturePadOptions" (onBeginEvent)="drawStart()" (onEndEvent)="drawComplete()">
-          </signature-pad>
-        </ion-col>
-        <ion-col>
 
-        </ion-col>
-
-      </ion-row>
-      <ion-button expand="block" color="danger" (click)="clearPad()">Clear</ion-button>
-      <ion-button expand="block" color="secondary" (click)="savePadCliente()">Save</ion-button>
+    <ion-item>
+      <ion-label position="stacked">Assinar Ordem</ion-label>
+      <ion-toggle slot="end" color="tertiary" (ionChange)="checkValue($event)" value="yes"></ion-toggle>
+    </ion-item>
+    <br>
+    <br>
+    <ion-row [ngClass]="{'drawing-active': isDrawing, 'esconder': showAssinatura}">
+      <ion-col>Cliente Assinatura</ion-col>
       <ion-col>
-        <ion-col></ion-col>
-        <ion-col width-80>
-          <img [src]="signature" />
-        </ion-col>
-        <ion-col></ion-col>
+        <signature-pad #Assinaturacliente [options]="signaturePadOptions" (onBeginEvent)="drawStartClient()"
+          (onEndEvent)="drawCompleteClient()">
+        </signature-pad>
       </ion-col>
-    </div>
-
-    <div #assfuncionario>
-      <ion-row [ngClass]="{'drawing-active': isDrawing}">
-        <ion-col>Assinatura Responsável</ion-col>
-        <ion-col>
-          <signature-pad [options]="signaturePadOptions" (onBeginEvent)="drawStart()" (onEndEvent)="drawComplete()">
-          </signature-pad>
-        </ion-col>
-        <ion-col>
-
-        </ion-col>
-
-      </ion-row>
-      <ion-button expand="block" color="danger" (click)="clearPadFuncionario()">Clear</ion-button>
-      <ion-button expand="block" color="secondary" (click)="savePadFuncionario()">Save</ion-button>
       <ion-col>
-        <ion-col></ion-col>
-        <ion-col width-80>
-          <img [src]="signature" />
-        </ion-col>
-        <ion-col></ion-col>
+        <ion-button color="danger" (click)="clearPadClient()">Limpar</ion-button>
+        <ion-button color="secondary" (click)="savePadClient()">Salvar</ion-button>
       </ion-col>
-    </div>
+    </ion-row>
+
+    <ion-col>
+      <ion-col></ion-col>
+      <ion-col width-80>
+        <img [src]="signaturecliente" />
+      </ion-col>
+      <ion-col></ion-col>
+    </ion-col>
+
+    <br>
+
+    <ion-row [ngClass]="{'drawing-active': isDrawing, 'esconder2': showAssinatura}">
+      <ion-col>Assinatura Funcionário</ion-col>
+      <ion-col>
+        <signature-pad #Assfuncionario [options]="signaturePadOptions" (onBeginEvent)="drawStartFunc()"
+          (onEndEvent)="drawCompleteFunc()">
+        </signature-pad>
+      </ion-col>
+      <ion-col>
+        <ion-button color="danger" (click)="clearPadFunc()">Limpar</ion-button>
+        <ion-button color="secondary" (click)="savePadFunc()">Salvar</ion-button>
+      </ion-col>
+
+    </ion-row>
+
+    <ion-col>
+      <ion-col></ion-col>
+      <ion-col width-80>
+        <img [src]="signaturefuncionario" />
+      </ion-col>
+      <ion-col></ion-col>
+    </ion-col>
+
 
     <div class="ion-padding">
       <ion-button expand="block" (click)="sendOrdem()" class="ion-no-margin">Salvar</ion-button>

@@ -6,7 +6,7 @@ import { LoadingController, AlertController } from '@ionic/angular';
 })
 export class MessageService {
   public loading;
-  constructor(public loadingController: LoadingController, public alertCtrl: AlertController) {}
+  constructor(public loadingController: LoadingController, public alertCtrl: AlertController) { }
 
   async showLoading(message: string, loadingId: string) {
     this.loading = await this.loadingController.create({
@@ -20,7 +20,7 @@ export class MessageService {
     return await this.loadingController.dismiss(null, null, loadingId);
   }
 
-  async alert(title, message, button) {
+  async alerts(title, message, button) {
     const alert = await this.alertCtrl.create({
       header: title,
       message: message,
