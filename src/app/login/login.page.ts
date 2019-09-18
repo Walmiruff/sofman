@@ -57,35 +57,31 @@ export class LoginPage implements OnInit {
       login: this.form.value.login,
       senha: this.form.value.senha
     };
-    try {
-      this.message.showLoading('Verificando dados...', 'loading-login');
 
-      this.http.post(this.url, data, { headers }).subscribe(
-        async (resp: any) => {
-          console.log(resp);
-          if (resp.login) {
-            const user = await resp;
-            this.api.setCredentials(user.id, user.login, user.nome, user.email);
-            setTimeout(() => {
-              this.navctrl.navigateForward('tabs/tab1');
-              this.message.hideLoading('loading-login');
-            }, 2500);
-          } else if (resp.message !== 'sucesso') {
+    this.message.showLoading('Verificando dados...', 'loading-login');
+
+    this.http.post(this.url, data, { headers }).subscribe(
+      (resp: any) => {
+        console.log(resp);
+        if (resp.login) {
+          const user = resp;
+          this.api.setCredentials(user.id, user.login, user.nome, user.email);
+          setTimeout(() => {
+            this.navctrl.navigateForward('tabs/tab1');
             this.message.hideLoading('loading-login');
-            this.message.alerts('Atenção', 'Ocorreu um erro ao efetuar login', 'OK');
-          }
-        },
-        err => {
-          console.log(err);
+          }, 2500);
+        } else if (resp.message !== 'sucesso') {
+          this.message.hideLoading('loading-login');
           this.message.alerts('Atenção', 'Ocorreu um erro ao efetuar login', 'OK');
-          return;
         }
-      );
-    } catch (error) {
-      console.log(error);
-    } finally {
-      this.message.hideLoading('loading-login');
-    }
+      },
+      err => {
+        console.log(err);
+        this.message.alerts('Atenção', 'Ocorreu um erro ao efetuar login', 'OK');
+        return;
+      }
+    );
+
   }
 
   showPassword() {

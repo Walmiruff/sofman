@@ -19,12 +19,12 @@ export class OrdemEffects {
   loadOrdem$ = this.actions$.pipe(
     ofType<ALLORDEMREQUESTED>(OrdemActionTypes.ALLORDEMREQUESTED),
     mergeMap(action => this.ordemService.getOrdem()),
-    map(ordens => console.log('ordens', ordens))
+    map(ordens => new ALLORDEMLOADED({ ordens }))
   );
 
   constructor(
     private actions$: Actions,
     private ordemService: OrdemService,
     private firebaseService: FirebaseService
-  ) {}
+  ) { }
 }

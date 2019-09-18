@@ -61,14 +61,14 @@ export class Tab2FormPage implements OnInit {
           ordem: this.ordens[0].ordem,
           data: this.ordens[0].data,
           equipamento: this.ordens[0].equipamento,
-          tipo_de_mnt: this.ordens[0].tipo_de_mnt,
+          tipo_de_mnt: this.ordens[0].tipo_manutencao,
           descricao: this.ordens[0].descricao,
           solicitante: this.ordens[0].solicitante,
-          data_prog: this.ordens[0].data_prog,
-          data_solic: this.ordens[0].data_solic,
+          data_prog: this.ordens[0].data_programada,
+          data_solic: this.ordens[0].data_solicitada,
           setor_solic: this.ordens[0].setor_solic,
-          observacao: this.ordens[0].observacao,
-          status_da_os: this.ordens[0].status_da_os
+          observacao: this.ordens[0].observacoes,
+          status_da_os: this.ordens[0].status_os
         });
       });
     }

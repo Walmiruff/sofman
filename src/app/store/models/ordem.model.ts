@@ -1,15 +1,18 @@
 export interface IOrdem {
-  id: string | number;
-  filial: string;
-  ordem: string | number;
   data: string | Date;
+  data_programada?: string | Date;
+  data_solicitada?: string | Date;
   equipamento: string;
-  tipo_de_mnt: string;
-  descricao: string;
+  filial: string;
+  id: string | number;
+  id_filial: string | number;
+  message?: string;
+  observacoes?: string;
+  ordem: string | number;
+  setor_solicitante: string;
   solicitante?: string;
-  data_prog?: string | Date;
-  data_solic?: string | Date;
+  tipo_manutencao: string;
+  descricao: string;
   setor_solic?: string;
-  observacao?: string;
-  status_da_os?: string;
+  status_os?: string;
 }
