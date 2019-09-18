@@ -49,7 +49,6 @@ export class LoginPage implements OnInit {
     }
   }
   login() {
-
     const headers = new HttpHeaders();
     headers.set('Accept', 'application/json');
     headers.set('Content-Type', 'application/json');
@@ -62,7 +61,6 @@ export class LoginPage implements OnInit {
       this.message.showLoading('Verificando dados...', 'loading-login');
 
       this.http.post(this.url, data, { headers }).subscribe(
-
         async (resp: any) => {
           console.log(resp);
           if (resp.login) {
@@ -71,30 +69,24 @@ export class LoginPage implements OnInit {
             setTimeout(() => {
               this.navctrl.navigateForward('tabs/tab1');
               this.message.hideLoading('loading-login');
-
             }, 2500);
           } else if (resp.message !== 'sucesso') {
-
             this.message.hideLoading('loading-login');
             this.message.alerts('Atenção', 'Ocorreu um erro ao efetuar login', 'OK');
-
           }
         },
         err => {
-          console.log(err)
+          console.log(err);
           this.message.alerts('Atenção', 'Ocorreu um erro ao efetuar login', 'OK');
           return;
         }
       );
     } catch (error) {
-      console.log(error)
+      console.log(error);
     } finally {
       this.message.hideLoading('loading-login');
-
     }
   }
-
-
 
   showPassword() {
     this.showPass = !this.showPass;
