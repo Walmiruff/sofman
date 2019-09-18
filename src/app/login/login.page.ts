@@ -6,6 +6,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { MessageService } from '../shared/services/message.service';
 import { ApiService } from './../shared/services/api.service';
+import { FirebaseService } from '../shared/services/firebase.service';
 
 @Component({
   selector: 'app-login',
@@ -14,6 +15,8 @@ import { ApiService } from './../shared/services/api.service';
 })
 export class LoginPage implements OnInit {
   private url = environment.api + 'login.php'; //
+  // private apilogin = 'https://posts.vix.br/apisoftman/login.php'; //
+
   public lat;
   public long;
 
@@ -30,7 +33,8 @@ export class LoginPage implements OnInit {
     private platform: Platform,
     private navctrl: NavController,
     private api: ApiService,
-    public message: MessageService
+    public message: MessageService,
+    private firebaseservice: FirebaseService
   ) {
     if (platform.is('cordova')) {
       this.initLocation(this.lat, this.long);
@@ -48,23 +52,24 @@ export class LoginPage implements OnInit {
       return;
     }
   }
+
   login() {
     const headers = new HttpHeaders();
     headers.set('Accept', 'application/json');
     headers.set('Content-Type', 'application/json');
-
     const data = {
       login: this.form.value.login,
       senha: this.form.value.senha
     };
-
     this.message.showLoading('Verificando dados...', 'loading-login');
-
     this.http.post(this.url, data, { headers }).subscribe(
       (resp: any) => {
         console.log(resp);
         if (resp.login) {
           const user = resp;
+          this.initLocation(this.long, this.lat);
+
+
           this.api.setCredentials(user.id, user.login, user.nome, user.email);
           setTimeout(() => {
             this.navctrl.navigateForward('tabs/tab1');
@@ -78,6 +83,7 @@ export class LoginPage implements OnInit {
       err => {
         console.log(err);
         this.message.alerts('Atenção', 'Ocorreu um erro ao efetuar login', 'OK');
+        this.message.hideLoading('loading-login');
         return;
       }
     );
@@ -106,6 +112,11 @@ export class LoginPage implements OnInit {
             lat: this.lat,
             long: this.long
           };
+          const localizacao = JSON.stringify(geoLocationUser)
+          this.firebaseservice.userLocation('local',localizacao).then( res => {
+            alert('Gravando dados firebase' + res)
+          }).catch(e => alert('Erro ao gravar dados.. Location firebase' + e));
+
           alert('Localizacao JSON' + JSON.stringify(geoLocationUser));
         })
         .catch(e => console.log('Erro ao pegar localizacao ' + e));

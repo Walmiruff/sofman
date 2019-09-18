@@ -10,7 +10,8 @@ import { ITarefa } from 'src/app/store/models/tarefa.model';
 export class TarefasService {
   //private url = environment.api + 'retornotarefas.php' ?ordensservico=ordensservico&;
 
-  private url = environment.api + '?tarefas';
+  //private url = environment.api + '?tarefas';
+  private url = environment.api + 'tarefas/';
 
   constructor(private http: HttpClient) {}
 

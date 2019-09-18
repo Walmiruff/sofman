@@ -8,8 +8,9 @@ import { IAptHora } from 'src/app/store/models/apt_hora.model';
   providedIn: 'root'
 })
 export class ApontamentoDeHorasService {
-  //private url = environment.api + 'apontamentohora.php'; //
-  private url = environment.api + '?apontamento_de_horas';
+
+ // private url = environment.api + '?apontamento_de_horas';
+  private url = environment.api + 'apontamento_de_horas/';
 
   constructor(private http: HttpClient) {}
 

@@ -29,12 +29,7 @@ export class Tab2Page implements OnInit {
   ) { }
 
   ngOnInit() {
-
-    this.ordens$ = this.store.pipe(select(selectAllOrdens));
-    // this.ordemservice.getOrdem().subscribe((data: any) => {
-    //   this.ordensList = data;
-    //   console.log(data);
-    // });
+  this.ordens$ = this.store.pipe(select(selectAllOrdens));
   }
 
   async openModalCreate() {

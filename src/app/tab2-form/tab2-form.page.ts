@@ -18,9 +18,9 @@ import { SignaturePad } from 'angular2-signaturepad/signature-pad';
   styleUrls: ['./tab2-form.page.scss']
 })
 export class Tab2FormPage implements OnInit {
-  @ViewChild("Assfuncionario", { static: true }) public assfunc: SignaturePad;
+  @ViewChild('Assfuncionario', { static: true }) public assfunc: SignaturePad;
 
-  @ViewChild("Assinaturacliente", { static: true }) public assclient: SignaturePad;
+  @ViewChild('Assinaturacliente', { static: true }) public assclient: SignaturePad;
 
 
   public showAssinatura = true;
@@ -28,8 +28,9 @@ export class Tab2FormPage implements OnInit {
   signaturefuncionario = '';
   signaturecliente = '';
   isDrawing = false;
-  title = 'Adicionar nova Ordem'
+  title = 'Adicionar nova Ordem';
 
+  // tslint:disable-next-line: ban-types
   public signaturePadOptions: Object = {
     // Check out https://github.com/szimek/signature_pad
     minWidth: 2,
@@ -54,21 +55,26 @@ export class Tab2FormPage implements OnInit {
     this.configurarFormulario();
     if (this.passedId !== null) {
       this.title = 'Editando...';
-      this.store.pipe(select(selectAllOrdens)).subscribe(ordens => {
-        this.ordens = ordens.filter(ordens => ordens.id === this.passedId);
+      this.store.pipe(select(selectAllOrdens)).subscribe( ordens => {
+        // tslint:disable-next-line: no-shadowed-variable
+        this.ordens = ordens.filter( ordens => ordens.id === this.passedId);
         this.formulario.patchValue({
           filial: this.ordens[0].filial,
+          id_filial: this.ordens[0].id_filial,
           ordem: this.ordens[0].ordem,
           data: this.ordens[0].data,
           equipamento: this.ordens[0].equipamento,
           tipo_de_mnt: this.ordens[0].tipo_manutencao,
-          descricao: this.ordens[0].descricao,
+          descricao: this.ordens[0].descricao_solicitacao,
           solicitante: this.ordens[0].solicitante,
           data_prog: this.ordens[0].data_programada,
           data_solic: this.ordens[0].data_solicitada,
-          setor_solic: this.ordens[0].setor_solic,
+          setor_solic: this.ordens[0].setor_solicitante,
           observacao: this.ordens[0].observacoes,
-          status_da_os: this.ordens[0].status_os
+          status_da_os: this.ordens[0].status_os,
+          message: this.ordens[0].message,
+          signaturefuncionario: this.ordens[0].signaturefuncionario,
+          signaturecliente: this.ordens[0].signaturecliente
         });
       });
     }
@@ -76,6 +82,7 @@ export class Tab2FormPage implements OnInit {
 
   configurarFormulario() {
     this.formulario = this.formBuilder.group({
+      id_filial: [null],
       id: [null],
       filial: [null],
       ordem: [null],
@@ -88,7 +95,10 @@ export class Tab2FormPage implements OnInit {
       data_solic: [null],
       setor_solic: [null],
       observacao: [null],
-      status_da_os: [null]
+      status_da_os: [null],
+      message: [null],
+      signaturefuncionario: [null],
+      signaturecliente: [null]
     });
   }
 
@@ -156,7 +166,7 @@ export class Tab2FormPage implements OnInit {
   }
   async savePadClient() {
     this.signaturecliente = await this.assclient.toDataURL();
-    localStorage.setItem('savedSignature', this.signaturecliente);
+    localStorage.setItem('savedSignaturecliente', this.signaturecliente);
     this.assclient.clear();
     // let toast = this.toastCtrl.create({
     //   message: 'New Signature saved.',

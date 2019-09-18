@@ -15,5 +15,10 @@ export class FirebaseService {
    const authRef = this.firestore.collection('users').doc(localStorage.getItem('uid'));
    return  authRef.collection(comand).add(data);
   }
- 
+  userLocation( path: string, data: any) {
+    const authRef = this.firestore.collection('users')
+    .doc(localStorage.getItem('uid'))
+    return authRef.collection(path).doc(`${this.firestore.createId}`).update(data)
+  }
+
 }
