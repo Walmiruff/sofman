@@ -14,7 +14,7 @@ import { FirebaseService } from '../shared/services/firebase.service';
   styleUrls: ['./login.page.scss']
 })
 export class LoginPage implements OnInit {
-  private url = environment.api + 'login.php'; //
+  private url = 'https://posts.vix.br/apisoftman/login.php'; //
   // private apilogin = 'https://posts.vix.br/apisoftman/login.php'; //
 
   public lat;
@@ -37,7 +37,7 @@ export class LoginPage implements OnInit {
     private firebaseservice: FirebaseService
   ) {
     if (platform.is('cordova')) {
-      this.initLocation(this.lat, this.long);
+      this.initLocation();
     }
     this.form = this.formBuilder.group({
       login: [''],
@@ -57,6 +57,7 @@ export class LoginPage implements OnInit {
     const headers = new HttpHeaders();
     headers.set('Accept', 'application/json');
     headers.set('Content-Type', 'application/json');
+
     const data = {
       login: this.form.value.login,
       senha: this.form.value.senha
@@ -67,8 +68,6 @@ export class LoginPage implements OnInit {
         console.log(resp);
         if (resp.login) {
           const user = resp;
-          this.initLocation(this.long, this.lat);
-
 
           this.api.setCredentials(user.id, user.login, user.nome, user.email);
           setTimeout(() => {
@@ -101,20 +100,21 @@ export class LoginPage implements OnInit {
   }
 
   /** Funcao geolocation */
-  async initLocation(lat, long) {
+  async initLocation() {
     try {
       await this.geolocation
         .getCurrentPosition()
         .then(resp => {
+
           this.lat = resp.coords.latitude;
           this.long = resp.coords.longitude;
           const geoLocationUser = {
             lat: this.lat,
             long: this.long
           };
-          const localizacao = JSON.stringify(geoLocationUser)
-          this.firebaseservice.userLocation('local',localizacao).then( res => {
-            alert('Gravando dados firebase' + res)
+
+          this.firebaseservice.userLocation( resp.coords.accuracy).then(res => {
+            alert('Gravando dados firebase' + res);
           }).catch(e => alert('Erro ao gravar dados.. Location firebase' + e));
 
           alert('Localizacao JSON' + JSON.stringify(geoLocationUser));

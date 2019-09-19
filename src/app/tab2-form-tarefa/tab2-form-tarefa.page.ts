@@ -19,7 +19,7 @@ import { FirebaseService } from '../shared/services/firebase.service';
   styleUrls: ['./tab2-form-tarefa.page.scss'],
 })
 export class Tab2FormTarefaPage implements OnInit {
-  
+
   passedId = null;
   tarefaId = null;
   formulario: FormGroup;
@@ -33,10 +33,11 @@ export class Tab2FormTarefaPage implements OnInit {
  ) { }
 
   ngOnInit() {
+    console.log(this.passedId, this.tarefaId)
     this.configurarFormulario();
     if (this.tarefaId !== null) {
       this.store.pipe(select(selectAllTarefas)).subscribe(horas => {
-        this.horas = horas.filter(horas => horas.id == this.tarefaId);
+        this.horas = horas.filter(horas => horas.id === this.tarefaId);
         this.formulario.patchValue({
           fk: this.horas[0].fk,
           tarefa: this.horas[0].tarefa,
@@ -72,7 +73,7 @@ export class Tab2FormTarefaPage implements OnInit {
       this.formulario.patchValue({
         id: this.tarefaId
       })
-    
+
 
       const changes = this.formulario.value;
       const hora: Update<ITarefa> = {
