@@ -13,25 +13,23 @@ export class TarefasService {
   // private url = environment.api + '?tarefas';
 
   private url = environment.api;
-  ordemId = null
+  ordemId = null;
   constructor(private http: HttpClient, private api: ApiService) {
-   // this.ordemId = this.route.snapshot.params['ordemid'];
+    // this.ordemId = this.route.snapshot.params['ordemid'];
   }
 
   getTarefa() {
-    const idcliente = this.api.getCredentials().iduser;
-    const logincliente = this.api.getCredentials().login;
     const form = new FormData();
     form.append('retornotarefas', 'retornotarefas');
-    form.append('id_ordem',  this.ordemId);
+    form.append('id_ordem', this.ordemId);
 
     const headers = {
-        headers: { Accept: 'application/json, text/plain, */*'},
-        processData: false,
-        contentType: false,
-        mimeType: 'multipart/form-data',
-        data: form
-      };
+      headers: { Accept: 'application/json, text/plain, */*' },
+      processData: false,
+      contentType: false,
+      mimeType: 'multipart/form-data',
+      data: form
+    };
 
     return this.http.post<ITarefa[]>(this.url, form, headers);
   }
