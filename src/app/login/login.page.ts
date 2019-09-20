@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { environment } from 'src/environments/environment';
 import { Platform, NavController } from '@ionic/angular';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { MessageService } from '../shared/services/message.service';
 import { ApiService } from './../shared/services/api.service';
 import { FirebaseService } from '../shared/services/firebase.service';
+import { Geolocation } from '@ionic-native/geolocation/ngx';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-login',
@@ -29,16 +29,16 @@ export class LoginPage implements OnInit {
     private http: HttpClient,
 
     private formBuilder: FormBuilder,
-    private geolocation: Geolocation,
-    private platform: Platform,
     private navctrl: NavController,
     private api: ApiService,
     public message: MessageService,
-    private firebaseservice: FirebaseService
+    // private platform: Platform,
+    // private geolocation: Geolocation,
+    // private firebaseservice: FirebaseService
   ) {
-    if (platform.is('cordova')) {
-      this.initLocation();
-    }
+    // if (platform.is('cordova')) {
+    //   // this.initLocation();
+    // }
     this.form = this.formBuilder.group({
       login: [''],
       senha: ['']
@@ -100,28 +100,28 @@ export class LoginPage implements OnInit {
   }
 
   /** Funcao geolocation */
-  async initLocation() {
-    try {
-      await this.geolocation
-        .getCurrentPosition()
-        .then(resp => {
+  // async initLocation() {
+  //   try {
+  //     await this.geolocation
+  //       .getCurrentPosition()
+  //       .then(resp => {
 
-          this.lat = resp.coords.latitude;
-          this.long = resp.coords.longitude;
-          const geoLocationUser = {
-            lat: this.lat,
-            long: this.long
-          };
+  //         this.lat = resp.coords.latitude;
+  //         this.long = resp.coords.longitude;
+  //         const geoLocationUser = {
+  //           lat: this.lat,
+  //           long: this.long
+  //         };
 
-          this.firebaseservice.userLocation( resp.coords.accuracy).then(res => {
-            alert('Gravando dados firebase' + res);
-          }).catch(e => alert('Erro ao gravar dados.. Location firebase' + e));
+  //         this.firebaseservice.userLocation(resp.coords).then(res => {
+  //           alert('Gravando dados firebase' + res);
+  //         }).catch(e => alert('Erro ao gravar dados.. Location firebase' + e));
 
-          alert('Localizacao JSON' + JSON.stringify(geoLocationUser));
-        })
-        .catch(e => console.log('Erro ao pegar localizacao ' + e));
-    } catch (error) {
-      console.log(error);
-    }
-  }
+  //         alert('Localizacao JSON' + JSON.stringify(geoLocationUser));
+  //       })
+  //       .catch(e => console.log('Erro ao pegar localizacao ' + e));
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // }
 }

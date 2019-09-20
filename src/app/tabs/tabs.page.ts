@@ -8,7 +8,11 @@ import { ALLMATREQUESTED } from '../store/actions/apontamento_de_materiais.actio
 import { ALLHORAREQUESTED } from '../store/actions/apontamento_de_horas.action';
 import { ALLTAREFAREQUESTED } from '../store/actions/tarefas.action';
 import { MessageService } from '../shared/services/message.service';
-import { NavController } from '@ionic/angular';
+import { NavController, Platform } from '@ionic/angular';
+import { FirebaseService } from '../shared/services/firebase.service';
+import { Geolocation } from '@ionic-native/geolocation/ngx';
+import { firestore } from 'firebase/app';
+
 
 @Component({
   selector: 'app-tabs',
@@ -16,12 +20,21 @@ import { NavController } from '@ionic/angular';
   styleUrls: ['tabs.page.scss']
 })
 export class TabsPage implements OnInit {
+  public lat: any;
+  public long: any;
 
   constructor(
     private store: Store<AppState>,
     private messageservice: MessageService,
-    private navctrl: NavController
-  ) { }
+    private navctrl: NavController,
+    private platform: Platform,
+    public geolocation: Geolocation,
+    private firebaseservice: FirebaseService
+  ) {
+    if (platform.is('cordova')) {
+      this.initLocation();
+    }
+  }
 
 
   ngOnInit(): void {
@@ -47,7 +60,28 @@ export class TabsPage implements OnInit {
       }
     );
   }
+  /** Funcao geolocation */
+  async initLocation() {
+    try {
+      await this.geolocation
+        .getCurrentPosition()
+        .then(resp => {
 
+          this.lat = resp.coords.latitude;
+          this.long = resp.coords.longitude;
+
+          const locationData = new firestore.GeoPoint(this.lat, this.long)
+          this.firebaseservice.userLocation(locationData).then(res => {
+            console.log('Gravando dados firebase' + locationData);
+          }).catch(e => alert('Erro ao gravar dados.. Location firebase' + e));
+
+          console.log('Localizacao JSON' + JSON.stringify(locationData));
+        })
+        .catch(e => console.log('Erro ao pegar localizacao ' + e));
+    } catch (error) {
+      console.log(error);
+    }
+  }
 }
 
 

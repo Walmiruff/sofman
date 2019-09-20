@@ -8,7 +8,7 @@ export enum TarefaActionTypes {
     ALLTAREFALOADED = '[TAREFA API] All Tarefas Loaded',
     ADDTAREFA = '[TAREFA ADD] Add Tarefa',
     UPDATETAREFA = '[TAREFA UPDATE] Update Tarefa',
-    REMOVETAREFA =  '[TAREFA REMOVE] Remove Tarefa'   
+    REMOVETAREFA = '[TAREFA REMOVE] Remove Tarefa'
 }
 
 
@@ -19,23 +19,23 @@ export class ALLTAREFAREQUESTED implements Action {
 
 export class ALLTAREFALOADED implements Action {
     readonly type = TarefaActionTypes.ALLTAREFALOADED;
-    constructor(public payload: { tarefas: ITarefa[] }) {}
+    constructor(public payload: { tarefas: ITarefa[] }) { console.log(payload.tarefas) }
 }
 
 export class ADDTAREFA implements Action {
     readonly type = TarefaActionTypes.ADDTAREFA;
-    constructor( public payload: { tarefa: ITarefa }) {}
+    constructor(public payload: { tarefa: ITarefa }) { }
 }
 
 
 export class UPDATETAREFA implements Action {
     readonly type = TarefaActionTypes.UPDATETAREFA;
-    constructor ( public payload: { tarefa: Update<ITarefa>}){}
+    constructor(public payload: { tarefa: Update<ITarefa> }) { }
 }
 
 export class REMOVETAREFA implements Action {
     readonly type = TarefaActionTypes.REMOVETAREFA;
-    constructor ( public payload: { id: number}){}
+    constructor(public payload: { id: number }) { }
 }
 
 

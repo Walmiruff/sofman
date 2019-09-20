@@ -8,7 +8,7 @@ export enum MaterialActionTypes {
     ALLMATLOADED = '[MAT API] All Materiais Loaded',
     ADDMAT = '[MAT ADD] Add Material',
     UPDATEMAT = '[MAT UPDATE] Update Material',
-    REMOVE =  '[MAT REMOVE] Remove Material'   
+    REMOVE = '[MAT REMOVE] Remove Material'
 }
 
 
@@ -19,23 +19,23 @@ export class ALLMATREQUESTED implements Action {
 
 export class ALLMATLOADED implements Action {
     readonly type = MaterialActionTypes.ALLMATLOADED;
-    constructor(public payload: { materiais: IAptMaterial[] }) {}
+    constructor(public payload: { materiais: IAptMaterial[] }) { console.log(payload.materiais) }
 }
 
 export class ADDMAT implements Action {
     readonly type = MaterialActionTypes.ADDMAT;
-    constructor( public payload: { material: IAptMaterial }) {}
+    constructor(public payload: { material: IAptMaterial }) { }
 }
 
 
 export class UPDATEMAT implements Action {
     readonly type = MaterialActionTypes.UPDATEMAT;
-    constructor ( public payload: { material: Update<IAptMaterial>}){}
+    constructor(public payload: { material: Update<IAptMaterial> }) { }
 }
 
 export class REMOVE implements Action {
     readonly type = MaterialActionTypes.REMOVE;
-    constructor ( public payload: { id: number}){}
+    constructor(public payload: { id: number }) { }
 }
 
 

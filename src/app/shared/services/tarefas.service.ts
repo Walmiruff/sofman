@@ -21,7 +21,7 @@ export class TarefasService {
   getTarefa() {
     const form = new FormData();
     form.append('retornotarefas', 'retornotarefas');
-    form.append('id_ordem', this.ordemId);
+    form.append('id_ordem', '439652');
 
     const headers = {
       headers: { Accept: 'application/json, text/plain, */*' },

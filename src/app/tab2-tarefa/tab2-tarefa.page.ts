@@ -32,6 +32,7 @@ export class Tab2TarefaPage implements OnInit {
 
   ngOnInit() {
     this.ordemId = this.route.snapshot.params['ordemid'];
+    console.log(this.ordemId);
 
     this.tarefas$ = this.store
       .pipe(

@@ -9,10 +9,10 @@ import { IAptHora } from 'src/app/store/models/apt_hora.model';
 })
 export class ApontamentoDeHorasService {
   // private url = environment.api + '?apontamento_de_horas';
-  public ordemId = null;
+  public ordemId = '439652';
   private url = environment.api;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   getAptHora() {
     const form = new FormData();

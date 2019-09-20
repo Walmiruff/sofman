@@ -52,7 +52,8 @@ export class Tab2DetailsPage implements OnInit {
         passedId: this.ordemId
       }
     });
-    return modal.present()
+    console.log(this.ordemId)
+    return modal.present();
   }
 
 

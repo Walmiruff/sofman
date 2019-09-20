@@ -11,8 +11,8 @@ export class ApontamentoDeMateriaisService {
   //private url = environment.api + '?apontamento_de_materiais';
   private url = environment.api;
 
-  public ordemId = null;
-  constructor(private http: HttpClient) {}
+  public ordemId = '439652';
+  constructor(private http: HttpClient) { }
 
   getAptMaterial() {
     const form = new FormData();
