@@ -9,8 +9,8 @@ import { ApiService } from './api.service';
   providedIn: 'root'
 })
 export class OrdemService {
-  // private url = environment.api + 'ordens/'; // api mySql ordensservico
-  private url = environment.api; // api mySql ordensservico
+   private url = environment.api + 'ordens/'; // api mySql ordensservico
+ // private url = environment.api; // api mySql ordensservico
 
   constructor(private http: HttpClient, private api: ApiService) { }
   getOrdem() {
@@ -27,8 +27,8 @@ export class OrdemService {
         mimeType: 'multipart/form-data',
         data: form
       };
-    //  return this.http.get<IOrdem[]>(this.url);
-    return this.http.post<IOrdem[]>(this.url, form, headers);
+    return this.http.get<IOrdem[]>(this.url);
+   // return this.http.post<IOrdem[]>(this.url, form, headers);
 
   }
 }

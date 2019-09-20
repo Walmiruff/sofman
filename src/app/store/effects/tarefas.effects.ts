@@ -14,7 +14,9 @@ export class TarefaEffects {
     loadHora$ = this.actions$
     .pipe(
         ofType<ALLTAREFAREQUESTED>( TarefaActionTypes.ALLTAREFAREQUESTED ),
-        mergeMap( action => this.tarefasService.getTarefa()), //action.payload.ordemId
+        mergeMap( action => this.tarefasService.getTarefa()
+
+        ), //action.payload.ordemId
         map( tarefas => new ALLTAREFALOADED({tarefas}))
     );
 

@@ -37,12 +37,12 @@ export class Tab2FormTarefaPage implements OnInit {
     this.configurarFormulario();
     if (this.tarefaId !== null) {
       this.store.pipe(select(selectAllTarefas)).subscribe(horas => {
-        this.horas = horas.filter(horas => horas.id === this.tarefaId);
+        this.horas = horas.filter( horas => horas.id === this.tarefaId);
         this.formulario.patchValue({
-          fk: this.horas[0].fk,
-          tarefa: this.horas[0].tarefa,
-          retorno: this.horas[0].retorno,
-          status: this.horas[0].status
+         // fk: this.horas[0].fk,
+         tarefa: this.horas[0].tarefa,
+         retorno_alfanumerico: this.horas[0].retorno_alfanumerico,
+         legenda: this.horas[0].legenda
         });
       }
       )
@@ -54,10 +54,10 @@ export class Tab2FormTarefaPage implements OnInit {
   configurarFormulario() {
     this.formulario = this.formBuilder.group({
       id:[null],
-      fk: [null],
-      tarefa: [null],
-      retorno: [null],
-      status: [null]
+     // fk: [null],
+     tarefa: [null],
+     retorno_alfanumerico: [null],
+     legenda: [null]
     });
   }
 
@@ -98,7 +98,7 @@ export class Tab2FormTarefaPage implements OnInit {
 
   dismiss() {
     this.modalController.dismiss({
-      'dismissed': true
+      dismissed: true
     });
   }
 

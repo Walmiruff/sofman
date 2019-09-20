@@ -5,22 +5,21 @@ import { Observable } from 'rxjs';
 import { Store, select } from '@ngrx/store';
 
 import { AppState } from '../store/models/app-state.model';
-import { selectAllTarefas } from '../store/selectors/tarefas.selectors';
-import { REMOVETAREFA } from '../store/actions/tarefas.action';
 
 import { FirebaseService } from '../shared/services/firebase.service';
-import { Tab2FormTarefaPage } from '../tab2-form-tarefa/tab2-form-tarefa.page';
+import { Tab2FormImgPage } from '../tab2-form-img/tab2-form-img.page';
+//import { Tab2FormTarefaPage } from '../tab2-form-tarefa/tab2-form-tarefa.page';
 
 @Component({
-  selector: 'app-tab2-tarefa',
-  templateUrl: './tab2-tarefa.page.html',
-  styleUrls: ['./tab2-tarefa.page.scss'],
+  selector: 'app-tab2-img',
+  templateUrl: './tab2-img.page.html',
+  styleUrls: ['./tab2-img.page.scss'],
 })
-export class Tab2TarefaPage implements OnInit {
+export class Tab2ImgPage implements OnInit {
 
-  tarefas$: Observable<any>;
+  img$: Observable<any>;
   ordemId: number;
-  tarefaId: number;
+  imgId: number;
 
   constructor(
     private store: Store<AppState>,
@@ -32,15 +31,15 @@ export class Tab2TarefaPage implements OnInit {
 
   ngOnInit() {
     this.ordemId = this.route.snapshot.params['ordemid'];
-    this.tarefas$ = this.store.pipe(select(selectAllTarefas));
+  //  this.img$ = this.store.pipe(select(sel));
   }
 
   async openModalUpdate(id: string | number) {
     const modal = await this.modalController.create({
-      component: Tab2FormTarefaPage,
+      component: Tab2FormImgPage,
       componentProps: {
         passedId: this.ordemId,
-        tarefaId: id
+        imgId: id
       }
     });
     return modal.present();
@@ -48,7 +47,7 @@ export class Tab2TarefaPage implements OnInit {
 
   async openModalCreate() {
     const modal = await this.modalController.create({
-      component: Tab2FormTarefaPage,
+      component: Tab2FormImgPage,
       componentProps: {
         passedId: this.ordemId,
       }
@@ -59,7 +58,7 @@ export class Tab2TarefaPage implements OnInit {
   async  openConfirmRemove(id: string | number) {
     const alert = await this.alertController.create({
       header: 'Sofman',
-      message: '<strong>Deseja remover a Tarefa?</strong>',
+      message: '<strong>Deseja remover a Imagem?</strong>',
       buttons: [
         {
           text: 'Cancelar',
@@ -69,8 +68,8 @@ export class Tab2TarefaPage implements OnInit {
         {
           text: 'Remover',
           handler: () => {
-            this.firebaseService.crudFirebase({ id: id }, 'tarefa-remove');
-            this.store.dispatch(new REMOVETAREFA({ id: Number(id) }));
+            this.firebaseService.crudFirebase({ id: id }, 'img-remove');
+          //  this.store.dispatch(new REMOVETAREFA({ id: Number(id) }));
           }
         }
       ]

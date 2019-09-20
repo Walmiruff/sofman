@@ -12,10 +12,25 @@
 </ion-header>
 
 <ion-content fullscreen class="ion-padding">
-  <ion-text>
-    <h2>Seja Bem Vindo(a) !</h2>
-  </ion-text>
-  <ion-text>
-    <h6>Comunicados</h6>
-  </ion-text>
+    <h4 class="bemvindo">Seja Bem Vindo(a)!</h4>
+    <ion-card color="light">
+    <ion-card-content>
+           <ion-text color="dark">
+            <p class="nome" > {{nome}} </p>
+           </ion-text>
+           <ion-note color="primary"> {{logincliente}}</ion-note>
+    </ion-card-content>
+    </ion-card>
+<h4 class="bemvindo">Comunicados</h4>
+<ion-slides [options]="slideOpts" loop=true mode="ios">
+    <ion-slide *ngFor="let item of cominicados"  style="width: 100%">
+        <ion-text color="dark">
+          <h4 >{{item.title}}</h4>
+          <ion-note>{{item.description}}</ion-note>
+      </ion-text>
+        <br>
+      </ion-slide> slide 1
+
+</ion-slides>
+
 </ion-content>

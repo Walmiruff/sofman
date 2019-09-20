@@ -12,7 +12,7 @@
 </ion-header>
 
 <ion-content>
-
+  <div nigor></div>
   <ng-container *ngIf="tarefas$ | async as tarefas ; else elseTemplate">
 
     <ion-list>
@@ -24,7 +24,7 @@
               <ion-label>Tarefa</ion-label>
             </ion-col>
             <ion-col size="7">
-              <P class="custom"> {{ entities.tarefa }}</P>
+              <p class="custom"> {{ entities.tarefa }}</p>
             </ion-col>
           </ion-row>
 
@@ -33,7 +33,10 @@
               <ion-label>Retorno</ion-label>
             </ion-col>
             <ion-col size="5">
-              <P class="custom"> {{ entities.retorno }}</P>
+              {{entities.retorno_alfanumerico}}
+              /
+              {{entities.retorno_numerico}}
+              <!-- <P class="custom"> {{ entities.retorno }}</P> -->
             </ion-col>
             <ion-col size="2">
               <ion-button color="medium" (click)="openModalUpdate(entities.id)">
@@ -47,7 +50,7 @@
               <ion-label>Status</ion-label>
             </ion-col>
             <ion-col size="5">
-              <P class="custom"> {{ entities.status }}</P>
+              <P class="custom"> {{ entities.legenda }}</P>
             </ion-col>
 
             <ion-col size="2">

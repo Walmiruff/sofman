@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { IAptHora } from 'src/app/store/models/apt_hora.model';
 
@@ -8,25 +8,24 @@ import { IAptHora } from 'src/app/store/models/apt_hora.model';
   providedIn: 'root'
 })
 export class ApontamentoDeHorasService {
-  // private url = environment.api + '?apontamento_de_horas';
-  public ordemId = '439652';
-  private url = environment.api;
+
+ // private url = environment.api; Localhost Mocado
+ private url = environment.api + 'apontamento_de_horas/';
 
   constructor(private http: HttpClient) { }
 
   getAptHora() {
+
     const form = new FormData();
     form.append('apontamento_de_horas', 'apontamento_de_horas');
-    form.append('id_ordem', this.ordemId);
+    form.append('idordem', '439652');
 
-    const headers = {
-      headers: { Accept: 'application/json, text/plain, */*' },
-      processData: false,
-      contentType: false,
-      mimeType: 'multipart/form-data',
-      data: form
-    };
+    const headers =  new HttpHeaders();
+    headers.set('Accept', 'application/json, text/plain, */*')
+    headers.set('Content-Type', 'text/plain')
 
-    return this.http.get<IAptHora[]>(this.url);
+    return this.http.get<IAptHora[]>(this.url); //mocado
+
+  //  return this.http.post<IAptHora[]>(this.url, form, { headers });
   }
 }

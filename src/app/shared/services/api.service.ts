@@ -22,12 +22,13 @@ export class ApiService {
     return this.http.get(url);
   }
 
-  setCredentials(id, login: string, nome: string, email: string) {
+  setCredentials(id, login: string, nome: string, email: string, authorization: string) {
     localStorage.setItem('id', id);
     localStorage.setItem('login', login);
     localStorage.setItem('nome', nome);
     localStorage.setItem('email', email);
-    localStorage.setItem('authorization', 'true');
+    localStorage.setItem('authorization', authorization);
+
   }
 
   getCredentials() {
@@ -36,8 +37,14 @@ export class ApiService {
       login: localStorage.getItem('login'),
       name: localStorage.getItem('nome'),
       email: localStorage.getItem('email'),
-
+      pass: localStorage.getItem('pass'),
       authorization: localStorage.getItem('authorization')
     };
+  }
+  // https://newsapi.org/v2/top-headlines?sources=google-news-br&apiKey=527661c783af4453a88acbceeddb0c56
+
+  // Exemples
+  getAllComunicados(){
+   return this.http.get('https://newsapi.org/v2/top-headlines?sources=google-news-br&apiKey=527661c783af4453a88acbceeddb0c56');
   }
 }

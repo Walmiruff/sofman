@@ -19,6 +19,8 @@ export class LoginPage implements OnInit {
 
   public lat;
   public long;
+  user: any;
+  authorization: any;
 
   public type = 'password';
   public showPass = false;
@@ -30,15 +32,16 @@ export class LoginPage implements OnInit {
 
     private formBuilder: FormBuilder,
     private navctrl: NavController,
-    private api: ApiService,
+    public api: ApiService,
     public message: MessageService,
     // private platform: Platform,
     // private geolocation: Geolocation,
     // private firebaseservice: FirebaseService
   ) {
-    // if (platform.is('cordova')) {
-    //   // this.initLocation();
-    // }
+    /** Fixar login usuario para envio de post... */
+   this.user = this.api.getCredentials().login;
+   this.authorization = this.api.getCredentials().authorization;
+
     this.form = this.formBuilder.group({
       login: [''],
       senha: ['']
@@ -46,11 +49,7 @@ export class LoginPage implements OnInit {
   }
 
   ngOnInit() {
-    if (this.api.getCredentials().login) {
-      this.navctrl.navigateForward('tabs/tab1');
-    } else {
-      return;
-    }
+
   }
 
   login() {
@@ -69,7 +68,7 @@ export class LoginPage implements OnInit {
         if (resp.login) {
           const user = resp;
 
-          this.api.setCredentials(user.id, user.login, user.nome, user.email);
+          this.api.setCredentials(user.id, user.login, user.nome, user.email, this.form.value.senha);
           setTimeout(() => {
             this.navctrl.navigateForward('tabs/tab1');
             this.message.hideLoading('loading-login');

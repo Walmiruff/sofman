@@ -70,6 +70,16 @@ const routes: Routes = [
           }
         ]
       },
+      {
+        path: 'tab2/:ordemid/img',
+        children: [
+          {
+            path: '',
+            loadChildren: () =>
+              import('../tab2-img/tab2-img.module').then(m => m.Tab2ImgPageModule)
+          }
+        ]
+      },
 
       {
         path: '',

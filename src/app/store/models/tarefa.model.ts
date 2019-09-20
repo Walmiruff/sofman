@@ -1,7 +1,9 @@
 export interface ITarefa {
-    id: number;
-    fk: number;
+    id: string | number;
+   // fk: number;
     tarefa: string;
-    retorno: number;
-    status: number;
+    retorno_alfanumerico: string| number;
+    retorno_numerico: string | number;
+    legenda: string
+
 }
