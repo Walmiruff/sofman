@@ -24,12 +24,11 @@ export class Tab2Page implements OnInit {
     private store: Store<AppState>,
     private modalController: ModalController,
     private barcodescanner: BarcodeScanner,
-    private platform: Platform,
-    private ordemservice: OrdemService
-  ) { }
+    private platform: Platform
+  ) {}
 
   ngOnInit() {
-  this.ordens$ = this.store.pipe(select(selectAllOrdens));
+    this.ordens$ = this.store.pipe(select(selectAllOrdens));
   }
 
   async openModalCreate() {
@@ -51,6 +50,6 @@ export class Tab2Page implements OnInit {
             this.barcode = JSON.stringify(e);
           });
       }
-    } catch (error) { }
+    } catch (error) {}
   }
 }

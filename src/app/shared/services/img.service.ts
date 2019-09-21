@@ -8,22 +8,21 @@ import { IImg } from 'src/app/store/models/img.model';
   providedIn: 'root'
 })
 export class ImgService {
+  private url = environment.api + 'imgs/';
 
-  private url = environment.api + 'img/' ;
-
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   getImg() {
     const form = new FormData();
     form.append('gerenciarimagens', 'gerenciarimagens');
     form.append('idordem', '439652');
 
-    const headers =  new HttpHeaders();
-    headers.set('Accept', 'application/json, text/plain, */*')
-    headers.set('Content-Type', 'text/plain')
+    const headers = new HttpHeaders();
+    headers.set('Accept', 'application/json, text/plain, */*');
+    headers.set('Content-Type', 'text/plain');
 
     //return  this.http.post<IImg[]>(this.url, form, {headers});
 
-    return  this.http.get<IImg[]>(this.url);
-   }
+    return this.http.get<IImg[]>(this.url);
+  }
 }

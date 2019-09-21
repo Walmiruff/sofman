@@ -13,7 +13,10 @@
       "data_solic": "17/08/2017 09:25",
       "setor_solic": "Sala de Reuniões",
       "observacao": "teste obs",
-      "status_da_os": "ABERTO"
+      "status_da_os": "ABERTO",
+      "message": "Testandao mensagem",
+      "signaturecliente": "56565656565666",
+      "signaturefuncionario": "55656565656565656"
     },
     {
       "id": 2,
@@ -28,7 +31,10 @@
       "data_solic": "17/08/2017 09:25",
       "setor_solic": "Sala de Reuniões",
       "observacao": "teste obs",
-      "status_da_os": "ABERTO"
+      "status_da_os": "ABERTO",
+      "message": "Testandao mensagem",
+      "signaturecliente": "56565656565666",
+      "signaturefuncionario": "55656565656565656"
     },
     {
       "id": 3,
@@ -43,7 +49,10 @@
       "data_solic": "17/08/2017 09:25",
       "setor_solic": "Sala de Reuniões",
       "observacao": "teste obs",
-      "status_da_os": "ABERTO"
+      "status_da_os": "ABERTO",
+      "message": "Testandao mensagem",
+      "signaturecliente": "56565656565666",
+      "signaturefuncionario": "55656565656565656"
     }
   ],
   "apontamento_de_materiais": [

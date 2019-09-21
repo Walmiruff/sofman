@@ -22,7 +22,6 @@ export class Tab2FormPage implements OnInit {
 
   @ViewChild('Assinaturacliente', { static: true }) public assclient: SignaturePad;
 
-
   public showAssinatura = true;
 
   signaturefuncionario = '';
@@ -49,29 +48,29 @@ export class Tab2FormPage implements OnInit {
     private formBuilder: FormBuilder,
     private store: Store<AppState>,
     private firebaseService: FirebaseService
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.configurarFormulario();
     if (this.passedId !== null) {
       this.title = 'Editando...';
-      this.store.pipe(select(selectAllOrdens)).subscribe( ordens => {
+      this.store.pipe(select(selectAllOrdens)).subscribe(ordens => {
+        console.log('Rernono tab2 f' + JSON.stringify(ordens));
         // tslint:disable-next-line: no-shadowed-variable
-        this.ordens = ordens.filter( ordens => ordens.id === this.passedId);
+        this.ordens = ordens.filter(ordens => ordens.id == this.passedId);
         this.formulario.patchValue({
           filial: this.ordens[0].filial,
-          id_filial: this.ordens[0].id_filial,
           ordem: this.ordens[0].ordem,
           data: this.ordens[0].data,
           equipamento: this.ordens[0].equipamento,
-          tipo_de_mnt: this.ordens[0].tipo_manutencao,
-          descricao: this.ordens[0].descricao_solicitacao,
+          tipo_de_mnt: this.ordens[0].tipo_de_mnt,
+          descricao: this.ordens[0].descricao,
           solicitante: this.ordens[0].solicitante,
-          data_prog: this.ordens[0].data_programada,
-          data_solic: this.ordens[0].data_solicitada,
-          setor_solic: this.ordens[0].setor_solicitante,
-          observacao: this.ordens[0].observacoes,
-          status_da_os: this.ordens[0].status_os,
+          data_prog: this.ordens[0].data_prog,
+          data_solic: this.ordens[0].data_solic,
+          setor_solic: this.ordens[0].setor_solic,
+          observacao: this.ordens[0].observacao,
+          status_da_os: this.ordens[0].status_da_os,
           message: this.ordens[0].message,
           signaturefuncionario: this.ordens[0].signaturefuncionario,
           signaturecliente: this.ordens[0].signaturecliente
@@ -82,7 +81,6 @@ export class Tab2FormPage implements OnInit {
 
   configurarFormulario() {
     this.formulario = this.formBuilder.group({
-      id_filial: [null],
       id: [null],
       filial: [null],
       ordem: [null],
@@ -180,10 +178,8 @@ export class Tab2FormPage implements OnInit {
   checkValue(e) {
     if (e.detail.checked) {
       this.showAssinatura = false;
-
     } else {
       this.showAssinatura = true;
-
     }
   }
 }

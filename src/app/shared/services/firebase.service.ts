@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { ApiService } from './api.service';
 
 import { AngularFirestore } from '@angular/fire/firestore';
 
@@ -6,22 +7,20 @@ import { AngularFirestore } from '@angular/fire/firestore';
   providedIn: 'root'
 })
 export class FirebaseService {
-
-  constructor(private firestore: AngularFirestore) { }
+  constructor(private firestore: AngularFirestore, private api: ApiService) {}
 
   // comando que vai determinar se os dados vao ser inseridos, atualizados ou deletados no banco
   crudFirebase(data: any, comand: string) {
-    const authRef = this.firestore.collection('users').doc(localStorage.getItem('uid'));
+    const loginuser = this.api.getCredentials().login;
+    const authRef = this.firestore.collection('users').doc(loginuser);
     return authRef.collection(comand).add(data);
   }
   userLocation(geoPoint: any) {
-    // Guarda dados de localizacao do usuario
-    const iduser = localStorage.getItem('uid');
-    if (iduser) {
-      const authRef = this.firestore.collection('users').doc(iduser);
+    // Guarda dados de localizacao do usuario ( Falta colocar para enviar localizacao a cada 5 minutos..)
+    const loginuser = this.api.getCredentials().login;
+    if (loginuser) {
+      const authRef = this.firestore.collection('users').doc(loginuser);
       return authRef.set({ geoPoint });
     }
-
   }
-
 }
