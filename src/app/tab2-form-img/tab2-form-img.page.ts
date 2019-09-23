@@ -29,9 +29,9 @@ import * as firebase from 'firebase';
   ]
 })
 export class Tab2FormImgPage implements OnInit {
-  public myPhotosRef: any;
   public myPhoto: any;
   public myPhotoURL: any;
+  public myPorcents: Observable<number>;
 
   passedId = null;
   imgId = null;
@@ -47,12 +47,10 @@ export class Tab2FormImgPage implements OnInit {
     private formBuilder: FormBuilder,
     private store: Store<AppState>,
     private firebaseService: FirebaseService,
-    private api: ApiService,
     private camera: Camera,
     private platform: Platform,
     public afstore: AngularFireStorage,
   ) {
-    //this.myPhotosRef = firebase.storage().ref('/OrdensFotos/');
 
   }
 
@@ -73,8 +71,6 @@ export class Tab2FormImgPage implements OnInit {
     }
 
   }
-
-
   configurarFormulario() {
     this.formulario = this.formBuilder.group({
       id: [null],
@@ -82,7 +78,6 @@ export class Tab2FormImgPage implements OnInit {
       obs: [null],
     });
   }
-
 
   send() {
 
@@ -95,7 +90,6 @@ export class Tab2FormImgPage implements OnInit {
       this.formulario.patchValue({
         id: this.imgId
       })
-
 
       const changes = this.formulario.value;
       const img: Update<IImg> = {
@@ -139,53 +133,18 @@ export class Tab2FormImgPage implements OnInit {
     }
 
   }
-  generateFromImage(img, MAX_WIDTH, MAX_HEIGHT, quality, callback) {
-    const canvas: any = document.createElement('canvas');
-    const image = new Image();
-    image.onload = () => {
-      let width = image.width;
-      let height = image.height;
-
-      if (width > height) {
-        if (width > MAX_WIDTH) {
-          height *= MAX_WIDTH / width;
-          width = MAX_WIDTH;
-        }
-      } else {
-        if (height > MAX_HEIGHT) {
-          width *= MAX_HEIGHT / height;
-          height = MAX_HEIGHT;
-        }
-      }
-      canvas.width = width;
-      canvas.height = height;
-      const ctx = canvas.getContext('2d');
-      ctx.drawImage(image, 0, 0, width, height);
-      // IMPORTANT: 'jpeg' NOT 'jpg'
-      const dataUrl = canvas.toDataURL('image/jpeg', quality);
-      callback(dataUrl);
-    };
-    image.src = img;
-  }
 
   private uploadPhoto(): void {
     const ref = this.afstore.ref('/SofmanOrdensImg/').child(this.generateUUID()).child('Sofman.png');
 
     const task = ref.putString(this.myPhoto, 'base64', { contentType: 'image/png' });
+    this.myPorcents = task.percentageChanges();
+
     task.snapshotChanges().pipe(
       finalize(() => this.myPhotoURL = ref.getDownloadURL())
 
     ).subscribe();
     alert(JSON.stringify(this.myPhotoURL))
-    task.percentageChanges();
-
-    // this.myPhotosRef.child(this.generateUUID()).child('SofmanOrdems.png')
-    //   .putString(this.myPhoto, 'base64', { contentType: 'image/png' })
-    //   .then((savedPicture) => {
-    //     this.myPhotoURL = savedPicture.downloadURL;
-    //     alert(this.myPhotoURL)
-    //   });
-
 
   }
   private generateUUID(): any {

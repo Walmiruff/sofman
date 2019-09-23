@@ -12,6 +12,8 @@
   <form [formGroup]="formulario" class="appointment-form2">
 
     <ion-list lines="full" class="ion-no-margin ion-no-padding">
+      <ion-progress-bar value="myPorcents | async" buffer="0.5" reversed="true" color="primary">
+      </ion-progress-bar>
 
       <ion-item>
         <ion-label position="stacked">Obs</ion-label>
@@ -20,14 +22,9 @@
 
       <ion-item>
         <ion-label position="stacked">Url Img</ion-label>
-        Url {{myPhotoURL | async}}
-
-        <img [src]="myPhotoURL | async">
-        <ion-img [src]="myPhotoURL | async"></ion-img>
-
         <ion-input type="text" [value]="myPhotoURL | async" formControlName="url" id="url"></ion-input>
       </ion-item>
-
+      <ion-img *ngIf="myPhotoURL" [src]="myPhotoURL | async"></ion-img>
     </ion-list>
     <div class="ion-padding">
       <ion-button expand="block" (click)="send()" class="ion-no-margin">Salvar</ion-button>
