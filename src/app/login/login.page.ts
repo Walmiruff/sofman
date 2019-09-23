@@ -4,9 +4,6 @@ import { Platform, NavController } from '@ionic/angular';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MessageService } from '../shared/services/message.service';
 import { ApiService } from './../shared/services/api.service';
-import { FirebaseService } from '../shared/services/firebase.service';
-import { Geolocation } from '@ionic-native/geolocation/ngx';
-import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-login',
@@ -33,15 +30,8 @@ export class LoginPage implements OnInit {
     private formBuilder: FormBuilder,
     private navctrl: NavController,
     public api: ApiService,
-    public message: MessageService,
-    // private platform: Platform,
-    // private geolocation: Geolocation,
-    // private firebaseservice: FirebaseService
+    public message: MessageService
   ) {
-    /** Fixar login usuario para envio de post... */
-   this.user = this.api.getCredentials().login;
-   this.authorization = this.api.getCredentials().authorization;
-
     this.form = this.formBuilder.group({
       login: [''],
       senha: ['']
@@ -49,7 +39,9 @@ export class LoginPage implements OnInit {
   }
 
   ngOnInit() {
-
+    /** Fixar login usuario para envio de post... */
+    this.user = this.api.getCredentials().login;
+    this.authorization = this.api.getCredentials().authorization;
   }
 
   login() {
@@ -68,7 +60,13 @@ export class LoginPage implements OnInit {
         if (resp.login) {
           const user = resp;
 
-          this.api.setCredentials(user.id, user.login, user.nome, user.email, this.form.value.senha);
+          this.api.setCredentials(
+            user.id,
+            user.login,
+            user.nome,
+            user.email,
+            this.form.value.senha
+          );
           setTimeout(() => {
             this.navctrl.navigateForward('tabs/tab1');
             this.message.hideLoading('loading-login');
@@ -85,42 +83,13 @@ export class LoginPage implements OnInit {
         return;
       }
     );
-
   }
-
   showPassword() {
     this.showPass = !this.showPass;
-
     if (this.showPass) {
       this.type = 'text';
     } else {
       this.type = 'password';
     }
   }
-
-  /** Funcao geolocation */
-  // async initLocation() {
-  //   try {
-  //     await this.geolocation
-  //       .getCurrentPosition()
-  //       .then(resp => {
-
-  //         this.lat = resp.coords.latitude;
-  //         this.long = resp.coords.longitude;
-  //         const geoLocationUser = {
-  //           lat: this.lat,
-  //           long: this.long
-  //         };
-
-  //         this.firebaseservice.userLocation(resp.coords).then(res => {
-  //           alert('Gravando dados firebase' + res);
-  //         }).catch(e => alert('Erro ao gravar dados.. Location firebase' + e));
-
-  //         alert('Localizacao JSON' + JSON.stringify(geoLocationUser));
-  //       })
-  //       .catch(e => console.log('Erro ao pegar localizacao ' + e));
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // }
 }

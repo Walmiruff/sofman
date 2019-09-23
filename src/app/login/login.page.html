@@ -14,13 +14,13 @@
         <ion-item>
           <ion-label position="stacked">Login <ion-text color="danger">*</ion-text>
           </ion-label>
-          <ion-input required formControlName="login" [value]="user" type="text"></ion-input>
+          <ion-input required formControlName="login" value="user" type="text"></ion-input>
         </ion-item>
 
         <ion-item>
           <ion-label position="stacked">Senha <ion-text color="danger">*</ion-text>
           </ion-label>
-          <ion-input required formControlName="senha" [value]="authorization" type="{{ type }}">
+          <ion-input required formControlName="senha" value="authorization" type="{{ type }}">
 
           </ion-input>
           <ion-button slot="end" class="eye" *ngIf="!showPass" (click)="showPassword()" fill="clear">
@@ -33,18 +33,13 @@
         </ion-item>
 
 
-
         <div class="ion-padding">
           <!-- <ion-button [routerLink]="[ '/tabs/tab1' ]" expand="block" type="submit" class="ion-no-margin">Entrar
           </ion-button> -->
 
-          <ion-button expand="block" type="submit" class="ion-no-margin">Entrar Login
+          <ion-button expand="block" type="submit" class="ion-no-margin">Entrar
           </ion-button>
         </div>
       </ion-list>
     </form>
-    <code>
-      LAT = {{lat}} <br> LONG = {{long}}
-    </code>
-    <ion-button a href='https://www.google.com/maps/@{{lat}},{{long}},15z'> Abri mapa</ion-button>
   </ion-content>
