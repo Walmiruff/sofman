@@ -20,10 +20,12 @@
 
       <ion-item>
         <ion-label position="stacked">Url Img</ion-label>
-        {{downloadURL | async}}
-        <img [src]="downloadURL | async" *ngIf="downloadURL | async">
-        <ion-img [src]="smallImg"></ion-img>
-        <ion-input type="text" [value]="downloadURL | async" formControlName="url" id="url"></ion-input>
+        Url {{myPhotoURL | async}}
+
+        <img [src]="myPhotoURL | async">
+        <ion-img [src]="myPhotoURL | async"></ion-img>
+
+        <ion-input type="text" [value]="myPhotoURL | async" formControlName="url" id="url"></ion-input>
       </ion-item>
 
     </ion-list>

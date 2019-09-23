@@ -15,6 +15,7 @@ import { AngularFireStorage } from '@angular/fire/storage';
 import { finalize } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { ApiService } from '../shared/services/api.service';
+import * as firebase from 'firebase';
 
 
 
@@ -28,15 +29,16 @@ import { ApiService } from '../shared/services/api.service';
   ]
 })
 export class Tab2FormImgPage implements OnInit {
+  public myPhotosRef: any;
+  public myPhoto: any;
+  public myPhotoURL: any;
 
   passedId = null;
   imgId = null;
   formulario: FormGroup;
   imgs: IImg[];
-  bigImg = null;
-  smallImg = null;
-  public fileName: any;
-  downloadURL: Observable<string>
+
+
 
   public title: string = 'Nova Foto';
 
@@ -49,7 +51,10 @@ export class Tab2FormImgPage implements OnInit {
     private camera: Camera,
     private platform: Platform,
     public afstore: AngularFireStorage,
-  ) { }
+  ) {
+    //this.myPhotosRef = firebase.storage().ref('/OrdensFotos/');
+
+  }
 
   ngOnInit() {
     console.log(this.passedId, this.imgId)
@@ -119,45 +124,19 @@ export class Tab2FormImgPage implements OnInit {
 
   async selectImageInCamera() {
     if (this.platform.is('cordova')) {
-      try {
-        const CAMERA_OPTIONS: CameraOptions = {
-          allowEdit: true,
-          quality: 100,
-          destinationType: this.camera.DestinationType.DATA_URL,
-          sourceType: this.camera.PictureSourceType.CAMERA,
-          encodingType: this.camera.EncodingType.PNG,
-          mediaType: this.camera.MediaType.PICTURE,
-          correctOrientation: true,
-          targetWidth: 900,
-          targetHeight: 900
-        };
-        this.camera.getPicture(CAMERA_OPTIONS).then(
-          imageData => {
-            const base64data = 'data:image/jpeg;base64,' + imageData;
-            this.bigImg = base64data;
-            // Get image size
-            this.createThumbnail();
-
-          },
-          error => {
-            console.log('', error);
-
-          }
-        );
-      } catch (error) {
-      } finally {
-      }
+      this.camera.getPicture({
+        quality: 100,
+        destinationType: this.camera.DestinationType.DATA_URL,
+        sourceType: this.camera.PictureSourceType.CAMERA,
+        encodingType: this.camera.EncodingType.PNG,
+        saveToPhotoAlbum: true
+      }).then(imageData => {
+        this.myPhoto = imageData;
+        this.uploadPhoto();
+      }, error => {
+        alert("ERROR -> " + JSON.stringify(error));
+      });
     }
-  }
-
-
-  async createThumbnail() {
-    this.generateFromImage(this.bigImg, 1000, 1000, 100, data => {
-      this.smallImg = data;
-      const imgToUp = this.smallImg.split(',')[1];
-      this.fileName = Date.now();
-      this.upload(imgToUp, this.fileName);
-    });
 
   }
   generateFromImage(img, MAX_WIDTH, MAX_HEIGHT, quality, callback) {
@@ -188,15 +167,34 @@ export class Tab2FormImgPage implements OnInit {
     };
     image.src = img;
   }
-  async upload(img, fileName) {
-    const storageRef = this.afstore.ref('Ordens_img/');
-    const task = storageRef.putString(img + '_' + fileName)
 
+  private uploadPhoto(): void {
+    const ref = this.afstore.ref('/SofmanOrdensImg/').child(this.generateUUID()).child('Sofman.png');
+
+    const task = ref.putString(this.myPhoto, 'base64', { contentType: 'image/png' });
     task.snapshotChanges().pipe(
-      finalize(() => {
-        this.downloadURL = storageRef.getDownloadURL();
-      })
-    ).subscribe();
-  }
+      finalize(() => this.myPhotoURL = ref.getDownloadURL())
 
+    ).subscribe();
+    alert(JSON.stringify(this.myPhotoURL))
+    task.percentageChanges();
+
+    // this.myPhotosRef.child(this.generateUUID()).child('SofmanOrdems.png')
+    //   .putString(this.myPhoto, 'base64', { contentType: 'image/png' })
+    //   .then((savedPicture) => {
+    //     this.myPhotoURL = savedPicture.downloadURL;
+    //     alert(this.myPhotoURL)
+    //   });
+
+
+  }
+  private generateUUID(): any {
+    var d = new Date().getTime();
+    var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx'.replace(/[xy]/g, function (c) {
+      var r = (d + Math.random() * 16) % 16 | 0;
+      d = Math.floor(d / 16);
+      return (c == 'x' ? r : (r & 0x3 | 0x8)).toString(16);
+    });
+    return uuid;
+  }
 }
