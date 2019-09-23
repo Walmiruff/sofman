@@ -8,9 +8,9 @@ import { IImg } from 'src/app/store/models/img.model';
   providedIn: 'root'
 })
 export class ImgService {
-  private url = environment.api + 'imgs/';
+  private url = environment.api + 'img/';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   getImg() {
     const form = new FormData();

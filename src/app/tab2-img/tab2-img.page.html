@@ -5,34 +5,35 @@
         <img class="logo" src="assets/img/logosmall.png">
       </div>
       <ion-title>
-      Gerenciamentos de Imagens
+        Gerenciamentos de Imagens
       </ion-title>
     </ion-row>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <div nigor></div>
   <ng-container *ngIf="img$ | async as imgs ; else elseTemplate">
 
     <ion-list>
-      <ion-item *ngFor="let entities of imgs | filter: ordemId">
-        <ion-grid>
 
-          <ion-row>
-            <ion-col size="12">
-              <ion-card class="card-background-page">
-                <img [src]="entities.url"/>
-                <div class="card-title"></div>
-                <div class="card-subtitle">{{entities.obs}}</div>
-              </ion-card>
-            </ion-col>
-          </ion-row>
-
-
-
-        </ion-grid>
+      <ion-item *ngFor="let entities of imgs">
+        <ion-thumbnail slot="start">
+          <img src="{{entities.url}}">
+        </ion-thumbnail>
+        <ion-label>{{entities.obs}}</ion-label>
+        <ion-col size="2">
+          <ion-button color="medium" (click)="openModalUpdate(entities.id)">
+            <ion-icon name="refresh"></ion-icon>
+          </ion-button>
+        </ion-col>
+        <ion-col size="2">
+          <ion-button color="medium" (click)="openConfirmRemove(entities.id)">
+            <ion-icon name="trash"></ion-icon>
+          </ion-button>
+        </ion-col>
       </ion-item>
+
+
     </ion-list>
 
     <ion-fab horizontal="end" vertical="top" slot="fixed" edge>

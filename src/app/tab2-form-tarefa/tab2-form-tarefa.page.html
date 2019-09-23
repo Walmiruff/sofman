@@ -7,34 +7,34 @@
 <ion-content>
 
 
-<form [formGroup]="formulario"  class="appointment-form2">
+  <form [formGroup]="formulario" class="appointment-form2">
 
 
-  <ion-list lines="full" class="ion-no-margin ion-no-padding">
+    <ion-list lines="full" class="ion-no-margin ion-no-padding">
 
-    <ion-item>
-      <ion-label position="stacked">Tarefas</ion-label>
-      <ion-input type="text" formControlName="tarefa" id="tarefa"></ion-input>
-    </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Tarefas</ion-label>
+        <ion-input type="text" formControlName="tarefa" id="tarefa"></ion-input>
+      </ion-item>
 
-    <ion-item>
-      <ion-label position="stacked">Retorno</ion-label>
-      <ion-input type="text" formControlName="retorno_alfanumerico" id="retorno_alfanumerico"></ion-input>
-    </ion-item>
-
-
-    <ion-item>
-      <ion-label position="stacked">Status</ion-label>
-      <ion-input type="text" formControlName="legenda" id="legenda"></ion-input>
-    </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Retorno</ion-label>
+        <ion-input type="text" formControlName="retorno" id="retorno"></ion-input>
+      </ion-item>
 
 
-  </ion-list>
+      <ion-item>
+        <ion-label position="stacked">Status</ion-label>
+        <ion-input type="text" formControlName="status" id="status"></ion-input>
+      </ion-item>
 
-  <div class="ion-padding">
-    <ion-button expand="block" (click)="send()" class="ion-no-margin">Salvar</ion-button>
-  </div>
 
-</form>
+    </ion-list>
+
+    <div class="ion-padding">
+      <ion-button expand="block" (click)="send()" class="ion-no-margin">Salvar</ion-button>
+    </div>
+
+  </form>
 
 </ion-content>

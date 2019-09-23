@@ -5,7 +5,6 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 import { Tab2ImgPage } from './tab2-img.page';
-import { SharedPipesModule } from '../shared/pipes/shared-pipes.module';
 
 
 
@@ -20,9 +19,8 @@ const routes: Routes = [
   imports: [
     CommonModule,
     IonicModule,
-    SharedPipesModule,
     RouterModule.forChild(routes),
   ],
   declarations: [Tab2ImgPage]
 })
-export class Tab2ImgPageModule {}
+export class Tab2ImgPageModule { }

@@ -1,7 +1,7 @@
 export const environment = {
- api: 'http://localhost:3000/', // mudar para api mySql
+  api: 'http://localhost:3000/', // mudar para api mySql
 
-//api: 'https://posts.vix.br/apisoftman/index.php',
+  //api: 'https://posts.vix.br/apisoftman/index.php',
 
   production: true,
   firebaseConfig: {
@@ -9,7 +9,7 @@ export const environment = {
     authDomain: 'sofman-15-09.firebaseapp.com',
     databaseURL: 'https://sofman-15-09.firebaseio.com',
     projectId: 'sofman-15-09',
-    storageBucket: '',
+    storageBucket: 'sofman-15-09.appspot.com',
     messagingSenderId: '726160937064',
     appId: '1:726160937064:web:a70d7bdc505b3998'
   }

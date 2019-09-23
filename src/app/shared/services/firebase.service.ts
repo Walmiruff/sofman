@@ -2,12 +2,25 @@ import { Injectable } from '@angular/core';
 import { ApiService } from './api.service';
 
 import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFireStorage } from '@angular/fire/storage';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FirebaseService {
-  constructor(private firestore: AngularFirestore, private api: ApiService) {}
+
+  public imgRef: any;
+  public img: any;
+  public imgUrl: any;
+  public fileName: any;
+
+  constructor(
+    private firestore: AngularFirestore,
+    private api: ApiService,
+  ) {
+
+  }
+
 
   // comando que vai determinar se os dados vao ser inseridos, atualizados ou deletados no banco
   crudFirebase(data: any, comand: string) {

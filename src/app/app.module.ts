@@ -30,42 +30,47 @@ import { OrdemReducer } from './store/reducers/ordem.reducer';
 import { MaterialReducer } from './store/reducers/apontamento_de_materiais.reducer';
 import { HoraReducer } from './store/reducers/apontamento_de_horas.reducer';
 import { TarefaReducer } from './store/reducers/tarefas.reducer';
+import { ImgReducer } from './store/reducers/imgs.reducer';
 
 import { OrdemEffects } from './store/effects/ordem.effects';
 import { MaterialEffects } from './store/effects/apontamento_de_materiais.effects';
 import { HoraEffects } from './store/effects/apontamento_de_horas.effects';
 import { TarefaEffects } from './store/effects/tarefas.effects';
+import { ImgEffects } from './store/effects/imgs.effects';
+import { AngularFireStorageModule } from '@angular/fire/storage';
 
-import { Tab2FormPageModule } from './tab2-form/tab2-form.module';
-import { Tab2FormAptMatPageModule } from './tab2-form-apt-mat/tab2-form-apt-mat.module';
-import { Tab2FormAptHoraPageModule } from './tab2-form-apt-hora/tab2-form-apt-hora.module';
-import { Tab2FormTarefaPageModule } from './tab2-form-tarefa/tab2-form-tarefa.module';
+// import { Tab2FormPageModule } from './tab2-form/tab2-form.module';
+// import { Tab2FormAptMatPageModule } from './tab2-form-apt-mat/tab2-form-apt-mat.module';
+// import { Tab2FormAptHoraPageModule } from './tab2-form-apt-hora/tab2-form-apt-hora.module';
+// import { Tab2FormTarefaPageModule } from './tab2-form-tarefa/tab2-form-tarefa.module';
 
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
   imports: [
     BrowserModule,
-
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-
-    // Tab2FormPageModule,
-    // Tab2FormAptMatPageModule,
-    //Tab2FormAptHoraPageModule,
-    //Tab2FormTarefaPageModule,
     IonicModule.forRoot(),
     AngularFireDatabaseModule,
     AngularFirestoreModule,
+    AngularFireStorageModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     StoreModule.forRoot({
       ordem: OrdemReducer,
       material: MaterialReducer,
       hora: HoraReducer,
-      tarefa: TarefaReducer
+      tarefa: TarefaReducer,
+      img: ImgReducer
     }),
-    EffectsModule.forRoot([OrdemEffects, MaterialEffects, HoraEffects, TarefaEffects]),
+    EffectsModule.forRoot(
+      [OrdemEffects,
+        MaterialEffects,
+        HoraEffects,
+        TarefaEffects,
+        ImgEffects
+      ]),
     StoreDevtoolsModule.instrument(),
     AppRoutingModule
   ],
@@ -78,4 +83,4 @@ import { Tab2FormTarefaPageModule } from './tab2-form-tarefa/tab2-form-tarefa.mo
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }
