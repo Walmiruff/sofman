@@ -32,7 +32,7 @@ export class TabsPage implements OnInit {
     public geolocation: Geolocation,
     private firebaseservice: FirebaseService
   ) {
-    if (platform.is('cordova')) {
+    if (this.platform.is('cordova')) {
       this.initLocation();
     }
   }
