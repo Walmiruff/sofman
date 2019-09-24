@@ -88,7 +88,7 @@
       <ion-toggle slot="end" color="tertiary" (ionChange)="checkValue($event)" value="yes"></ion-toggle>
     </ion-item>
     <br>
-    <br>
+
     <ion-row [ngClass]="{'drawing-active': isDrawing, 'esconder': showAssinatura}">
       <ion-col>Cliente Assinatura</ion-col>
       <ion-col>
@@ -104,17 +104,18 @@
     </ion-row>
 
     <ion-col>
-      <ion-col></ion-col>
-      <ion-col width-80>
 
-        <ion-img [src]="signaturecliente"></ion-img>
+      <ion-col width-100>
         <ion-input type="text" formControlName="signaturecliente" [value]="signaturecliente" id="signaturecliente">
         </ion-input>
-      </ion-col>
-      <ion-col></ion-col>
-    </ion-col>
+        <ion-img *ngIf="signaturecliente" [src]="signaturecliente"></ion-img>
 
-    <br>
+      </ion-col>
+      <ion-label *ngIf="assinaturaclientebase64">
+        <p>Ass Client: </p>
+        <img [src]='assinaturaclientebase64'>
+      </ion-label>
+    </ion-col>
 
     <ion-row [ngClass]="{'drawing-active': isDrawing, 'esconder2': showAssinatura}">
       <ion-col>Assinatura Funcionário</ion-col>
@@ -131,18 +132,17 @@
     </ion-row>
 
     <ion-col>
-      <ion-col></ion-col>
-      <ion-col width-80>
-
-        <ion-img [src]="signaturefuncionario"></ion-img>
-
-        <ion-input type="text" formControlName="signaturefuncionario" value="{{signaturefuncionario}}"
+      <ion-col width-100>
+        <ion-input readonly type="text" formControlName="signaturefuncionario" [value]="signaturefuncionario"
           id="signaturefuncionario"></ion-input>
 
-        <img src='formControlName="signaturefuncionario"'>
+        <ion-img *ngIf="signaturefuncionario" [src]="signaturefuncionario"></ion-img>
 
       </ion-col>
-      <ion-col></ion-col>
+      <ion-label *ngIf="assinaturafuncbase64">
+        <p>Ass Func: </p>
+        <img [src]='assinaturafuncbase64'>
+      </ion-label>
     </ion-col>
 
 

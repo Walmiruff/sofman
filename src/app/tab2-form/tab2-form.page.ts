@@ -24,10 +24,12 @@ export class Tab2FormPage implements OnInit {
 
   public showAssinatura = true;
 
-  signaturefuncionario = '';
-  signaturecliente = '';
+  public signaturefuncionario = '';
+  public signaturecliente = '';
   isDrawing = false;
   title = 'Adicionar nova Ordem';
+  public assinaturafuncbase64;
+  public assinaturaclientebase64;
 
   // tslint:disable-next-line: ban-types
   public signaturePadOptions: Object = {
@@ -56,6 +58,8 @@ export class Tab2FormPage implements OnInit {
       this.title = 'Editando...';
       this.store.pipe(select(selectAllOrdens)).subscribe(ordens => {
         console.log('Rernono tab2 f' + JSON.stringify(ordens));
+        this.assinaturafuncbase64 = ordens[0].signaturefuncionario;
+        this.assinaturaclientebase64 = ordens[0].signaturecliente;
         // tslint:disable-next-line: no-shadowed-variable
         this.ordens = ordens.filter(ordens => ordens.id == this.passedId);
         this.formulario.patchValue({
@@ -144,6 +148,7 @@ export class Tab2FormPage implements OnInit {
   async savePadFunc() {
     this.signaturefuncionario = await this.assfunc.toDataURL();
     localStorage.setItem('savedSignaturefunc', this.signaturefuncionario);
+    this.assinaturafuncbase64 = this.signaturefuncionario;
     this.assfunc.clear();
     // let toast = this.toastCtrl.create({
     //   message: 'New Signature saved.',
