@@ -75,8 +75,19 @@ const routes: Routes = [
         children: [
           {
             path: '',
+            loadChildren: () => import('../tab2-img/tab2-img.module').then(m => m.Tab2ImgPageModule)
+          }
+        ]
+      },
+      {
+        path: 'tab2/:ordemid/solicitations',
+        children: [
+          {
+            path: '',
             loadChildren: () =>
-              import('../tab2-img/tab2-img.module').then(m => m.Tab2ImgPageModule)
+              import('../tab2-solicitations/tab2-solicitations.module').then(
+                m => m.Tab2SolicitationsPageModule
+              )
           }
         ]
       },
@@ -94,4 +105,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class TabsPageRoutingModule { }
+export class TabsPageRoutingModule {}

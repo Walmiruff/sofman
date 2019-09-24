@@ -23,12 +23,11 @@ export class TarefasService {
     form.append('retornotarefas', 'retornotarefas');
     form.append('idordem', '439652');
 
-    const headers =  new HttpHeaders();
-    headers.set('Accept', 'application/json, text/plain, */*')
-    headers.set('Content-Type', 'text/plain')
+    const headers = new HttpHeaders();
+    headers.set('Accept', 'application/json, text/plain, */*');
+    headers.set('Content-Type', 'text/plain');
 
     // return this.http.post<ITarefa[]>(this.url, form, {headers});
     return this.http.get<ITarefa[]>(this.url); // localhost mocado
-
   }
 }

@@ -23,8 +23,7 @@ import { Tab2FormImgPageModule } from './../tab2-form-img/tab2-form-img.module';
     Tab2FormAptHoraPageModule,
     Tab2FormTarefaPageModule,
     Tab2FormImgPageModule
-
   ],
   declarations: [TabsPage]
 })
-export class TabsPageModule { }
+export class TabsPageModule {}

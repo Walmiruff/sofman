@@ -8,11 +8,11 @@ import { ALLMATREQUESTED } from '../store/actions/apontamento_de_materiais.actio
 import { ALLHORAREQUESTED } from '../store/actions/apontamento_de_horas.action';
 import { ALLTAREFAREQUESTED } from '../store/actions/tarefas.action';
 import { ALLIMGREQUESTED } from '../store/actions/imgs.action';
+import { ALLSOLICITATIONREQUESTED } from './../store/actions/solicitations.action';
 import { MessageService } from '../shared/services/message.service';
 import { NavController, Platform } from '@ionic/angular';
 import { FirebaseService } from '../shared/services/firebase.service';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
-import { firestore } from 'firebase/app';
 
 @Component({
   selector: 'app-tabs',
@@ -44,6 +44,7 @@ export class TabsPage implements OnInit {
     this.store.dispatch(new ALLHORAREQUESTED());
     this.store.dispatch(new ALLTAREFAREQUESTED());
     this.store.dispatch(new ALLIMGREQUESTED());
+    this.store.dispatch(new ALLSOLICITATIONREQUESTED());
   }
 
   async logout() {
@@ -74,7 +75,7 @@ export class TabsPage implements OnInit {
             timestamp: this.timestamp
           };
 
-          //const locationData = new firestore.GeoPoint(this.lat, this.long);
+          // const locationData = new firestore.GeoPoint(this.lat, this.long);
           this.firebaseservice
             .userLocation(locationUser)
             .then(res => {

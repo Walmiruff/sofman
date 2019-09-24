@@ -106,7 +106,8 @@
     <ion-col>
       <ion-col></ion-col>
       <ion-col width-80>
-        <img [src]="signaturecliente" />
+
+        <ion-img [src]="signaturecliente"></ion-img>
         <ion-input type="text" formControlName="signaturecliente" [value]="signaturecliente" id="signaturecliente">
         </ion-input>
       </ion-col>
@@ -132,10 +133,13 @@
     <ion-col>
       <ion-col></ion-col>
       <ion-col width-80>
-        <img [src]="signaturefuncionario" />
+
         <ion-img [src]="signaturefuncionario"></ion-img>
-        <ion-input type="text" formControlName="signaturefuncionario" [value]="signaturefuncionario"
+
+        <ion-input type="text" formControlName="signaturefuncionario" value="{{signaturefuncionario}}"
           id="signaturefuncionario"></ion-input>
+
+        <img src='formControlName="signaturefuncionario"'>
 
       </ion-col>
       <ion-col></ion-col>

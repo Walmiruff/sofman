@@ -5,14 +5,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { Tab2FormPage } from './tab2-form.page';
-import { SignaturePadModule } from 'angular2-signaturepad';
-import { Tab2FormSolicitationsPageModule } from './../tab2-form-solicitations/tab2-form-solicitations.module';
+import { Tab2FormSolicitationsPage } from './tab2-form-solicitations.page';
 
 const routes: Routes = [
   {
     path: '',
-    component: Tab2FormPage
+    component: Tab2FormSolicitationsPage
   }
 ];
 
@@ -22,10 +20,8 @@ const routes: Routes = [
     FormsModule,
     ReactiveFormsModule,
     IonicModule,
-    SignaturePadModule,
-    Tab2FormSolicitationsPageModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [Tab2FormPage]
+  declarations: [Tab2FormSolicitationsPage]
 })
-export class Tab2FormPageModule {}
+export class Tab2FormSolicitationsPageModule {}

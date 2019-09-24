@@ -30,7 +30,11 @@ import { OrdemReducer } from './store/reducers/ordem.reducer';
 import { MaterialReducer } from './store/reducers/apontamento_de_materiais.reducer';
 import { HoraReducer } from './store/reducers/apontamento_de_horas.reducer';
 import { TarefaReducer } from './store/reducers/tarefas.reducer';
+
+/** Adicionado  */
 import { ImgReducer } from './store/reducers/imgs.reducer';
+import { SolicitationReducer } from './store/reducers/solicitations.reducer';
+import { SolicitationEffects } from './store/effects/solicitations.effects';
 
 import { OrdemEffects } from './store/effects/ordem.effects';
 import { MaterialEffects } from './store/effects/apontamento_de_materiais.effects';
@@ -62,15 +66,17 @@ import { AngularFireStorageModule } from '@angular/fire/storage';
       material: MaterialReducer,
       hora: HoraReducer,
       tarefa: TarefaReducer,
-      img: ImgReducer
+      img: ImgReducer,
+      solicitation: SolicitationReducer
     }),
-    EffectsModule.forRoot(
-      [OrdemEffects,
-        MaterialEffects,
-        HoraEffects,
-        TarefaEffects,
-        ImgEffects
-      ]),
+    EffectsModule.forRoot([
+      OrdemEffects,
+      MaterialEffects,
+      HoraEffects,
+      TarefaEffects,
+      ImgEffects,
+      SolicitationEffects
+    ]),
     StoreDevtoolsModule.instrument(),
     AppRoutingModule
   ],
@@ -83,4 +89,4 @@ import { AngularFireStorageModule } from '@angular/fire/storage';
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>{{title}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+
+  <form [formGroup]="formulario" class="appointment-form2">
+
+
+    <ion-list lines="full" class="ion-no-margin ion-no-padding">
+
+      <ion-item>
+        <ion-label position="stacked">Solicitacoes</ion-label>
+        <ion-input type="text" formControlName="solicitacao" id="solicitacao"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Retorno</ion-label>
+        <ion-input type="text" formControlName="retorno" id="retorno"></ion-input>
+      </ion-item>
+
+
+      <ion-item>
+        <ion-label position="stacked">Status</ion-label>
+        <ion-input type="text" formControlName="status" id="status"></ion-input>
+      </ion-item>
+
+
+    </ion-list>
+
+    <div class="ion-padding">
+      <ion-button expand="block" (click)="send()" class="ion-no-margin">Salvar</ion-button>
+    </div>
+
+  </form>
+
+</ion-content>

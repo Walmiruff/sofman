@@ -7,8 +7,8 @@ import { FilterPipe } from 'ngx-filter-pipe';
 import { AppState } from '../store/models/app-state.model';
 import { selectAllOrdens } from '../store/selectors/ordem.selectors';
 import { Tab2FormPage } from '../tab2-form/tab2-form.page';
+import { Tab2FormSolicitationsPage } from './../tab2-form-solicitations/tab2-form-solicitations.page';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
-import { OrdemService } from './../shared/services/ordem.service';
 
 @Component({
   selector: 'app-tab2',
@@ -37,6 +37,14 @@ export class Tab2Page implements OnInit {
     });
     return modal.present();
   }
+
+  async openModalSolicitation() {
+    const modal = await this.modalController.create({
+      component: Tab2FormSolicitationsPage
+    });
+    return modal.present();
+  }
+
   /** ScanQrcode */
   async scanQrcode() {
     try {
