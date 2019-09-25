@@ -74,7 +74,8 @@ export class LoginPage implements OnInit {
             user.login,
             user.nome,
             user.email,
-            this.form.value.senha
+            this.form.value.senha,
+            user.tipo_acesso,
           );
           setTimeout(() => {
             this.navctrl.navigateForward('tabs/tab1');

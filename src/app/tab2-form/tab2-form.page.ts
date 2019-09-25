@@ -26,10 +26,10 @@ export class Tab2FormPage implements OnInit {
 
   public signaturefuncionario = '';
   public signaturecliente = '';
-  isDrawing = false;
-  title = 'Adicionar nova Ordem';
-  public assinaturafuncbase64;
-  public assinaturaclientebase64;
+  public isDrawing = false;
+  public title = 'Adicionar nova Ordem';
+  public assinaturafuncbase64:string;
+  public assinaturaclientebase64:string;
 
   // tslint:disable-next-line: ban-types
   public signaturePadOptions: Object = {

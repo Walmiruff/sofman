@@ -22,6 +22,25 @@ export class Tab2FormSolicitationsPage implements OnInit {
   formulario: FormGroup;
   solicitations: ISolicitation[];
   public title = 'Nova Solicitação';
+
+  public prioridadearray = ['Alta', 'Media', 'Baixa']
+  public statusarray = ['ABERTO', 'EM EXECUÇÃO', 'FINALIZADO', 'RECUSADO' ]
+  public clientes = ['Andre', 'Jão', 'Ingrd', 'Matheus' ]
+  public tipomanutencaoarray = [ 'DEMANDA',
+  'DOCUMENTAÇÃO LEGAL',
+ 'EMERGENCIAL',
+  'INSPEÇÃO',
+ 'INSTALAÇÃO',
+  'JARDINAGEM',
+  'LUBRIFICAÇÃO',
+ 'MANUTENÇÃO CORRETIVA',
+ 'MANUTENÇÃO PREDITIVA',
+ 'MANUTENÇÃO PREVENTIVA',
+  'MEDIÇÃO',
+  'MEMORANDO',
+  'MEMORANDO (MKT)',
+  'PLANEJADA']
+
   constructor(
     private modalController: ModalController,
     private formBuilder: FormBuilder,
@@ -31,18 +50,44 @@ export class Tab2FormSolicitationsPage implements OnInit {
 
   ngOnInit() {
     console.log(this.passedId, this.solicitationId);
+    console.log(this.clientes.values)
     this.configurarFormulario();
     if (this.solicitationId !== null) {
+
+
+
+
       this.title = 'Editando...';
       this.store.pipe(select(selectAllSolicitations)).subscribe(solicitations => {
         this.solicitations = solicitations.filter(
           solicitations => solicitations.id === this.solicitationId
         );
         this.formulario.patchValue({
-          fk: this.solicitations[0].fk,
-          solicitacao: this.solicitations[0].solicitacao,
-          retorno: this.solicitations[0].retorno,
-          status: this.solicitations[0].status
+
+          tag_id: this.solicitations[0].tag_id,
+          id_cliente: this.solicitations[0].id_cliente, //
+          id_filial: this.solicitations[0].id_filial,
+          id_subgrupo: this.solicitations[0].id_subgrupo, // Lista suspensa
+          id_equipamento: this.solicitations[0].id_equipamento, // lista suspensa
+          localizacao: this.solicitations[0].localizacao,
+          ordem_servico: this.solicitations[0].ordem_servico,
+          id_setor_executante: this.solicitations[0].id_setor_executante, // lista suspensa
+          id_contato_filial: this.solicitations[0].id_contato_filial,
+          codigo_solicitacao: this.solicitations[0].codigo_solicitacao,
+          categoria: this.solicitations[0].categoria,
+          assunto: this.solicitations[0].assunto,
+          mensagem: this.solicitations[0].mensagem,
+          prioridade: this.prioridadearray,
+          status: this.statusarray,
+          imagem: this.solicitations[0].imagem,
+          imagem_nome: this.solicitations[0],
+          imagem_tamanho: this.solicitations[0],
+          data_inicio: this.solicitations[0].data_inicio,
+          data_termino: this.solicitations[0].data_termino,
+          id_problema: this.solicitations[0].id_problema, // lista suspensa
+          maquina_parada: this.solicitations[0].maquina_parada,
+          notificar: this.solicitations[0].notificar,
+
         });
       });
     }
@@ -51,10 +96,30 @@ export class Tab2FormSolicitationsPage implements OnInit {
   configurarFormulario() {
     this.formulario = this.formBuilder.group({
       id: [null],
-      fk: [null],
-      solicitacao: [null],
-      retorno: [null],
-      status: [null]
+      tag_id: [null],
+      id_cliente: [null], //
+      id_filial: [null],
+      id_subgrupo: [null], // Lista suspensa
+      id_equipamento: [null], // lista suspensa
+      localizacao: [null],
+      ordem_servico: [null],
+      id_setor_executante: [null], // lista suspensa
+      id_contato_filial: [null],
+      codigo_solicitacao: [null],
+      categoria: [null],
+      assunto: [null],
+      mensagem: [null],
+      prioridade: [null],
+      status: [null],
+      imagem: [null],
+      imagem_nome: [null],
+      imagem_tamanho: [null],
+      data_inicio: [null],
+      data_termino: [null],
+
+      id_problema: [null], // lista suspensa
+      maquina_parada: [null],
+      notificar: [null],
     });
   }
 
@@ -90,5 +155,9 @@ export class Tab2FormSolicitationsPage implements OnInit {
     this.modalController.dismiss({
       dismissed: true
     });
+  }
+  async closeModal() {
+    const modalclose = await this.modalController.dismiss();
+    return modalclose;
   }
 }

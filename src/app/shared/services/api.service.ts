@@ -22,12 +22,13 @@ export class ApiService {
     return this.http.get(url);
   }
 
-  setCredentials(id, login: string, nome: string, email: string, authorization: string) {
+  setCredentials(id, login: string, nome: string, email: string, authorization: string, tipoacesso) {
     localStorage.setItem('id', id);
     localStorage.setItem('login', login);
     localStorage.setItem('nome', nome);
     localStorage.setItem('email', email);
     localStorage.setItem('authorization', authorization);
+    localStorage.setItem('tipoacesso', tipoacesso);
 
   }
 
@@ -38,7 +39,8 @@ export class ApiService {
       name: localStorage.getItem('nome'),
       email: localStorage.getItem('email'),
       pass: localStorage.getItem('pass'),
-      authorization: localStorage.getItem('authorization')
+      authorization: localStorage.getItem('authorization'),
+      tipoacesso: localStorage.getItem('tipoacesso'),
     };
   }
   // https://newsapi.org/v2/top-headlines?sources=google-news-br&apiKey=527661c783af4453a88acbceeddb0c56
