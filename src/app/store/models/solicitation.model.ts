@@ -1,7 +1,30 @@
 export interface ISolicitation {
   id: string | number;
-  fk: number;
-  solicitacao: string;
-  retorno: string | number;
+  tag_id: string | number;
+  id_cliente: string | number;
+  id_filial: string | number;
+  id_subgrupo: string | number;
+  id_equipamento: string | number;
+  localizacao: string;
+  ordem_servico: string | number;
+  id_setor_executante: string | number;
+  id_contato_filial: string | number;
+  codigo_solicitacao: string | number;
+  categoria: string | number;
+  assunto: string;
+  mensagem: string;
+  prioridade: string;
   status: string | number;
+  anexo: string;
+  anexo_nome: string;
+  anexo_tamanho: string;
+  imagem: string;
+  imagem_nome: string;
+  imagem_tamanho: string;
+  data_inicio: Date | number;
+  data_termino: Date | number;
+  log_date: Date | number;
+  id_problema: string | number;
+  maquina_parada: string | number;
+  notificar: string;
 }

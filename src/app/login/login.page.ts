@@ -14,6 +14,15 @@ export class LoginPage implements OnInit {
   private url = 'https://posts.vix.br/apisoftman/login.php'; //
   // private apilogin = 'https://posts.vix.br/apisoftman/login.php'; //
 
+  /**
+  Qr code, leitura
+  start atraves do qr code .
+
+  0 / nao gera ordem de servico.  / Pode solicatacaoi
+  1 / pode gera ordem de servico e gera solicitacoa ( toltal)
+  2 / nao pode fazer solicitacao / Pode gera ordem de serco
+
+   */
   public lat;
   public long;
   user: any;

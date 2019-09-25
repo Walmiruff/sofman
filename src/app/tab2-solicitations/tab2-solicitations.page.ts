@@ -6,7 +6,7 @@ import { Store, select } from '@ngrx/store';
 
 import { AppState } from '../store/models/app-state.model';
 import { selectAllSolicitations } from '../store/selectors/solicitations.selectors';
-import { REMOVETAREFA } from '../store/actions/tarefas.action';
+import { REMOVESOLICITATION } from './../store/actions/solicitations.action';
 
 import { FirebaseService } from '../shared/services/firebase.service';
 import { Tab2FormSolicitationsPage } from './../tab2-form-solicitations/tab2-form-solicitations.page';
@@ -69,7 +69,7 @@ export class Tab2SolicitationsPage implements OnInit {
           text: 'Remover',
           handler: () => {
             this.firebaseService.crudFirebase({ id: id }, 'solicitation-remove');
-            this.store.dispatch(new REMOVETAREFA({ id: Number(id) }));
+            this.store.dispatch(new REMOVESOLICITATION({ id: Number(id) }));
           }
         }
       ]
