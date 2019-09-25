@@ -1,5 +1,5 @@
 export interface IImg {
-  id: number;
+  id: string | number;
   fk: number;
   url: string;
   obs: string;

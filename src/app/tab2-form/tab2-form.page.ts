@@ -19,21 +19,21 @@ import { SignaturePad } from 'angular2-signaturepad/signature-pad';
 })
 export class Tab2FormPage implements OnInit {
   @ViewChild('Assfuncionario', { static: true }) public assfunc: SignaturePad;
-
   @ViewChild('Assinaturacliente', { static: true }) public assclient: SignaturePad;
-
+  public assinaturafuncbase64: string;
+  public assinaturaclientebase64: string;
   public showAssinatura = true;
 
   public signaturefuncionario = '';
   public signaturecliente = '';
+
   public isDrawing = false;
   public title = 'Adicionar nova Ordem';
-  public assinaturafuncbase64:string;
-  public assinaturaclientebase64:string;
 
-  // tslint:disable-next-line: ban-types
+
+
   public signaturePadOptions: Object = {
-    // Check out https://github.com/szimek/signature_pad
+
     minWidth: 2,
     canvasWidth: 400,
     canvasHeight: 100,

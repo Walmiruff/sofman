@@ -45,7 +45,6 @@ export class Tab2TarefaPage implements OnInit {
     });
     return modal.present();
   }
-
   async openModalCreate() {
     const modal = await this.modalController.create({
       component: Tab2FormTarefaPage,
@@ -77,7 +76,4 @@ export class Tab2TarefaPage implements OnInit {
     })
     alert.present();
   }
-
-
-
 }

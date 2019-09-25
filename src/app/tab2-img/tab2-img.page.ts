@@ -17,6 +17,7 @@ import { selectAllImgs } from '../store/selectors/imgs.selectors';
   styleUrls: ['./tab2-img.page.scss']
 })
 export class Tab2ImgPage implements OnInit {
+
   img$: Observable<any>;
   ordemId: number;
   imgId: number;
@@ -31,7 +32,8 @@ export class Tab2ImgPage implements OnInit {
 
   ngOnInit() {
     this.ordemId = this.route.snapshot.params['ordemid'];
-    this.img$ = this.store.pipe(select(selectAllImgs));
+        this.img$ = this.store.pipe(select(selectAllImgs));
+    console.log('Id ordem',  this.ordemId)
   }
 
   async openModalUpdate(id: string | number) {

@@ -54,9 +54,6 @@ export class Tab2FormSolicitationsPage implements OnInit {
     this.configurarFormulario();
     if (this.solicitationId !== null) {
 
-
-
-
       this.title = 'Editando...';
       this.store.pipe(select(selectAllSolicitations)).subscribe(solicitations => {
         this.solicitations = solicitations.filter(

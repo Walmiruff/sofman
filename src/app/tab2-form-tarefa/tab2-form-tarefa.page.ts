@@ -37,7 +37,7 @@ export class Tab2FormTarefaPage implements OnInit {
     this.configurarFormulario();
     if (this.tarefaId !== null) {
       this.store.pipe(select(selectAllTarefas)).subscribe(tarefas => {
-        this.tarefas = tarefas.filter(tarefas => tarefas.id === this.tarefaId);
+        this.tarefas = tarefas.filter(tarefas => tarefas.id == this.tarefaId);
         this.formulario.patchValue({
           fk: this.tarefas[0].fk,
           tarefa: this.tarefas[0].tarefa,
@@ -49,7 +49,6 @@ export class Tab2FormTarefaPage implements OnInit {
     }
 
   }
-
 
   configurarFormulario() {
     this.formulario = this.formBuilder.group({
@@ -90,11 +89,8 @@ export class Tab2FormTarefaPage implements OnInit {
       this.firebaseService.crudFirebase(this.formulario.value, 'tarefa-add');
       this.store.dispatch(new ADDTAREFA({ tarefa: this.formulario.value }));
     }
-
-
     this.dismiss();
   }
-
 
   dismiss() {
     this.modalController.dismiss({

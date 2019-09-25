@@ -51,8 +51,8 @@
       "observacao": "teste obs",
       "status_da_os": "ABERTO",
       "message": "Testandao mensagem",
-      "signaturecliente": "56565656565666",
-      "signaturefuncionario": "55656565656565656"
+      "signaturecliente": "",
+      "signaturefuncionario": ""
     }
   ],
   "apontamento_de_materiais": [
@@ -248,5 +248,22 @@
       "url": "https://picsum.photos/200/300?random",
       "obs": "teste envio de imagem2"
     }
+  ],
+  "solicitations" :
+  [
+   {
+     "id" : 1
+    },
+    {
+      "id" : 2
+     },
+     {
+      "id" : 3
+     },
+     {
+      "id" : 4
+     }
   ]
+
+
 }

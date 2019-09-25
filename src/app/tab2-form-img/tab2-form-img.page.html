@@ -5,27 +5,15 @@
 </ion-header>
 
 <ion-content>
-
   <ion-button (click)="selectImageInCamera()" fill="solid" shape="round">
     Tirar Foto
   </ion-button>
   <form [formGroup]="formulario" class="appointment-form2">
-
-
-    <ion-progress-bar value="myPorcents | async" buffer="0.5" reversed="true" color="primary">
-    </ion-progress-bar>
-
-
-
-
-    <ion-list lines="full" class="ion-no-margin ion-no-padding">
-
-
+  <ion-list lines="full" class="ion-no-margin ion-no-padding">
       <ion-thumbnail slot="start">
         <img *ngIf="myPhotoURL" [src]="myPhotoURL | async">
       </ion-thumbnail>
       <ion-label>
-
       </ion-label>
       <ion-item>
         <ion-label position="stacked">Obs</ion-label>
@@ -33,11 +21,9 @@
       </ion-item>
       <ion-item>
         <ion-label position="stacked">Url Img</ion-label>
+        <ion-input  formControlName="url" id="url"></ion-input>
         <ion-input type="text" [value]="myPhotoURL | async" formControlName="url" id="url"></ion-input>
       </ion-item>
-
-
-
 
     </ion-list>
 

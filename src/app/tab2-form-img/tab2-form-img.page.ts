@@ -14,8 +14,6 @@ import { MessageService } from '../shared/services/message.service';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { finalize } from 'rxjs/operators';
 import { Observable } from 'rxjs';
-import { ApiService } from '../shared/services/api.service';
-import * as firebase from 'firebase';
 
 @Component({
   selector: 'app-tab2-form-img',
@@ -50,9 +48,12 @@ export class Tab2FormImgPage implements OnInit {
     if (this.imgId !== null) {
       console.log(this.imgId);
       this.title = 'Editando foto';
+
       this.store.pipe(select(selectAllImgs)).subscribe(imgs => {
-        this.imgId = imgs.filter(imgs => imgs.id === this.imgId);
+        this.imgs = imgs.filter( imgs => imgs.id == this.imgId);
+
         this.formulario.patchValue({
+
           fk: this.imgs[0].fk,
           obs: this.imgs[0].obs,
           url: this.imgs[0].url
