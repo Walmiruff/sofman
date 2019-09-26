@@ -50,10 +50,9 @@ export class Tab2FormImgPage implements OnInit {
       this.title = 'Editando foto';
 
       this.store.pipe(select(selectAllImgs)).subscribe(imgs => {
-        this.imgs = imgs.filter( imgs => imgs.id == this.imgId);
+        this.imgs = imgs.filter(imgs => imgs.id == this.imgId);
 
         this.formulario.patchValue({
-
           fk: this.imgs[0].fk,
           obs: this.imgs[0].obs,
           url: this.imgs[0].url

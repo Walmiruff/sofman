@@ -23,23 +23,25 @@ export class Tab2FormSolicitationsPage implements OnInit {
   solicitations: ISolicitation[];
   public title = 'Nova Solicitação';
 
-  public prioridadearray = ['Alta', 'Media', 'Baixa']
-  public statusarray = ['ABERTO', 'EM EXECUÇÃO', 'FINALIZADO', 'RECUSADO' ]
-  public clientes = ['Andre', 'Jão', 'Ingrd', 'Matheus' ]
-  public tipomanutencaoarray = [ 'DEMANDA',
-  'DOCUMENTAÇÃO LEGAL',
- 'EMERGENCIAL',
-  'INSPEÇÃO',
- 'INSTALAÇÃO',
-  'JARDINAGEM',
-  'LUBRIFICAÇÃO',
- 'MANUTENÇÃO CORRETIVA',
- 'MANUTENÇÃO PREDITIVA',
- 'MANUTENÇÃO PREVENTIVA',
-  'MEDIÇÃO',
-  'MEMORANDO',
-  'MEMORANDO (MKT)',
-  'PLANEJADA']
+  public prioridadearray = ['Alta', 'Media', 'Baixa'];
+  public statusarray = ['ABERTO', 'EM EXECUÇÃO', 'FINALIZADO', 'RECUSADO'];
+  public clientes = ['Andre', 'Jão', 'Ingrd', 'Matheus'];
+  public tipomanutencaoarray = [
+    'DEMANDA',
+    'DOCUMENTAÇÃO LEGAL',
+    'EMERGENCIAL',
+    'INSPEÇÃO',
+    'INSTALAÇÃO',
+    'JARDINAGEM',
+    'LUBRIFICAÇÃO',
+    'MANUTENÇÃO CORRETIVA',
+    'MANUTENÇÃO PREDITIVA',
+    'MANUTENÇÃO PREVENTIVA',
+    'MEDIÇÃO',
+    'MEMORANDO',
+    'MEMORANDO (MKT)',
+    'PLANEJADA'
+  ];
 
   constructor(
     private modalController: ModalController,
@@ -50,18 +52,16 @@ export class Tab2FormSolicitationsPage implements OnInit {
 
   ngOnInit() {
     console.log(this.passedId, this.solicitationId);
-    console.log(this.clientes.values)
+    console.log(this.clientes.values);
     this.configurarFormulario();
     if (this.solicitationId !== null) {
-
       this.title = 'Editando...';
+      console.log('ID Solicitacao...' + this.solicitationId);
       this.store.pipe(select(selectAllSolicitations)).subscribe(solicitations => {
         this.solicitations = solicitations.filter(
-          solicitations => solicitations.id === this.solicitationId
+          solicitations => solicitations.id == this.solicitationId
         );
         this.formulario.patchValue({
-
-          tag_id: this.solicitations[0].tag_id,
           id_cliente: this.solicitations[0].id_cliente, //
           id_filial: this.solicitations[0].id_filial,
           id_subgrupo: this.solicitations[0].id_subgrupo, // Lista suspensa
@@ -74,17 +74,14 @@ export class Tab2FormSolicitationsPage implements OnInit {
           categoria: this.solicitations[0].categoria,
           assunto: this.solicitations[0].assunto,
           mensagem: this.solicitations[0].mensagem,
-          prioridade: this.prioridadearray,
-          status: this.statusarray,
+          prioridade: this.solicitations[0].prioridade,
+          status: this.solicitations[0].status,
           imagem: this.solicitations[0].imagem,
-          imagem_nome: this.solicitations[0],
-          imagem_tamanho: this.solicitations[0],
+
           data_inicio: this.solicitations[0].data_inicio,
           data_termino: this.solicitations[0].data_termino,
           id_problema: this.solicitations[0].id_problema, // lista suspensa
-          maquina_parada: this.solicitations[0].maquina_parada,
-          notificar: this.solicitations[0].notificar,
-
+          maquina_parada: this.solicitations[0].maquina_parada
         });
       });
     }
@@ -93,7 +90,7 @@ export class Tab2FormSolicitationsPage implements OnInit {
   configurarFormulario() {
     this.formulario = this.formBuilder.group({
       id: [null],
-      tag_id: [null],
+
       id_cliente: [null], //
       id_filial: [null],
       id_subgrupo: [null], // Lista suspensa
@@ -109,14 +106,11 @@ export class Tab2FormSolicitationsPage implements OnInit {
       prioridade: [null],
       status: [null],
       imagem: [null],
-      imagem_nome: [null],
-      imagem_tamanho: [null],
       data_inicio: [null],
       data_termino: [null],
-
       id_problema: [null], // lista suspensa
       maquina_parada: [null],
-      notificar: [null],
+      notificar: [null]
     });
   }
 

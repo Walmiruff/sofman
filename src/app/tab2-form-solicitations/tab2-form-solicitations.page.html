@@ -21,113 +21,118 @@
         <ion-label position="stacked">Cliente <ion-text color="danger"> * </ion-text>
         </ion-label>
         <ion-select placeholder="Selecione Cliente" formControlName="id_cliente">
-          <ion-select-option *ngFor="let cliente of clientes | keyvalue" [value]="cliente.key">{{cliente.key}}
+          <ion-select-option *ngFor="let cliente of clientes | keyvalue" value="  {{cliente.key}}">
+
             {{cliente.value}}</ion-select-option>
         </ion-select>
       </ion-item>
 
 
-        <ion-item>
-          <ion-label position="stacked">Assunto: <ion-text color="danger"> * </ion-text>
-          </ion-label>
-          <ion-input type="text" formControlName="assunto" id="assunto">
-          </ion-input>
-        </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Assunto: <ion-text color="danger"> * </ion-text>
+        </ion-label>
+        <ion-input type="text" formControlName="assunto" id="assunto">
+        </ion-input>
+      </ion-item>
 
       <ion-item>
-          <ion-label position="stacked">Tipo de Mt: <ion-text color="danger"> * </ion-text>
-          </ion-label>
-          <ion-select placeholder="Selecione Tipo Manutenção" formControlName="id_equipamento" id="id_equipamento">
-            <ion-select-option *ngFor="let tipomanutencao of tipomanutencaoarray | keyvalue" [value]="tipomanutencao.key">
-              {{tipomanutencao.key}} {{tipomanutencao.value}}</ion-select-option>
-          </ion-select>
-        </ion-item>
+        <ion-label position="stacked">Tipo de Mt: <ion-text color="danger"> * </ion-text>
+        </ion-label>
+        <ion-select placeholder="Selecione Tipo Manutenção" formControlName="id_equipamento" id="id_equipamento">
+          <ion-select-option *ngFor="let tipomanutencao of tipomanutencaoarray | keyvalue"
+            value="{{tipomanutencao.key}}">
+            {{tipomanutencao.key}} {{tipomanutencao.value}}</ion-select-option>
+        </ion-select>
+      </ion-item>
 
 
       <ion-item>
         <ion-label position="stacked">Prioridade: <ion-text color="danger"> * </ion-text>
         </ion-label>
         <ion-select placeholder="Selecione a Prioridade" formControlName="prioridade">
-          <ion-select-option *ngFor="let prioridade of prioridadearray | keyvalue" [value]="prioridade.key">
+          <ion-select-option *ngFor="let prioridade of prioridadearray | keyvalue"
+            value="{{prioridade.key}} {{prioridade.value}}">
             {{prioridade.key}} {{prioridade.value}}</ion-select-option>
         </ion-select>
       </ion-item>
 
       <ion-item>
-   <ion-label position="stacked">Status: <ion-text color="danger"> * </ion-text></ion-label>
-        <ion-select placeholder="Selecione o Status" formControlName="status" >
-          <ion-select-option   *ngFor="let status of statusarray | keyvalue"
-       [value]="status.key">{{status.key}} {{status.value}}</ion-select-option>
+        <ion-label position="stacked">Status: <ion-text color="danger"> * </ion-text>
+        </ion-label>
+        <ion-select placeholder="Selecione o Status" formControlName="status">
+          <ion-select-option *ngFor="let status of statusarray | keyvalue" [value]="status.key">{{status.key}}
+            {{status.value}}</ion-select-option>
         </ion-select>
       </ion-item>
 
 
 
       <ion-item>
-          <ion-label position="stacked">Data Termino</ion-label>
-          <ion-datetime displayFormat="DD MM YYYY" formControlName="data_termino" id="data_termino"></ion-datetime>
-    </ion-item>
+        <ion-label position="stacked">Data Termino</ion-label>
+        <ion-datetime displayFormat="DD MM YYYY" formControlName="data_termino" id="data_termino"></ion-datetime>
+      </ion-item>
 
-    <ion-item>
+      <ion-item>
         <ion-label position="stacked">Equipamento: <ion-text color="danger"> * </ion-text>
         </ion-label>
-        <ion-input type="text" formControlName="equipamento" id="equipamento">
+        <ion-input type="text" formControlName="id_equipamento" id="id_equipamento">
         </ion-input>
-  </ion-item>
+      </ion-item>
 
-  <ion-item>
-      <ion-label position="stacked">Localização: <ion-text color="danger"> * </ion-text>
-      </ion-label>
-      <ion-input type="text" formControlName="localizacao" id="localizacao">
-      </ion-input>
-</ion-item>
+      <ion-item>
+        <ion-label position="stacked">Localização: <ion-text color="danger"> * </ion-text>
+        </ion-label>
+        <ion-input type="text" formControlName="localizacao" id="localizacao">
+        </ion-input>
+      </ion-item>
 
-<ion-item>
-    <ion-label position="stacked">Maquina parada: <ion-text color="danger"> * </ion-text>
-    </ion-label>
-  <ion-checkbox slot="start"   formControlName="maquina_parada" type="checkbox"  > </ion-checkbox>
-</ion-item>
-
-
-
-<ion-item>
-    <ion-label position="stacked">Setor executante: <ion-text color="danger"> * </ion-text>
-    </ion-label>
-    <ion-input type="text" formControlName="id_setor_executante" id="id_setor_executante">
-    </ion-input>
-</ion-item>
+      <ion-item>
+        <ion-label position="stacked">Maquina parada: <ion-text color="danger"> * </ion-text>
+        </ion-label>
+        <ion-checkbox slot="start" formControlName="maquina_parada" type="checkbox" (ionChange)=($event)>
+        </ion-checkbox>
+      </ion-item>
 
 
-<ion-item>
-    <ion-label position="stacked">Problema: <ion-text color="danger"> * </ion-text>
-    </ion-label>
-    <ion-input type="text" formControlName="id_problema" id="id_problema">
-    </ion-input>
-</ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Setor executante: <ion-text color="danger"> * </ion-text>
+        </ion-label>
+        <ion-input type="text" formControlName="id_setor_executante" id="id_setor_executante">
+        </ion-input>
+      </ion-item>
 
 
-<ion-item>
-    <ion-label position="stacked">Sub-grupo: <ion-text color="danger"> * </ion-text>
-    </ion-label>
-    <ion-input type="text" formControlName="id_subgrupo" id="id_subgrupo">
-    </ion-input>
-</ion-item>
+      <ion-item>
+        <ion-label position="stacked">Problema: <ion-text color="danger"> * </ion-text>
+        </ion-label>
+        <ion-input type="text" formControlName="id_problema" id="id_problema">
+        </ion-input>
+      </ion-item>
 
 
-<ion-item>
-    <ion-label position="stacked">Descrição: <ion-text color="danger"> * </ion-text>
-    </ion-label>
-    <ion-input type="textarea" row=4 formControlName="mensagem" id="mensagem">
-    </ion-input>
-</ion-item>
+      <ion-item>
+        <ion-label position="stacked">Sub-grupo: <ion-text color="danger"> * </ion-text>
+        </ion-label>
+        <ion-input type="text" formControlName="id_subgrupo" id="id_subgrupo">
+        </ion-input>
+      </ion-item>
 
 
-<ion-item>
-    <ion-label position="stacked">Anexar Imagem: <ion-text color="danger"> * </ion-text>
-    </ion-label>
-    <ion-input type="text" formControlName="imagem" id="imagem">
-    </ion-input>
-</ion-item>
+      <ion-item>
+        <ion-label position="stacked">Descrição: <ion-text color="danger"> * </ion-text>
+        </ion-label>
+        <ion-input type="textarea" row=4 formControlName="mensagem" id="mensagem">
+        </ion-input>
+      </ion-item>
+
+
+      <ion-item>
+        <ion-label position="stacked">Anexar Imagem: <ion-text color="danger"> * </ion-text>
+        </ion-label>
+        <ion-input type="text" formControlName="imagem" id="imagem">
+        </ion-input>
+      </ion-item>
 
 
     </ion-list>

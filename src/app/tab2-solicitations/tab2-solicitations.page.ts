@@ -76,4 +76,8 @@ export class Tab2SolicitationsPage implements OnInit {
     });
     alert.present();
   }
+  async closeModal() {
+    const modalclose = await this.modalController.dismiss();
+    return modalclose;
+  }
 }
