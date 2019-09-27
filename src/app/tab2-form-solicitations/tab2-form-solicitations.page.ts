@@ -32,7 +32,7 @@ export class Tab2FormSolicitationsPage implements OnInit {
   public bigImg = null;
   public smallImg = null;
   public myPorcents: Observable<number>;
-  public imagem: Observable<any>;
+  public imagem: any;
   /** Fim imagem */
 
   public prioridadearray = ['Alta', 'Media', 'Baixa'];
@@ -209,28 +209,11 @@ export class Tab2FormSolicitationsPage implements OnInit {
     this.generateFromImage(this.bigImg, 1000, 1000, 100, data => {
       this.smallImg = data;
       const imgToUp = this.smallImg.split(',')[1];
-      this.bigImg = imgToUp;
-      // console.log(imgToUp);
-      // this.uploadimageservice
-      //   .uploadPhoto(imgToUp, this.usuario.uid, 'Profile')
-      //   .then(savedPicture => {
-      //     const storageRef = this.afs.storage.ref('Images/' + 'Profile' + '/' + this.usuario.uid);
-      //     storageRef.getDownloadURL().then(async url => {
-      //       this.usuario.avatar = url;
-      //       // alert('Imagem avatar this.ususario.vatar ->>>>' + this.usuario.avatar);
-      //       await this.authService.authState$.subscribe(res => {
-      //         res.updateProfile({
-      //           photoURL: url
-      //         });
-      //       });
-      //       load.dismiss();
-      //       //  alert('sceusso ao fazer upkiad');
-      //     });
-      //   })
-      //   .catch(err => {
-      //     alert('Erro ao enviar atualizar imagem' + err);
-      //     load.dismiss();
-      //   });
+      this.imagem = imgToUp;
+      console.log('Retorno up imagem' + this.bigImg);
+      this.uploadPhoto();
+      load.dismiss();
+
     });
   }
   generateFromImage(img, MAX_WIDTH, MAX_HEIGHT, quality, callback) {
@@ -261,20 +244,24 @@ export class Tab2FormSolicitationsPage implements OnInit {
     };
     image.src = img;
   }
-  private uploadPhoto(): void {
+  private async uploadPhoto() {
     const ref = this.afstore
       .ref('/SofmanSolicitacoes/')
       .child(this.generateUUID())
       .child('SofmanSolicitacao.png');
 
-    const task = ref.putString(this.bigImg, 'base64', { contentType: 'image/png' });
+    const task = ref.putString(this.imagem, 'base64', { contentType: 'image/png' });
     this.myPorcents = task.percentageChanges();
 
-    task
-      .snapshotChanges()
-      .pipe(finalize(() => (this.imagem = ref.getDownloadURL())))
-      .subscribe();
-    alert(JSON.stringify(this.imagem));
+    try {
+          task
+          .snapshotChanges()
+          .pipe(finalize(() => ( this.imagem = ref.getDownloadURL())))
+          .subscribe();
+          alert(JSON.stringify(this.imagem));
+   } catch (error) {
+
+   }
   }
   private generateUUID(): any {
     let d = new Date().getTime();

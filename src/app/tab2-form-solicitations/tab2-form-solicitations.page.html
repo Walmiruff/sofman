@@ -134,11 +134,11 @@
 
         <ion-icon style="font-size: 49px;" slot="start" ios="ios-camera" md="md-camera"></ion-icon>
         <ion-label>Anexar Imagem: <ion-text color="danger"> * </ion-text>
-
+          {{myPorcents | async }} %
         </ion-label>
         <ion-input type="text" formControlName="imagem" id="imagem">
         </ion-input>
-        <ion-img *ngIf="imagem" [src]="imagem"></ion-img>
+        <ion-img *ngIf="imagem" [src]="imagem | async"></ion-img>
       </ion-item>
 
 
