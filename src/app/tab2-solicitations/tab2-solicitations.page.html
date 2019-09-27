@@ -1,24 +1,44 @@
 <ion-header>
   <ion-toolbar>
-    <ion-back-button></ion-back-button>
-    <ion-buttons slot="start">
-      <ion-button (click)="closeModal()">
-        <ion-icon slot="start" name="close"></ion-icon>
-      </ion-button>
-      <!-- <ion-buttons slot="start">
-        <ion-back-button defaultHref="tabs/tab1"></ion-back-button>
-      </ion-buttons> -->
-    </ion-buttons>
-    <ion-title>Solicitações</ion-title>
+    <ion-row>
+      <div>
+        <img class="logo" src="assets/img/logosmall.png">
+      </div>
+      <ion-title>
+        Solicitações
+      </ion-title>
+    </ion-row>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content fullscreen class="ion-padding">
+  <ion-row>
+
+    <div class="wrapper" (click)="scanQrcode()">
+      <img style="width: 30px;" class="qrcode" src="../../assets/img/qrcode.png">
+
+    </div>
+
+    <ion-col size="10">
+      <div class="container">
+        <ion-searchbar [(ngModel)]="userFilter.solicitation" animated placeholder="Pesquisar Solicitações"
+          [value]='barcode'>
+        </ion-searchbar>
+      </div>
+    </ion-col>
+
+    <div class="wrapper">
+      <ion-datetime></ion-datetime>
+      <ion-icon name="funnel"></ion-icon>
+    </div>
+
+  </ion-row>
 
   <ng-container *ngIf="solicitations$ | async as solicitations ; else elseTemplate">
 
     <ion-list>
-      <ion-item *ngFor="let entities of solicitations">
+      <ion-item *ngFor="let entities of solicitations | filterBy:  userFilter"
+        [routerLink]="[ '/tabs/tab2-solicitations', entities.id ]">
         <ion-grid>
 
           <ion-row>
@@ -38,11 +58,7 @@
 
               <p class="custom"> {{ entities.assunto }}</p>
             </ion-col>
-            <ion-col size="2">
-              <ion-button color="medium" (click)="openModalUpdate(entities.id)">
-                <ion-icon name="refresh"></ion-icon>
-              </ion-button>
-            </ion-col>
+
           </ion-row>
 
           <ion-row>
@@ -51,12 +67,6 @@
             </ion-col>
             <ion-col size="5">
               <p class="custom"> {{ entities.id_equipamento }}</p>
-            </ion-col>
-
-            <ion-col size="2">
-              <ion-button color="medium" (click)="openConfirmRemove(entities.id)">
-                <ion-icon name="trash"></ion-icon>
-              </ion-button>
             </ion-col>
           </ion-row>
 
@@ -75,8 +85,8 @@
     </ion-list>
 
     <ion-fab horizontal="end" vertical="top" slot="fixed" edge>
-      <ion-fab-button (click)="openModalCreate()">
-        <ion-icon name="add"></ion-icon>
+      <ion-fab-button>
+        <ion-icon name="add" (click)="openModalCreate()"></ion-icon>
       </ion-fab-button>
     </ion-fab>
 

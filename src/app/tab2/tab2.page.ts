@@ -28,6 +28,7 @@ export class Tab2Page implements OnInit {
 
   ngOnInit() {
     this.ordens$ = this.store.pipe(select(selectAllOrdens));
+    console.log(this.userFilter);
   }
 
   async openModalCreate() {
@@ -37,7 +38,7 @@ export class Tab2Page implements OnInit {
     return modal.present();
   }
 
-   /** ScanQrcode */
+  /** ScanQrcode */
   async scanQrcode() {
     try {
       if (this.platform.is('cordova')) {
@@ -51,5 +52,9 @@ export class Tab2Page implements OnInit {
           });
       }
     } catch (error) {}
+  }
+  async closeModal() {
+    const modalclose = await this.modalController.dismiss();
+    return modalclose;
   }
 }

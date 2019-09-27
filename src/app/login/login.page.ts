@@ -53,7 +53,7 @@ export class LoginPage implements OnInit {
     this.authorization = this.api.getCredentials().authorization;
   }
 
-  login() {
+  async login() {
     const headers = new HttpHeaders();
     headers.set('Accept', 'application/json');
     headers.set('Content-Type', 'application/json');
@@ -62,7 +62,10 @@ export class LoginPage implements OnInit {
       login: this.form.value.login,
       senha: this.form.value.senha
     };
-    this.message.showLoading('Verificando dados...', 'loading-login');
+    const loading = await this.message.loading({
+      message: 'Verificando dados...',
+      spinner: 'lines-small'
+    });
     this.http.post(this.url, data, { headers }).subscribe(
       (resp: any) => {
         console.log(resp);
@@ -75,21 +78,29 @@ export class LoginPage implements OnInit {
             user.nome,
             user.email,
             this.form.value.senha,
-            user.tipo_acesso,
+            user.tipo_acesso
           );
           setTimeout(() => {
             this.navctrl.navigateForward('tabs/tab1');
-            this.message.hideLoading('loading-login');
+            loading.dismiss();
           }, 2500);
         } else if (resp.message !== 'sucesso') {
-          this.message.hideLoading('loading-login');
-          this.message.alerts('Atenção', 'Ocorreu um erro ao efetuar login', 'OK');
+          loading.dismiss();
+          const alerta = this.message.alert({
+            header: 'Atenção!',
+            message: 'Ocorreu um erro ao efeturar login.',
+            buttons: [{ text: 'OK' }]
+          });
         }
       },
       err => {
         console.log(err);
-        this.message.alerts('Atenção', 'Ocorreu um erro ao efetuar login', 'OK');
-        this.message.hideLoading('loading-login');
+        const alerta = this.message.alert({
+          header: 'Atenção!',
+          message: 'Ocorreu um erro ao efeturar login.',
+          buttons: [{ text: 'OK' }]
+        });
+        loading.dismiss();
         return;
       }
     );

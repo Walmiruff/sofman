@@ -56,7 +56,7 @@ import { AngularFireStorageModule } from '@angular/fire/storage';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    IonicModule.forRoot(),
+    IonicModule.forRoot({ mode: 'ios' }),
     AngularFireDatabaseModule,
     AngularFirestoreModule,
     AngularFireStorageModule,

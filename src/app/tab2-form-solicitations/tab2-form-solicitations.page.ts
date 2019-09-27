@@ -1,20 +1,26 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
-import { ModalController } from '@ionic/angular';
+import { ModalController, Platform } from '@ionic/angular';
+import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
+
 import { Update } from '@ngrx/entity';
 import { Store, select } from '@ngrx/store';
-
 import { AppState } from '../store/models/app-state.model';
 import { UPDATESOLICITATION, ADDSOLICITATION } from '../store/actions/solicitations.action';
 import { selectAllSolicitations } from '../store/selectors/solicitations.selectors';
 
 import { ISolicitation } from '../store/models/solicitation.model';
+import { MessageService } from './../shared/services/message.service';
 import { FirebaseService } from '../shared/services/firebase.service';
+import { AngularFireStorage } from '@angular/fire/storage';
+import { Observable } from 'rxjs';
+import { finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'app-tab2-form-solicitations',
   templateUrl: './tab2-form-solicitations.page.html',
-  styleUrls: ['./tab2-form-solicitations.page.scss']
+  styleUrls: ['./tab2-form-solicitations.page.scss'],
+  providers: [Camera]
 })
 export class Tab2FormSolicitationsPage implements OnInit {
   passedId = null;
@@ -22,6 +28,12 @@ export class Tab2FormSolicitationsPage implements OnInit {
   formulario: FormGroup;
   solicitations: ISolicitation[];
   public title = 'Nova Solicitação';
+  /** Imagem */
+  public bigImg = null;
+  public smallImg = null;
+  public myPorcents: Observable<number>;
+  public imagem: Observable<any>;
+  /** Fim imagem */
 
   public prioridadearray = ['Alta', 'Media', 'Baixa'];
   public statusarray = ['ABERTO', 'EM EXECUÇÃO', 'FINALIZADO', 'RECUSADO'];
@@ -47,17 +59,24 @@ export class Tab2FormSolicitationsPage implements OnInit {
     private modalController: ModalController,
     private formBuilder: FormBuilder,
     private store: Store<AppState>,
-    private firebaseService: FirebaseService
+    private firebaseService: FirebaseService,
+    private messageservice: MessageService,
+    private afstore: AngularFireStorage,
+    private platform: Platform,
+    private camera: Camera
   ) {}
 
   ngOnInit() {
-    console.log(this.passedId, this.solicitationId);
-    console.log(this.clientes.values);
+    console.log('PassID' + this.passedId);
+    console.log('Solcit' + this.solicitationId);
+
     this.configurarFormulario();
     if (this.solicitationId !== null) {
       this.title = 'Editando...';
       console.log('ID Solicitacao...' + this.solicitationId);
       this.store.pipe(select(selectAllSolicitations)).subscribe(solicitations => {
+        console.log('Rernono solicitations' + JSON.stringify(solicitations));
+
         this.solicitations = solicitations.filter(
           solicitations => solicitations.id == this.solicitationId
         );
@@ -109,8 +128,7 @@ export class Tab2FormSolicitationsPage implements OnInit {
       data_inicio: [null],
       data_termino: [null],
       id_problema: [null], // lista suspensa
-      maquina_parada: [null],
-      notificar: [null]
+      maquina_parada: [null]
     });
   }
 
@@ -150,5 +168,121 @@ export class Tab2FormSolicitationsPage implements OnInit {
   async closeModal() {
     const modalclose = await this.modalController.dismiss();
     return modalclose;
+  }
+  /** Imagem Manipulacao */
+  async selectImageInCamera() {
+    if (this.platform.is('cordova')) {
+      try {
+        const CAMERA_OPTIONS: CameraOptions = {
+          allowEdit: true,
+          quality: 100,
+          destinationType: this.camera.DestinationType.DATA_URL,
+          sourceType: this.camera.PictureSourceType.CAMERA,
+          encodingType: this.camera.EncodingType.PNG,
+          mediaType: this.camera.MediaType.PICTURE,
+          correctOrientation: true,
+          targetWidth: 900,
+          targetHeight: 900
+        };
+        const aler = await this.messageservice.loading();
+        this.camera.getPicture(CAMERA_OPTIONS).then(
+          imageData => {
+            const base64data = 'data:image/jpeg;base64,' + imageData;
+            this.bigImg = base64data;
+            // Get image size
+            this.createThumbnail();
+            aler.dismiss();
+          },
+          error => {
+            console.log('', error);
+            aler.dismiss();
+          }
+        );
+      } catch (error) {
+      } finally {
+      }
+    }
+  }
+
+  async createThumbnail() {
+    const load = await this.messageservice.loading();
+    this.generateFromImage(this.bigImg, 1000, 1000, 100, data => {
+      this.smallImg = data;
+      const imgToUp = this.smallImg.split(',')[1];
+      this.bigImg = imgToUp;
+      // console.log(imgToUp);
+      // this.uploadimageservice
+      //   .uploadPhoto(imgToUp, this.usuario.uid, 'Profile')
+      //   .then(savedPicture => {
+      //     const storageRef = this.afs.storage.ref('Images/' + 'Profile' + '/' + this.usuario.uid);
+      //     storageRef.getDownloadURL().then(async url => {
+      //       this.usuario.avatar = url;
+      //       // alert('Imagem avatar this.ususario.vatar ->>>>' + this.usuario.avatar);
+      //       await this.authService.authState$.subscribe(res => {
+      //         res.updateProfile({
+      //           photoURL: url
+      //         });
+      //       });
+      //       load.dismiss();
+      //       //  alert('sceusso ao fazer upkiad');
+      //     });
+      //   })
+      //   .catch(err => {
+      //     alert('Erro ao enviar atualizar imagem' + err);
+      //     load.dismiss();
+      //   });
+    });
+  }
+  generateFromImage(img, MAX_WIDTH, MAX_HEIGHT, quality, callback) {
+    const canvas: any = document.createElement('canvas');
+    const image = new Image();
+    image.onload = () => {
+      let width = image.width;
+      let height = image.height;
+
+      if (width > height) {
+        if (width > MAX_WIDTH) {
+          height *= MAX_WIDTH / width;
+          width = MAX_WIDTH;
+        }
+      } else {
+        if (height > MAX_HEIGHT) {
+          width *= MAX_HEIGHT / height;
+          height = MAX_HEIGHT;
+        }
+      }
+      canvas.width = width;
+      canvas.height = height;
+      const ctx = canvas.getContext('2d');
+      ctx.drawImage(image, 0, 0, width, height);
+      // IMPORTANT: 'jpeg' NOT 'jpg'
+      const dataUrl = canvas.toDataURL('image/jpeg', quality);
+      callback(dataUrl);
+    };
+    image.src = img;
+  }
+  private uploadPhoto(): void {
+    const ref = this.afstore
+      .ref('/SofmanSolicitacoes/')
+      .child(this.generateUUID())
+      .child('SofmanSolicitacao.png');
+
+    const task = ref.putString(this.bigImg, 'base64', { contentType: 'image/png' });
+    this.myPorcents = task.percentageChanges();
+
+    task
+      .snapshotChanges()
+      .pipe(finalize(() => (this.imagem = ref.getDownloadURL())))
+      .subscribe();
+    alert(JSON.stringify(this.imagem));
+  }
+  private generateUUID(): any {
+    let d = new Date().getTime();
+    const uuid = 'xxxxxxxx-xxxx-4xxx-yxxx'.replace(/[xy]/g, function(c) {
+      let r = (d + Math.random() * 16) % 16 | 0;
+      d = Math.floor(d / 16);
+      return (c == 'x' ? r : (r & 0x3) | 0x8).toString(16);
+    });
+    return uuid;
   }
 }

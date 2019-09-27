@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Component } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { ApiService } from './../shared/services/api.service';
@@ -17,22 +18,28 @@ export class Tab1Page {
     loop: true
   };
 
-public nome = '';
-public logincliente = '';
-public cominicados = [];
-public tipoacesso;
+  public nome = '';
+  public logincliente = '';
+  public cominicados = [];
+  public tipoacesso;
 
-  constructor( public api: ApiService, public modalController: ModalController ) {
+  constructor(
+    public api: ApiService,
+    public modalController: ModalController,
+    private router: Router
+  ) {
     this.nome = api.getCredentials().name;
     this.logincliente = api.getCredentials().login;
     this.tipoacesso = api.getCredentials().tipoacesso;
 
-    this.api.getAllComunicados().subscribe((data:any)=>{
+    this.api.getAllComunicados().subscribe((data: any) => {
       this.cominicados = data.articles;
-
-    })
+    });
   }
 
+  openSolicitations() {
+    this.router.navigateByUrl('/tabs/tab2-solicitations');
+  }
   async openModalSolicitation() {
     const modal = await this.modalController.create({
       component: Tab2SolicitationsPage
@@ -45,5 +52,4 @@ public tipoacesso;
     });
     return modal.present();
   }
-
 }

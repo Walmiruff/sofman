@@ -12,11 +12,11 @@
 </ion-header>
 
 <ion-content>
-  <ng-container *ngIf="img$ | async as imgs ; else elseTemplate">
+  <ng-container *ngIf="imgs$ | async as imgs ; else elseTemplate">
 
     <ion-list>
 
-      <ion-item *ngFor="let entities of imgs">
+      <ion-item *ngFor="let entities of imgs | filter: ordemId">
         <ion-thumbnail slot="start">
           <img src="{{entities.url}}">
         </ion-thumbnail>

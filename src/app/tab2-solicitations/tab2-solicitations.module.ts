@@ -1,21 +1,19 @@
+import { IonicModule } from '@ionic/angular';
+import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Routes, RouterModule } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+import { FilterPipeModule } from 'ngx-filter-pipe';
 
-import { IonicModule } from '@ionic/angular';
-
-import { Tab2SolicitationsPage } from './tab2-solicitations.page';
-import { SharedPipesModule } from '../shared/pipes/shared-pipes.module';
-
-const routes: Routes = [
-  {
-    path: '',
-    component: Tab2SolicitationsPage
-  }
-];
-
+import { Tab2SolicitationsPage } from '../tab2-solicitations/tab2-solicitations.page';
 @NgModule({
-  imports: [CommonModule, IonicModule, SharedPipesModule, RouterModule.forChild(routes)],
+  imports: [
+    IonicModule,
+    CommonModule,
+    FormsModule,
+    FilterPipeModule,
+    RouterModule.forChild([{ path: '', component: Tab2SolicitationsPage }])
+  ],
   declarations: [Tab2SolicitationsPage]
 })
 export class Tab2SolicitationsPageModule {}

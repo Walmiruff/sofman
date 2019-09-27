@@ -59,7 +59,7 @@
       <ion-item>
         <ion-label position="stacked">Status: <ion-text color="danger"> * </ion-text>
         </ion-label>
-        <ion-select placeholder="Selecione o Status" formControlName="status">
+        <ion-select placeholder="Selecione o Status" formControlName="status" id="status">
           <ion-select-option *ngFor="let status of statusarray | keyvalue" [value]="status.key">{{status.key}}
             {{status.value}}</ion-select-option>
         </ion-select>
@@ -72,12 +72,12 @@
         <ion-datetime displayFormat="DD MM YYYY" formControlName="data_termino" id="data_termino"></ion-datetime>
       </ion-item>
 
-      <ion-item>
+      <!-- <ion-item>
         <ion-label position="stacked">Equipamento: <ion-text color="danger"> * </ion-text>
         </ion-label>
         <ion-input type="text" formControlName="id_equipamento" id="id_equipamento">
         </ion-input>
-      </ion-item>
+      </ion-item> -->
 
       <ion-item>
         <ion-label position="stacked">Localização: <ion-text color="danger"> * </ion-text>
@@ -87,9 +87,10 @@
       </ion-item>
 
       <ion-item>
-        <ion-label position="stacked">Maquina parada: <ion-text color="danger"> * </ion-text>
+        <ion-label>Maquina parada: <ion-text color="danger"> * </ion-text>
         </ion-label>
-        <ion-checkbox slot="start" formControlName="maquina_parada" type="checkbox" (ionChange)=($event)>
+        <ion-checkbox slot="start" formControlName="maquina_parada" id="maquina_parada" type="checkbox"
+          (ionChange)=($event)>
         </ion-checkbox>
       </ion-item>
 
@@ -111,12 +112,12 @@
       </ion-item>
 
 
-      <ion-item>
+      <!-- <ion-item>
         <ion-label position="stacked">Sub-grupo: <ion-text color="danger"> * </ion-text>
         </ion-label>
         <ion-input type="text" formControlName="id_subgrupo" id="id_subgrupo">
         </ion-input>
-      </ion-item>
+      </ion-item> -->
 
 
       <ion-item>
@@ -127,11 +128,17 @@
       </ion-item>
 
 
-      <ion-item>
-        <ion-label position="stacked">Anexar Imagem: <ion-text color="danger"> * </ion-text>
+      <ion-item (click)="selectImageInCamera()">
+
+
+
+        <ion-icon style="font-size: 49px;" slot="start" ios="ios-camera" md="md-camera"></ion-icon>
+        <ion-label>Anexar Imagem: <ion-text color="danger"> * </ion-text>
+
         </ion-label>
         <ion-input type="text" formControlName="imagem" id="imagem">
         </ion-input>
+        <ion-img *ngIf="imagem" [src]="imagem"></ion-img>
       </ion-item>
 
 

@@ -48,15 +48,26 @@ export class TabsPage implements OnInit {
   }
 
   async logout() {
-    await this.messageservice.alerts('Deseja sair?', 'Blza', {
-      text: 'Ok',
-      role: 'cancel',
-      cssClass: 'secondary',
-      handler: blah => {
-        console.log('Confirm Cancel: blah');
-        localStorage.clear();
-        this.navctrl.navigateRoot('login');
-      }
+    const alert = await this.messageservice.alert({
+      header: 'Deseja sair?',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: blah => {
+            console.log('Confirm Cancel: blah');
+          }
+        },
+        {
+          text: 'SIM',
+          handler: () => {
+            localStorage.clear();
+            this.navctrl.navigateRoot('login');
+            console.log('Confirm Okay');
+          }
+        }
+      ]
     });
   }
   /** Funcao geolocation */
