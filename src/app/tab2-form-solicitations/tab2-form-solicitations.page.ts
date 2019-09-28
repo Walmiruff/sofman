@@ -213,8 +213,24 @@ export class Tab2FormSolicitationsPage implements OnInit {
       console.log('Retorno up imagem' + this.bigImg);
       this.uploadPhoto();
       load.dismiss();
-
     });
+  }
+  private async uploadPhoto() {
+    const ref = this.afstore
+      .ref('/SofmanSolicitacoes/')
+      .child(this.generateUUID())
+      .child('SofmanSolicitacao.png');
+
+    const task = ref.putString(this.imagem, 'base64', { contentType: 'image/png' });
+    this.myPorcents = task.percentageChanges();
+
+    try {
+      task
+        .snapshotChanges()
+        .pipe(finalize(() => (this.imagem = ref.getDownloadURL())))
+        .subscribe();
+      alert(JSON.stringify(this.imagem));
+    } catch (error) {}
   }
   generateFromImage(img, MAX_WIDTH, MAX_HEIGHT, quality, callback) {
     const canvas: any = document.createElement('canvas');
@@ -244,25 +260,7 @@ export class Tab2FormSolicitationsPage implements OnInit {
     };
     image.src = img;
   }
-  private async uploadPhoto() {
-    const ref = this.afstore
-      .ref('/SofmanSolicitacoes/')
-      .child(this.generateUUID())
-      .child('SofmanSolicitacao.png');
 
-    const task = ref.putString(this.imagem, 'base64', { contentType: 'image/png' });
-    this.myPorcents = task.percentageChanges();
-
-    try {
-          task
-          .snapshotChanges()
-          .pipe(finalize(() => ( this.imagem = ref.getDownloadURL())))
-          .subscribe();
-          alert(JSON.stringify(this.imagem));
-   } catch (error) {
-
-   }
-  }
   private generateUUID(): any {
     let d = new Date().getTime();
     const uuid = 'xxxxxxxx-xxxx-4xxx-yxxx'.replace(/[xy]/g, function(c) {
