@@ -29,8 +29,10 @@ export class Tab2FormSolicitationsPage implements OnInit {
   solicitations: ISolicitation[];
   public title = 'Nova Solicitação';
   /** Imagem */
-  public bigImg = null;
-  public smallImg = null;
+
+  public myPhoto: any;
+  public myPhotoURL: any;
+  public foto: any;
   public myPorcents: Observable<number>;
   public imagem: any;
   /** Fim imagem */
@@ -64,7 +66,7 @@ export class Tab2FormSolicitationsPage implements OnInit {
     private afstore: AngularFireStorage,
     private platform: Platform,
     private camera: Camera
-  ) {}
+  ) { }
 
   ngOnInit() {
     console.log('PassID' + this.passedId);
@@ -172,98 +174,66 @@ export class Tab2FormSolicitationsPage implements OnInit {
   /** Imagem Manipulacao */
   async selectImageInCamera() {
     if (this.platform.is('cordova')) {
-      try {
-        const CAMERA_OPTIONS: CameraOptions = {
+
+      const aler = await this.messageservice.loading();
+
+      this.camera
+        .getPicture({
+          quality: 40,
           allowEdit: true,
-          quality: 100,
+
           destinationType: this.camera.DestinationType.DATA_URL,
           sourceType: this.camera.PictureSourceType.CAMERA,
           encodingType: this.camera.EncodingType.PNG,
+          saveToPhotoAlbum: true,
+
+          // destinationType: this.camera.DestinationType.DATA_URL,
+          // sourceType: this.camera.PictureSourceType.CAMERA,
+          // encodingType: this.camera.EncodingType.PNG,
           mediaType: this.camera.MediaType.PICTURE,
           correctOrientation: true,
-          targetWidth: 900,
-          targetHeight: 900
-        };
-        const aler = await this.messageservice.loading();
-        this.camera.getPicture(CAMERA_OPTIONS).then(
+          targetWidth: 600,
+          targetHeight: 600
+
+        })
+        .then(
           imageData => {
             const base64data = 'data:image/jpeg;base64,' + imageData;
-            this.bigImg = base64data;
-            // Get image size
-            this.createThumbnail();
+            this.foto = base64data;
+
+            this.myPhoto = imageData;
+
             aler.dismiss();
+
+            this.uploadPhoto();
           },
           error => {
-            console.log('', error);
-            aler.dismiss();
+            alert('ERROR -> ' + JSON.stringify(error));
           }
         );
-      } catch (error) {
-      } finally {
-      }
+
     }
   }
 
-  async createThumbnail() {
-    const load = await this.messageservice.loading();
-    this.generateFromImage(this.bigImg, 1000, 1000, 100, data => {
-      this.smallImg = data;
-      const imgToUp = this.smallImg.split(',')[1];
-      this.imagem = imgToUp;
-      console.log('Retorno up imagem' + this.bigImg);
-      this.uploadPhoto();
-      load.dismiss();
-    });
-  }
-  private async uploadPhoto() {
+  private uploadPhoto(): void {
     const ref = this.afstore
       .ref('/SofmanSolicitacoes/')
       .child(this.generateUUID())
-      .child('SofmanSolicitacao.png');
+      .child('Sofman.png');
 
-    const task = ref.putString(this.imagem, 'base64', { contentType: 'image/png' });
+    const task = ref.putString(this.myPhoto, 'base64', { contentType: 'image/png' });
     this.myPorcents = task.percentageChanges();
 
-    try {
-      task
-        .snapshotChanges()
-        .pipe(finalize(() => (this.imagem = ref.getDownloadURL())))
-        .subscribe();
-      alert(JSON.stringify(this.imagem));
-    } catch (error) {}
+    task
+      .snapshotChanges()
+      .pipe(finalize(() => (this.imagem = ref.getDownloadURL())))
+      .subscribe();
   }
-  generateFromImage(img, MAX_WIDTH, MAX_HEIGHT, quality, callback) {
-    const canvas: any = document.createElement('canvas');
-    const image = new Image();
-    image.onload = () => {
-      let width = image.width;
-      let height = image.height;
 
-      if (width > height) {
-        if (width > MAX_WIDTH) {
-          height *= MAX_WIDTH / width;
-          width = MAX_WIDTH;
-        }
-      } else {
-        if (height > MAX_HEIGHT) {
-          width *= MAX_HEIGHT / height;
-          height = MAX_HEIGHT;
-        }
-      }
-      canvas.width = width;
-      canvas.height = height;
-      const ctx = canvas.getContext('2d');
-      ctx.drawImage(image, 0, 0, width, height);
-      // IMPORTANT: 'jpeg' NOT 'jpg'
-      const dataUrl = canvas.toDataURL('image/jpeg', quality);
-      callback(dataUrl);
-    };
-    image.src = img;
-  }
 
   private generateUUID(): any {
     let d = new Date().getTime();
-    const uuid = 'xxxxxxxx-xxxx-4xxx-yxxx'.replace(/[xy]/g, function(c) {
+    const uuid = 'xxxxxxxx-xxxx-4xxx-yxxx'.replace(/[xy]/g, function (c) {
       let r = (d + Math.random() * 16) % 16 | 0;
       d = Math.floor(d / 16);
       return (c == 'x' ? r : (r & 0x3) | 0x8).toString(16);
