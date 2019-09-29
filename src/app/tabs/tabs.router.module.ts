@@ -92,7 +92,7 @@ const routes: Routes = [
         ]
       },
       {
-        path: 'tab2-solicitations/:solicitationid',
+        path: 'tab2-solicitations/:id',
         children: [
           {
             path: '',
@@ -117,4 +117,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class TabsPageRoutingModule {}
+export class TabsPageRoutingModule { }

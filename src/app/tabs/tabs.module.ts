@@ -25,7 +25,8 @@ import { Tab2SolicitationsPageModule } from './../tab2-solicitations/tab2-solici
     Tab2FormTarefaPageModule,
     Tab2FormImgPageModule,
     Tab2SolicitationsPageModule,
+
   ],
   declarations: [TabsPage]
 })
-export class TabsPageModule {}
+export class TabsPageModule { }

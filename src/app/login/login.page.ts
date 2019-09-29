@@ -51,6 +51,9 @@ export class LoginPage implements OnInit {
     /** Fixar login usuario para envio de post... */
     this.user = this.api.getCredentials().login;
     this.authorization = this.api.getCredentials().authorization;
+    if (this.user) {
+      this.navctrl.navigateRoot(['/tabs/tab1'])
+    }
   }
 
   async login() {

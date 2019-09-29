@@ -1,16 +1,16 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Routes, RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
-import { Tab2FormSolicitationsPage } from './tab2-form-solicitations.page';
+import { TabFormSolicitacaoPage } from './tab-form-solicitacao.page';
 
 const routes: Routes = [
   {
     path: '',
-    component: Tab2FormSolicitationsPage
+    component: TabFormSolicitacaoPage
   }
 ];
 
@@ -22,6 +22,6 @@ const routes: Routes = [
     IonicModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [Tab2FormSolicitationsPage]
+  declarations: [TabFormSolicitacaoPage]
 })
-export class Tab2FormSolicitationsPageModule {}
+export class TabFormSolicitacaoPageModule { }

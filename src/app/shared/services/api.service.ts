@@ -8,7 +8,7 @@ import { environment } from 'src/environments/environment';
 export class ApiService {
   public url: string = environment.api;
   public header;
-  constructor(public http: HttpClient) {}
+  constructor(public http: HttpClient) { }
 
   login(endpoint: string, body: any) {
     const headers = new HttpHeaders();
@@ -32,7 +32,7 @@ export class ApiService {
 
   }
 
-  getCredentials() {
+  public getCredentials() {
     return {
       iduser: localStorage.getItem('id'),
       login: localStorage.getItem('login'),
@@ -46,7 +46,7 @@ export class ApiService {
   // https://newsapi.org/v2/top-headlines?sources=google-news-br&apiKey=527661c783af4453a88acbceeddb0c56
 
   // Exemples
-  getAllComunicados(){
-   return this.http.get('https://newsapi.org/v2/top-headlines?sources=google-news-br&apiKey=527661c783af4453a88acbceeddb0c56');
+  getAllComunicados() {
+    return this.http.get('https://newsapi.org/v2/top-headlines?sources=google-news-br&apiKey=527661c783af4453a88acbceeddb0c56');
   }
 }

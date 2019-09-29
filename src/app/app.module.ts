@@ -42,6 +42,7 @@ import { HoraEffects } from './store/effects/apontamento_de_horas.effects';
 import { TarefaEffects } from './store/effects/tarefas.effects';
 import { ImgEffects } from './store/effects/imgs.effects';
 import { AngularFireStorageModule } from '@angular/fire/storage';
+import { TabFormSolicitacaoPageModule } from './tab-form-solicitacao/tab-form-solicitacao.module';
 
 // import { Tab2FormPageModule } from './tab2-form/tab2-form.module';
 // import { Tab2FormAptMatPageModule } from './tab2-form-apt-mat/tab2-form-apt-mat.module';
@@ -78,7 +79,8 @@ import { AngularFireStorageModule } from '@angular/fire/storage';
       SolicitationEffects
     ]),
     StoreDevtoolsModule.instrument(),
-    AppRoutingModule
+    AppRoutingModule,
+    TabFormSolicitacaoPageModule
   ],
   providers: [
     StatusBar,
@@ -89,4 +91,4 @@ import { AngularFireStorageModule } from '@angular/fire/storage';
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }

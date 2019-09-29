@@ -4,6 +4,8 @@ import { ModalController } from '@ionic/angular';
 import { ApiService } from './../shared/services/api.service';
 import { Tab2SolicitationsPage } from './../tab2-solicitations/tab2-solicitations.page';
 import { Tab2FormSolicitationsPage } from './../tab2-form-solicitations/tab2-form-solicitations.page';
+import { TabFormSolicitacaoPage } from '../tab-form-solicitacao/tab-form-solicitacao.page';
+import { TabSolicitacaoPage } from '../tab-solicitacao/tab-solicitacao.page';
 
 @Component({
   selector: 'app-tab1',
@@ -38,17 +40,18 @@ export class Tab1Page {
   }
 
   openSolicitations() {
-    this.router.navigateByUrl('/tabs/tab2-solicitations');
+    this.router.navigate(['/tab-solicitacao']);
   }
+
   async openModalSolicitation() {
     const modal = await this.modalController.create({
-      component: Tab2SolicitationsPage
+      component: TabSolicitacaoPage
     });
     return modal.present();
   }
   async openModalSolicitationCreat() {
     const modal = await this.modalController.create({
-      component: Tab2FormSolicitationsPage
+      component: TabFormSolicitacaoPage
     });
     return modal.present();
   }

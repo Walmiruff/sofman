@@ -1,33 +1,34 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { ModalController, Platform } from '@ionic/angular';
-import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
-
 import { Update } from '@ngrx/entity';
 import { Store, select } from '@ngrx/store';
+
+import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
+
+import { ISolicitation } from '../store/models/solicitation.model';
 import { AppState } from '../store/models/app-state.model';
 import { UPDATESOLICITATION, ADDSOLICITATION } from '../store/actions/solicitations.action';
 import { selectAllSolicitations } from '../store/selectors/solicitations.selectors';
-
-import { ISolicitation } from '../store/models/solicitation.model';
-import { MessageService } from './../shared/services/message.service';
-import { FirebaseService } from '../shared/services/firebase.service';
 import { AngularFireStorage } from '@angular/fire/storage';
+import { FirebaseService } from '../shared/services/firebase.service';
+import { MessageService } from '../shared/services/message.service';
 import { Observable } from 'rxjs';
 import { finalize } from 'rxjs/operators';
 
+
 @Component({
-  selector: 'app-tab2-form-solicitations',
-  templateUrl: './tab2-form-solicitations.page.html',
-  styleUrls: ['./tab2-form-solicitations.page.scss'],
+  selector: 'app-tab-form-solicitacao',
+  templateUrl: './tab-form-solicitacao.page.html',
+  styleUrls: ['./tab-form-solicitacao.page.scss'],
   providers: [Camera]
 })
-export class Tab2FormSolicitationsPage implements OnInit {
+export class TabFormSolicitacaoPage implements OnInit {
+
   passedId = null;
-  solicitationId = null;
   formulario: FormGroup;
-  solicitations: ISolicitation[];
-  public title = 'Nova Solicitação';
+  solicitacoes: ISolicitation[];
+  public result: any = {};
   /** Imagem */
 
   public myPhoto: any;
@@ -37,28 +38,9 @@ export class Tab2FormSolicitationsPage implements OnInit {
   public imagem: any;
   /** Fim imagem */
 
-  public prioridadearray = ['Alta', 'Media', 'Baixa'];
-  public statusarray = ['ABERTO', 'EM EXECUÇÃO', 'FINALIZADO', 'RECUSADO'];
-  public clientes = ['Andre', 'Jão', 'Ingrd', 'Matheus'];
-  public tipomanutencaoarray = [
-    'DEMANDA',
-    'DOCUMENTAÇÃO LEGAL',
-    'EMERGENCIAL',
-    'INSPEÇÃO',
-    'INSTALAÇÃO',
-    'JARDINAGEM',
-    'LUBRIFICAÇÃO',
-    'MANUTENÇÃO CORRETIVA',
-    'MANUTENÇÃO PREDITIVA',
-    'MANUTENÇÃO PREVENTIVA',
-    'MEDIÇÃO',
-    'MEMORANDO',
-    'MEMORANDO (MKT)',
-    'PLANEJADA'
-  ];
-
+  public title = 'Adicionar nova Solicitação';
   constructor(
-    private modalController: ModalController,
+    public modalController: ModalController,
     private formBuilder: FormBuilder,
     private store: Store<AppState>,
     private firebaseService: FirebaseService,
@@ -69,40 +51,47 @@ export class Tab2FormSolicitationsPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    console.log('PassID' + this.passedId);
-    console.log('Solcit' + this.solicitationId);
+
+    this.store.pipe(
+      select(selectAllSolicitations)
+    ).subscribe(resSolicitacoes => {
+      this.result = resSolicitacoes;
+
+      console.log('Resultodao' + this.result)
+    })
 
     this.configurarFormulario();
-    if (this.solicitationId !== null) {
-      this.title = 'Editando...';
-      console.log('ID Solicitacao...' + this.solicitationId);
-      this.store.pipe(select(selectAllSolicitations)).subscribe(solicitations => {
-        console.log('Rernono solicitations' + JSON.stringify(solicitations));
+    if (this.passedId !== null) {
+      this.title = `Editando Solicitação Id - ${this.passedId}`;
+      this.store.pipe(
+        select(selectAllSolicitations)
+      ).subscribe(resSolicitacoes => {
+        console.log('Solicitacoes retorno id', JSON.stringify(resSolicitacoes))
+        this.solicitacoes = resSolicitacoes.filter(solicitacoes => solicitacoes.id == this.passedId);
 
-        this.solicitations = solicitations.filter(
-          solicitations => solicitations.id == this.solicitationId
-        );
         this.formulario.patchValue({
-          id_cliente: this.solicitations[0].id_cliente, //
-          id_filial: this.solicitations[0].id_filial,
-          id_subgrupo: this.solicitations[0].id_subgrupo, // Lista suspensa
-          id_equipamento: this.solicitations[0].id_equipamento, // lista suspensa
-          localizacao: this.solicitations[0].localizacao,
-          ordem_servico: this.solicitations[0].ordem_servico,
-          id_setor_executante: this.solicitations[0].id_setor_executante, // lista suspensa
-          id_contato_filial: this.solicitations[0].id_contato_filial,
-          codigo_solicitacao: this.solicitations[0].codigo_solicitacao,
-          categoria: this.solicitations[0].categoria,
-          assunto: this.solicitations[0].assunto,
-          mensagem: this.solicitations[0].mensagem,
-          prioridade: this.solicitations[0].prioridade,
-          status: this.solicitations[0].status,
-          imagem: this.solicitations[0].imagem,
-
-          data_inicio: this.solicitations[0].data_inicio,
-          data_termino: this.solicitations[0].data_termino,
-          id_problema: this.solicitations[0].id_problema, // lista suspensa
-          maquina_parada: this.solicitations[0].maquina_parada
+          id_cliente: this.solicitacoes[0].id_cliente,
+          // tag_id?: string | number;
+          id_filial: this.solicitacoes[0].id_filial,
+          id_subgrupo: this.solicitacoes[0].id_subgrupo, // Lista suspensa
+          id_equipamento: this.solicitacoes[0].id_equipamento, // lista suspensa
+          // localizacao?: string;
+          ordem_servico: this.solicitacoes[0].ordem_servico, // lista supensa
+          id_setor_executante: this.solicitacoes[0].id_cliente,// lista suspensa
+          id_contato_filial: this.solicitacoes[0].id_contato_filial,
+          codigo_solicitacao: this.solicitacoes[0].codigo_solicitacao,
+          categoria: this.solicitacoes[0].categoria,
+          assunto: this.solicitacoes[0].assunto,
+          mensagem: this.solicitacoes[0].mensagem,
+          prioridade: this.solicitacoes[0].prioridade, // Lista suspensa
+          status: this.solicitacoes[0].status, // lista suspensa
+          imagem: this.solicitacoes[0].imagem,
+          data_inicio: this.solicitacoes[0].data_inicio,
+          data_termino: this.solicitacoes[0].data_termino,
+          // log_date?: Date | number;
+          id_problema: this.solicitacoes[0].id_problema, // lista suspensa
+          maquina_parada: this.solicitacoes[0].maquina_parada,
+          //  notificar?: string;
         });
       });
     }
@@ -111,13 +100,13 @@ export class Tab2FormSolicitationsPage implements OnInit {
   configurarFormulario() {
     this.formulario = this.formBuilder.group({
       id: [null],
-
-      id_cliente: [null], //
+      tag_id: [null], // Lista suspensa
+      id_cliente: [null], // Lista suspensa
       id_filial: [null],
       id_subgrupo: [null], // Lista suspensa
       id_equipamento: [null], // lista suspensa
       localizacao: [null],
-      ordem_servico: [null],
+      ordem_servico: [null], // Lista suspensa
       id_setor_executante: [null], // lista suspensa
       id_contato_filial: [null],
       codigo_solicitacao: [null],
@@ -125,48 +114,52 @@ export class Tab2FormSolicitationsPage implements OnInit {
       assunto: [null],
       mensagem: [null],
       prioridade: [null],
-      status: [null],
+      status: [null], // Lista suspensa
       imagem: [null],
       data_inicio: [null],
       data_termino: [null],
+      log_date: [null],
       id_problema: [null], // lista suspensa
-      maquina_parada: [null]
+      maquina_parada: [null],
+      notificar: [null],
     });
   }
 
-  send() {
-    this.formulario.patchValue({
-      fk: this.passedId
-    });
+  async sendSolicitacao() {
+    const loading = await this.messageservice.loading({ message: 'Aguarde...' });
+    if (this.passedId !== null) {
 
-    if (this.solicitationId !== null) {
       this.formulario.patchValue({
-        id: this.solicitationId
+        id: this.passedId
       });
+      loading.dismiss();
 
       const changes = this.formulario.value;
-      const solicitation: Update<ISolicitation> = {
-        id: this.solicitationId,
+
+      const solicitacao: Update<ISolicitation> = {
+        id: this.passedId,
         changes
       };
-      this.firebaseService.crudFirebase(this.formulario.value, 'solicitation-update');
-      this.store.dispatch(new UPDATESOLICITATION({ solicitation: solicitation }));
+
+      this.firebaseService.crudFirebase(this.formulario.value, 'solicitacao-update');
+      this.store.dispatch(new UPDATESOLICITATION({ solicitation: solicitacao }));
     } else {
       this.formulario.patchValue({
         id: new Date().getUTCMilliseconds().toString()
       });
-      this.firebaseService.crudFirebase(this.formulario.value, 'solicitation-add');
+      this.firebaseService.crudFirebase(this.formulario.value, 'ordem-add');
       this.store.dispatch(new ADDSOLICITATION({ solicitation: this.formulario.value }));
     }
-
     this.dismiss();
+    loading.dismiss();
   }
-
   dismiss() {
     this.modalController.dismiss({
       dismissed: true
     });
   }
+
+
   async closeModal() {
     const modalclose = await this.modalController.dismiss();
     return modalclose;
@@ -226,7 +219,7 @@ export class Tab2FormSolicitationsPage implements OnInit {
 
     task
       .snapshotChanges()
-      .pipe(finalize(() => (this.imagem = ref.getDownloadURL())))
+      .pipe(finalize(() => (this.myPhotoURL = ref.getDownloadURL())))
       .subscribe();
   }
 

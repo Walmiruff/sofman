@@ -5,8 +5,8 @@ import { FilterPipe } from './filter.pipe';
 import { FilterSolicitationPipe } from './filter-solicitation.pipe';
 
 @NgModule({
-  declarations: [FilterPipe, FilterSolicitationPipe],
+  declarations: [FilterPipe],
   imports: [CommonModule],
   exports: [FilterPipe]
 })
-export class SharedPipesModule {}
+export class SharedPipesModule { }

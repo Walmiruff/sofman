@@ -15,10 +15,19 @@ const routes: Routes = [
   {
     path: 'login',
     loadChildren: () => import('./login/login.module').then(m => m.LoginPageModule)
-  }
+  },
+  {
+    path: 'tab-solicitacao',
+    loadChildren: './tab-solicitacao/tab-solicitacao.module#TabSolicitacaoPageModule'
+  },
+  {
+    path: 'tab-solicitacao-details/:id',
+    loadChildren: './tab-solicitacao-details/tab-solicitacao-details.module#TabSolicitacaoDetailsPageModule'
+  },
+  { path: 'tab-form-solicitacao', loadChildren: './tab-form-solicitacao/tab-form-solicitacao.module#TabFormSolicitacaoPageModule' }
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })],
   exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

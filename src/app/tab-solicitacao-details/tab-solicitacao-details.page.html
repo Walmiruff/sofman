@@ -1,0 +1,203 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-row>
+      <div>
+        <img class="logo" src="assets/img/logosmall.png">
+      </div>
+      <ion-title>
+        Solicitações Detalhes {{ solicitacaoId }}
+      </ion-title>
+    </ion-row>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ng-container *ngIf="solicitacoes$ | async as solicitacoes ; else elseTemplate">
+
+    <ion-list>
+      <ion-item *ngFor="let entities of solicitacoes | filterSolicitation: solicitacaoId">
+        <ion-grid>
+
+          <ion-row>
+            <ion-col size="4">
+              <ion-label>Cliente</ion-label>
+            </ion-col>
+            <ion-col size="8">
+              <P class="custom"> {{ entities.id_cliente }}</P>
+            </ion-col>
+          </ion-row>
+
+          <ion-row>
+            <ion-col size="4">
+              <ion-label>Assunto: </ion-label>
+            </ion-col>
+            <ion-col size="8">
+              <P class="custom"> {{ entities.assunto }}</P>
+            </ion-col>
+          </ion-row>
+
+          <ion-row>
+            <ion-col size="4">
+              <ion-label>Filial: </ion-label>
+            </ion-col>
+            <ion-col size="8">
+              <P class="custom"> {{ entities.id_filial }}</P>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="4">
+              <ion-label>Contato Filial: </ion-label>
+            </ion-col>
+            <ion-col size="8">
+              <P class="custom"> {{ entities.id_contato_filial }}</P>
+            </ion-col>
+          </ion-row>
+
+          <ion-row *ngIf="entities.data_inicio">
+            <ion-col size="4">
+              <ion-label>Data Inicio: </ion-label>
+            </ion-col>
+            <ion-col size="8">
+              <P class="custom"> {{ entities.data_inicio | date:('d/M/yyyy') }}</P>
+            </ion-col>
+          </ion-row>
+
+          <ion-row>
+            <ion-col size="4">
+              <ion-label>Data Termino: </ion-label>
+            </ion-col>
+            <ion-col size="8">
+              <P class="custom"> {{ entities.data_termino | date:('d/M/yyyy')}}</P>
+            </ion-col>
+          </ion-row>
+
+          <ion-row>
+            <ion-col size="4">
+              <ion-label>Mensagem: </ion-label>
+            </ion-col>
+            <ion-col size="8">
+              <P class="custom"> {{ entities.mensagem }}</P>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="4">
+              <ion-label>Categoria: </ion-label>
+            </ion-col>
+            <ion-col size="8">
+              <P class="custom"> {{ entities.categoria }}</P>
+            </ion-col>
+          </ion-row>
+
+
+          <ion-row>
+            <ion-col size="4">
+              <ion-label>Equipamento: </ion-label>
+            </ion-col>
+            <ion-col size="8">
+              <P class="custom"> {{ entities.id_equipamento }}</P>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="4">
+              <ion-label>Ordem de Serv: </ion-label>
+            </ion-col>
+            <ion-col size="8">
+              <P class="custom"> {{ entities.ordem_servico }}</P>
+            </ion-col>
+          </ion-row>
+
+          <ion-row *ngIf="entities.id_problema">
+            <ion-col size="4">
+              <ion-label>Problema: </ion-label>
+            </ion-col>
+            <ion-col size="8">
+              <P class="custom"> {{ entities.id_problema }}</P>
+            </ion-col>
+          </ion-row>
+
+          <ion-row>
+            <ion-col size="4">
+              <ion-label>Localização: </ion-label>
+            </ion-col>
+            <ion-col size="8">
+              <P class="custom"> {{ entities.localizacao }}</P>
+            </ion-col>
+          </ion-row>
+
+          <ion-row>
+            <ion-col size="4">
+              <ion-label>Setor Exec. </ion-label>
+            </ion-col>
+            <ion-col size="8">
+              <P class="custom"> {{ entities.id_setor_executante }}</P>
+            </ion-col>
+          </ion-row>
+
+
+
+          <ion-row>
+            <ion-col size="4">
+              <ion-label>Maq. Parada: </ion-label>
+            </ion-col>
+            <ion-col size="8">
+              <P class="custom"> {{ entities.maquina_parada }}</P>
+            </ion-col>
+          </ion-row>
+
+
+          <ion-row>
+            <ion-col size="4">
+              <ion-label>Status: </ion-label>
+            </ion-col>
+            <ion-col size="8">
+              <P class="custom"> {{ entities.status }}</P>
+            </ion-col>
+          </ion-row>
+
+          <ion-row>
+            <ion-col size="4">
+              <ion-label>Prioridade: </ion-label>
+            </ion-col>
+            <ion-col size="8">
+              <P class="custom"> {{ entities.prioridade }}</P>
+            </ion-col>
+          </ion-row>
+
+
+
+
+
+          <ion-row *ngIf="entities.imagem">
+            <ion-col size="4">
+              <ion-label>Imagem: </ion-label>
+            </ion-col>
+            <ion-col size="8">
+              <ion-img [src]="entities.imagem"></ion-img>
+            </ion-col>
+          </ion-row>
+
+
+        </ion-grid>
+      </ion-item>
+    </ion-list>
+  </ng-container>
+
+  <ng-template #elseTemplate>
+    Carregando...
+  </ng-template>
+
+  <ion-fab horizontal="end" vertical="top" slot="fixed" edge>
+    <ion-fab-button>
+      <ion-icon name="arrow-dropdown"></ion-icon>
+    </ion-fab-button>
+    <ion-fab-list>
+      <ion-fab-button color="medium" (click)="openModalUpdate()">
+        <ion-icon name="refresh"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button color="medium" (click)="openConfirmRemove()">
+        <ion-icon name="trash"></ion-icon>
+      </ion-fab-button>
+    </ion-fab-list>
+  </ion-fab>
+
+</ion-content>
