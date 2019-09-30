@@ -41,10 +41,10 @@
         </ion-label>
         <ion-input type="text" formControlName="ordem_servico" id="ordem_servico">
         </ion-input>
-        <ion-select placeholder="Selecione Tipo Manutenção" formControlName="ordem_servico" id="ordem_servico">
-          <!-- <ion-select-option *ngFor="let tipomanutencao of tipomanutencaoarray | keyvalue" value="{{tipomanutencao.key}}">
-            {{tipomanutencao.key}} {{tipomanutencao.value}}</ion-select-option>-->
-        </ion-select>
+        <!-- <ion-select placeholder="Selecione Tipo Manutenção" formControlName="ordem_servico" id="ordem_servico">
+          <ion-select-option *ngFor="let tipomanutencao of tipomanutencaoarray | keyvalue" value="{{tipomanutencao.key}}">
+            {{tipomanutencao.key}} {{tipomanutencao.value}}</ion-select-option>
+        </ion-select>-->
       </ion-item>
 
 
@@ -53,11 +53,11 @@
         </ion-label>
         <ion-input type="text" formControlName="prioridade" id="prioridade">
         </ion-input>
-        <ion-select placeholder="Selecione a Prioridade" formControlName="prioridade">
-          <!-- <ion-select-option *ngFor="let prioridade of prioridadearray | keyvalue"
+      <!--  <ion-select placeholder="Selecione a Prioridade" formControlName="prioridade">
+           <ion-select-option *ngFor="let prioridade of prioridadearray | keyvalue"
               value="{{prioridade.key}} {{prioridade.value}}">
-              {{prioridade.key}} {{prioridade.value}}</ion-select-option> -->
-        </ion-select>
+              {{prioridade.key}} {{prioridade.value}}</ion-select-option>
+        </ion-select> -->
       </ion-item>
 
 
@@ -66,10 +66,10 @@
         </ion-label>
         <ion-input type="text" formControlName="status" id="status">
         </ion-input>
-        <ion-select placeholder="Selecione o Status" formControlName="status" id="status">
-          <!-- <ion-select-option *ngFor="let status of statusarray | keyvalue" [value]="status.key">{{status.key}}
-      {{status.value}}</ion-select-option> -->
-        </ion-select>
+       <!--  <ion-select placeholder="Selecione o Status" formControlName="status" id="status">
+          <ion-select-option *ngFor="let status of statusarray | keyvalue" [value]="status.key">{{status.key}}
+      {{status.value}}</ion-select-option>
+        </ion-select> -->
       </ion-item>
 
       <ion-item *ngIf="passedId">
@@ -84,10 +84,10 @@
         <ion-label position="stacked">Equipamento: </ion-label>
         <ion-input type="text" formControlName="id_equipamento" id="id_equipamento">
         </ion-input>
-        <ion-select placeholder="Equipamento" formControlName="id_equipamento" id="id_equipamento">
-          <!-- <ion-select-option *ngFor="let tipomanutencao of tipomanutencaoarray | keyvalue" value="{{tipomanutencao.key}}">
-              {{tipomanutencao.key}} {{tipomanutencao.value}}</ion-select-option> -->
-        </ion-select>
+        <!-- <ion-select placeholder="Equipamento" formControlName="id_equipamento" id="id_equipamento">
+          <ion-select-option *ngFor="let tipomanutencao of tipomanutencaoarray | keyvalue" value="{{tipomanutencao.key}}">
+              {{tipomanutencao.key}} {{tipomanutencao.value}}</ion-select-option>
+        </ion-select> -->
       </ion-item>
 
 
@@ -112,10 +112,10 @@
         </ion-label>
         <ion-input type="text" formControlName="id_setor_executante" id="id_setor_executante">
         </ion-input>
-        <ion-select placeholder="Equipamento" formControlName="id_setor_executante" id="id_setor_executante">
-          <!-- <ion-select-option *ngFor="let tipomanutencao of tipomanutencaoarray | keyvalue" value="{{tipomanutencao.key}}">
-                      {{tipomanutencao.key}} {{tipomanutencao.value}}</ion-select-option> -->
-        </ion-select>
+      <!-- <ion-select placeholder=">Setor executante" formControlName="id_setor_executante" id="id_setor_executante">
+           <ion-select-option *ngFor="let tipomanutencao of tipomanutencaoarray | keyvalue" value="{{tipomanutencao.key}}">
+                      {{tipomanutencao.key}} {{tipomanutencao.value}}</ion-select-option>
+        </ion-select>-->
       </ion-item>
 
       <ion-item>
@@ -123,10 +123,10 @@
         </ion-label>
         <ion-input type="text" formControlName="id_problema" id="id_problema">
         </ion-input>
-        <ion-select placeholder="Problema" formControlName="id_problema" id="id_problema">
-          <!-- <ion-select-option *ngFor="let tipomanutencao of tipomanutencaoarray | keyvalue" value="{{tipomanutencao.key}}">
-                              {{tipomanutencao.key}} {{tipomanutencao.value}}</ion-select-option> -->
-        </ion-select>
+        <!--  <ion-select placeholder="Problema" formControlName="id_problema" id="id_problema">
+         <ion-select-option *ngFor="let tipomanutencao of tipomanutencaoarray | keyvalue" value="{{tipomanutencao.key}}">
+                              {{tipomanutencao.key}} {{tipomanutencao.value}}</ion-select-option>
+        </ion-select> -->
       </ion-item>
 
 
@@ -134,10 +134,10 @@
         <ion-label position="stacked">Sub-Grupo:</ion-label>
         <ion-input type="text" formControlName="id_subgrupo" id="id_subgrupo">
         </ion-input>
-        <ion-select placeholder="SubGrupo" formControlName="id_subgrupo" id="id_subgrupo">
-          <!-- <ion-select-option *ngFor="let tipomanutencao of tipomanutencaoarray | keyvalue" value="{{tipomanutencao.key}}">
-                              {{tipomanutencao.key}} {{tipomanutencao.value}}</ion-select-option> -->
-        </ion-select>
+       <!-- <ion-select placeholder="SubGrupo" formControlName="id_subgrupo" id="id_subgrupo">
+           <ion-select-option *ngFor="let tipomanutencao of tipomanutencaoarray | keyvalue" value="{{tipomanutencao.key}}">
+                              {{tipomanutencao.key}} {{tipomanutencao.value}}</ion-select-option>
+        </ion-select> -->
       </ion-item>
 
       <ion-item>

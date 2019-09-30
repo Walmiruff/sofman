@@ -2,8 +2,6 @@ import { Router } from '@angular/router';
 import { Component } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { ApiService } from './../shared/services/api.service';
-import { Tab2SolicitationsPage } from './../tab2-solicitations/tab2-solicitations.page';
-import { Tab2FormSolicitationsPage } from './../tab2-form-solicitations/tab2-form-solicitations.page';
 import { TabFormSolicitacaoPage } from '../tab-form-solicitacao/tab-form-solicitacao.page';
 import { TabSolicitacaoPage } from '../tab-solicitacao/tab-solicitacao.page';
 

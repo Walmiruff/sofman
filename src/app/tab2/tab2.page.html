@@ -21,13 +21,23 @@
 
     <ion-col size="10">
       <div class="container">
-        <ion-searchbar [(ngModel)]="userFilter.ordem" animated placeholder="Pesquisar Ordens" [value]='barcode'>
-        </ion-searchbar>
+        <!-- <ion-searchbar [(ngModel)]="userFilter.ordem" animated placeholder="Pesquisar Ordens" [value]='barcode'>
+        </ion-searchbar> -->
+        <ion-searchbar
+         type="search"
+         [(ngModel)]="buscarpordata || barcode"
+         animated="true" spellcheck="true"
+         debounce="700" showCancelButton="true"
+        clearIcon="close-circle"
+       searchIcon="search"
+       placeholder="Pesquisar Ordens!" (ionChange)="getSearchItems($event)">
+    </ion-searchbar>
+
       </div>
     </ion-col>
 
     <div class="wrapper">
-      <ion-datetime></ion-datetime>
+      <ion-datetime displayFormat="DD/MM/YYYY" (ionChange)="dataselcionadata($event)"  ></ion-datetime>
       <ion-icon name="funnel"></ion-icon>
     </div>
 
@@ -36,7 +46,7 @@
   <ng-container *ngIf="ordens$ | async as ordens; else elseTemplate">
 
     <ion-list>
-      <ion-item *ngFor="let entities of ordens | filterBy:  userFilter" [routerLink]="[ '/tabs/tab2', entities.id ]">
+      <ion-item *ngFor="let entities of ordens | filtroOrdem: buscar" [routerLink]="[ '/tabs/tab2', entities.id ]">
 
         <ion-grid>
 

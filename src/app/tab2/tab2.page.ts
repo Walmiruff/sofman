@@ -16,9 +16,12 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 })
 export class Tab2Page implements OnInit {
   ordens$: Observable<any>;
-  public ordensList: {};
-  userFilter: any = { ordem: '' };
+  userFilter: any = { ordem: ''};
+
+  public buscar = '';
+  public buscarpordata: null;
   public barcode: string;
+
   constructor(
     private store: Store<AppState>,
     private modalController: ModalController,
@@ -28,8 +31,7 @@ export class Tab2Page implements OnInit {
 
   ngOnInit() {
     this.ordens$ = this.store.pipe(select(selectAllOrdens));
-    console.log(this.userFilter);
-  }
+ }
 
   async openModalCreate() {
     const modal = await this.modalController.create({
@@ -57,4 +59,19 @@ export class Tab2Page implements OnInit {
     const modalclose = await this.modalController.dismiss();
     return modalclose;
   }
+ getSearchItems(env: any) {
+  const val = env.target.value;
+  this.buscar = val;
+ }
+
+
+ dataselcionadata(env: any) {
+  const data = env.detail.value;
+  const dateFormat = data.split('T')[0];
+  const newdate = dateFormat.split('/').reverse().join('-');
+  console.log(newdate);
+
+
+}
+
 }

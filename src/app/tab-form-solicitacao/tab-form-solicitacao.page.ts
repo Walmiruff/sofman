@@ -56,9 +56,8 @@ export class TabFormSolicitacaoPage implements OnInit {
       select(selectAllSolicitations)
     ).subscribe(resSolicitacoes => {
       this.result = resSolicitacoes;
-
       console.log('Resultodao' + this.result)
-    })
+    });
 
     this.configurarFormulario();
     if (this.passedId !== null) {
@@ -75,7 +74,7 @@ export class TabFormSolicitacaoPage implements OnInit {
           id_filial: this.solicitacoes[0].id_filial,
           id_subgrupo: this.solicitacoes[0].id_subgrupo, // Lista suspensa
           id_equipamento: this.solicitacoes[0].id_equipamento, // lista suspensa
-          // localizacao?: string;
+          localizacao: this.solicitacoes[0].localizacao,// localizacao?: string;
           ordem_servico: this.solicitacoes[0].ordem_servico, // lista supensa
           id_setor_executante: this.solicitacoes[0].id_cliente,// lista suspensa
           id_contato_filial: this.solicitacoes[0].id_contato_filial,
@@ -100,7 +99,7 @@ export class TabFormSolicitacaoPage implements OnInit {
   configurarFormulario() {
     this.formulario = this.formBuilder.group({
       id: [null],
-      tag_id: [null], // Lista suspensa
+      //tag_id: [null], // Lista suspensa
       id_cliente: [null], // Lista suspensa
       id_filial: [null],
       id_subgrupo: [null], // Lista suspensa
@@ -118,10 +117,10 @@ export class TabFormSolicitacaoPage implements OnInit {
       imagem: [null],
       data_inicio: [null],
       data_termino: [null],
-      log_date: [null],
+     // log_date: [null],
       id_problema: [null], // lista suspensa
       maquina_parada: [null],
-      notificar: [null],
+    //  notificar: [null],
     });
   }
 
@@ -147,7 +146,7 @@ export class TabFormSolicitacaoPage implements OnInit {
       this.formulario.patchValue({
         id: new Date().getUTCMilliseconds().toString()
       });
-      this.firebaseService.crudFirebase(this.formulario.value, 'ordem-add');
+      this.firebaseService.crudFirebase(this.formulario.value, 'solicitacao-add');
       this.store.dispatch(new ADDSOLICITATION({ solicitation: this.formulario.value }));
     }
     this.dismiss();

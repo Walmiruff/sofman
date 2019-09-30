@@ -7,7 +7,6 @@ import { IonicModule } from '@ionic/angular';
 
 import { Tab2FormPage } from './tab2-form.page';
 import { SignaturePadModule } from 'angular2-signaturepad';
-import { Tab2FormSolicitationsPageModule } from './../tab2-form-solicitations/tab2-form-solicitations.module';
 
 const routes: Routes = [
   {
@@ -23,7 +22,6 @@ const routes: Routes = [
     ReactiveFormsModule,
     IonicModule,
     SignaturePadModule,
-    Tab2FormSolicitationsPageModule,
     RouterModule.forChild(routes)
   ],
   declarations: [Tab2FormPage]

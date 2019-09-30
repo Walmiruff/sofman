@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { FilterPipeModule } from 'ngx-filter-pipe';
 
 import { Tab2Page } from './tab2.page';
+import { FiltroOrdemPipe } from './../shared/pipes/filtro-ordem.pipe';
 
 @NgModule({
   imports: [
@@ -15,6 +16,6 @@ import { Tab2Page } from './tab2.page';
     FilterPipeModule,
     RouterModule.forChild([{ path: '', component: Tab2Page }])
   ],
-  declarations: [Tab2Page]
+  declarations: [Tab2Page, FiltroOrdemPipe]
 })
 export class Tab2PageModule {}

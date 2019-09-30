@@ -26,18 +26,6 @@ const routes: Routes = [
         ]
       },
       {
-        path: 'tab2-solicitations',
-        children: [
-          {
-            path: '',
-            loadChildren: () =>
-              import('../tab2-solicitations/tab2-solicitations.module').then(
-                m => m.Tab2SolicitationsPageModule
-              )
-          }
-        ]
-      },
-      {
         path: 'login',
         redirectTo: '/login',
         pathMatch: 'full'
@@ -91,19 +79,6 @@ const routes: Routes = [
           }
         ]
       },
-      {
-        path: 'tab2-solicitations/:id',
-        children: [
-          {
-            path: '',
-            loadChildren: () =>
-              import('../tab2-solicitations-details/tab2-solicitations-details.module').then(
-                m => m.Tab2SolicitationsDetailsPageModule
-              )
-          }
-        ]
-      },
-
       {
         path: '',
         redirectTo: '/tabs/tab1',
