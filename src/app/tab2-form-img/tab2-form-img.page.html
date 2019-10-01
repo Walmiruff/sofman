@@ -1,34 +1,33 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>{{title}}</ion-title>
+    <ion-button (click)="selectImageInCamera()" fill="solid" shape="round">
+      Tirar Foto
+    </ion-button>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-button (click)="selectImageInCamera()" fill="solid" shape="round">
-    Tirar Foto
-  </ion-button>
+
   <form [formGroup]="formulario" class="appointment-form2">
-  <ion-list lines="full" class="ion-no-margin ion-no-padding">
-      <ion-thumbnail slot="start">
-        <img *ngIf="myPhotoURL" [src]="myPhotoURL | async">
-      </ion-thumbnail>
-      <ion-label>
-      </ion-label>
+    <ion-list lines="full" class="ion-no-margin ion-no-padding">
+
       <ion-item>
         <ion-label position="stacked">Obs</ion-label>
         <ion-input type="text" formControlName="obs" id="obs"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label position="stacked">Url Img</ion-label>
-        <ion-input  formControlName="url" id="url"></ion-input>
+        <ion-input readonly formControlName="url" id="url"></ion-input>
         <ion-input type="text" [value]="myPhotoURL | async" formControlName="url" id="url"></ion-input>
       </ion-item>
 
     </ion-list>
+    <ion-card>
 
+      <ion-img style="height: 200px; width: 200px" *ngIf="foto" [src]="foto"> </ion-img>
 
-
+    </ion-card>
     <div class="ion-padding">
       <ion-button expand="block" (click)="send()" class="ion-no-margin">Salvar</ion-button>
     </div>

@@ -28,6 +28,7 @@ export class Tab2FormImgPage implements OnInit {
 
   passedId = null;
   imgId = null;
+  public foto = '';
   formulario: FormGroup;
   imgs: IImg[];
 
@@ -124,6 +125,8 @@ export class Tab2FormImgPage implements OnInit {
         .then(
           imageData => {
             this.myPhoto = imageData;
+            const base64data = 'data:image/jpeg;base64,' + imageData;
+            this.foto = base64data;
             this.uploadPhoto();
           },
           error => {
