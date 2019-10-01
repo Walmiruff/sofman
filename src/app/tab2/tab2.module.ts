@@ -18,4 +18,4 @@ import { FiltroOrdemPipe } from './../shared/pipes/filtro-ordem.pipe';
   ],
   declarations: [Tab2Page, FiltroOrdemPipe]
 })
-export class Tab2PageModule {}
+export class Tab2PageModule { }

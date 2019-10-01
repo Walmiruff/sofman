@@ -87,10 +87,20 @@
       <ion-label position="stacked">Assinar Ordem</ion-label>
       <ion-toggle slot="end" color="tertiary" (ionChange)="checkValue($event)" value="yes"></ion-toggle>
     </ion-item>
-    <br>
 
+    <ion-label *ngIf="assinaturafuncbase64">
+      <p>Ass Funcionário: </p>
+      <img [src]='assinaturafuncbase64'>
+    </ion-label>
+
+    <ion-label *ngIf="assinaturaclientebase64">
+      <p>Ass Client: </p>
+      <img [src]='assinaturaclientebase64'>
+    </ion-label>
+
+    <br>
     <ion-row [ngClass]="{'drawing-active': isDrawing, 'esconder': showAssinatura}">
-      <ion-col>Cliente Assinatura</ion-col>
+      <ion-col>Ass. Cliente: </ion-col>
       <ion-col>
         <signature-pad #Assinaturacliente [options]="signaturePadOptions" (onBeginEvent)="drawStartClient()"
           (onEndEvent)="drawCompleteClient()">
@@ -107,18 +117,39 @@
           <ion-img *ngIf="signaturecliente" [src]="signaturecliente"></ion-img>
         </ion-col>
 
-        <ion-label *ngIf="assinaturaclientebase64">
-          <p>Ass Client: </p>
-          <img [src]='assinaturaclientebase64'>
-        </ion-label>
-
       </ion-col>
     </ion-row>
 
 
 
+    <!--  Inicio func-->
+
     <ion-row [ngClass]="{'drawing-active': isDrawing, 'esconder2': showAssinatura}">
-      <ion-col>Assinatura Funcionário</ion-col>
+      <ion-col>Ass. Funcionário: </ion-col>
+      <ion-col>
+        <signature-pad #Assfuncionario [options]="signaturePadOptions" (onBeginEvent)="drawStartFunc()"
+          (onEndEvent)="drawCompleteFunc()">
+        </signature-pad>
+      </ion-col>
+      <ion-col>
+        <ion-button color="danger" (click)="clearPadFunc()">Limpar</ion-button>
+        <ion-button color="secondary" (click)="savePadFunc()">Salvar</ion-button>
+      </ion-col>
+      <ion-col>
+        <ion-col width-100>
+          <ion-input type="text" formControlName="signaturefuncionario" [value]="signaturefuncionario"
+            id="signaturefuncionario">
+          </ion-input>
+          <ion-img *ngIf="signaturefuncionario" [src]="signaturefuncionario"></ion-img>
+        </ion-col>
+      </ion-col>
+    </ion-row>
+
+
+    <!--  -->
+
+    <!-- <ion-row [ngClass]="{'drawing-active': isDrawing, 'esconder2': showAssinatura}">
+      <ion-col>Ass. Funcionário</ion-col>
       <ion-col>
         <signature-pad #Assfuncionario [options]="signaturePadOptions" (onBeginEvent)="drawStartFunc()"
           (onEndEvent)="drawCompleteFunc()">
@@ -133,11 +164,13 @@
           id="signaturefuncionario"></ion-input>
         <ion-img *ngIf="signaturefuncionario" [src]="signaturefuncionario"></ion-img>
       </ion-col>
+
       <ion-label *ngIf="assinaturafuncbase64">
         <p>Ass Func: </p>
         <img [src]='assinaturafuncbase64'>
       </ion-label>
-    </ion-row>
+
+    </ion-row> -->
 
     <div class="ion-padding">
       <ion-button expand="block" (click)="sendOrdem()" class="ion-no-margin">Salvar</ion-button>

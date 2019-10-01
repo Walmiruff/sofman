@@ -20,6 +20,7 @@ import { SignaturePad } from 'angular2-signaturepad/signature-pad';
 export class Tab2FormPage implements OnInit {
   @ViewChild('Assfuncionario', { static: true }) public assfunc: SignaturePad;
   @ViewChild('Assinaturacliente', { static: true }) public assclient: SignaturePad;
+
   public assinaturafuncbase64: string;
   public assinaturaclientebase64: string;
   public showAssinatura = true;
@@ -50,7 +51,7 @@ export class Tab2FormPage implements OnInit {
     private formBuilder: FormBuilder,
     private store: Store<AppState>,
     private firebaseService: FirebaseService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.configurarFormulario();
@@ -147,8 +148,10 @@ export class Tab2FormPage implements OnInit {
   }
   async savePadFunc() {
     this.signaturefuncionario = await this.assfunc.toDataURL();
+
     localStorage.setItem('savedSignaturefunc', this.signaturefuncionario);
-    this.assinaturafuncbase64 = this.signaturefuncionario;
+
+    //this.assinaturafuncbase64 = this.signaturefuncionario;
     this.assfunc.clear();
     // let toast = this.toastCtrl.create({
     //   message: 'New Signature saved.',

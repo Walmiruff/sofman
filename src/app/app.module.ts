@@ -43,6 +43,7 @@ import { TarefaEffects } from './store/effects/tarefas.effects';
 import { ImgEffects } from './store/effects/imgs.effects';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { TabFormSolicitacaoPageModule } from './tab-form-solicitacao/tab-form-solicitacao.module';
+import { SharedPipesModule } from './shared/pipes/shared-pipes.module';
 
 // import { Tab2FormPageModule } from './tab2-form/tab2-form.module';
 // import { Tab2FormAptMatPageModule } from './tab2-form-apt-mat/tab2-form-apt-mat.module';
@@ -80,7 +81,7 @@ import { TabFormSolicitacaoPageModule } from './tab-form-solicitacao/tab-form-so
     ]),
     StoreDevtoolsModule.instrument(),
     AppRoutingModule,
-    TabFormSolicitacaoPageModule
+    TabFormSolicitacaoPageModule,
   ],
   providers: [
     StatusBar,

@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 
 import { Tab2DetailsPage } from './tab2-details.page';
 import { FilterOrdemPipe } from '../shared/pipes/filter-ordem.pipe';
+import { SharedPipesModule } from '../shared/pipes/shared-pipes.module';
 
 const routes: Routes = [
   {
@@ -24,4 +25,4 @@ const routes: Routes = [
   ],
   declarations: [Tab2DetailsPage, FilterOrdemPipe]
 })
-export class Tab2DetailsPageModule {}
+export class Tab2DetailsPageModule { }

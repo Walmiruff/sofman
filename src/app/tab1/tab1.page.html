@@ -21,29 +21,33 @@
       <ion-note color="primary"> {{logincliente}}</ion-note>
     </ion-card-content>
   </ion-card>
-  <h4 class="bemvindo">Comunicados</h4>
+  <h4 class="bemvindo">
+    <ion-icon style="color: #f2b200" slot="start" name="megaphone"></ion-icon> Comunicados
+  </h4>
   <ion-slides [options]="slideOpts" loop=true mode="ios">
     <ion-slide *ngFor="let item of cominicados" style="width: 100%">
       <ion-text color="dark">
         <h4>{{item.title}}</h4>
-        <ion-note>{{item.description}}</ion-note>
+        <ion-note [innerHTML]="item.description"></ion-note>
       </ion-text>
-      <br>
+
     </ion-slide>
 
   </ion-slides>
-  <ion-grid fixed *ngIf="(tipoacesso === '1') ">
-    <ion-row>
-      <ion-col size="6">
-        <ion-button size="small" fill="solid" (click)="openSolicitations()" shape="round">
-          Listar Solicitacoes
+  <ion-grid style="text-align: center;" *ngIf="(tipoacesso === '1')">
+    <ion-row class="ion-justify-content-center">
+
+      <ion-col>
+        <ion-button shape="round" fill="solid" (click)="openModalSolicitationCreat()">
+          Abrir Solicitações
         </ion-button>
       </ion-col>
-      <ion-col size="6">
-        <ion-button size="small" fill="solid" (click)="openModalSolicitationCreat()" shape="round">
-          Abrir Solicitação
+      <ion-col>
+        <ion-button shape="round" fill="solid" (click)="openSolicitations()">
+          Listar Solicitações
         </ion-button>
       </ion-col>
+
     </ion-row>
   </ion-grid>
 </ion-content>
