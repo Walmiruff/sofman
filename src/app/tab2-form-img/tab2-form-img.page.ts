@@ -106,11 +106,20 @@ export class Tab2FormImgPage implements OnInit {
     if (this.platform.is('cordova')) {
       this.camera
         .getPicture({
-          quality: 60,
+          quality: 40,
+          allowEdit: true,
           destinationType: this.camera.DestinationType.DATA_URL,
           sourceType: this.camera.PictureSourceType.CAMERA,
           encodingType: this.camera.EncodingType.PNG,
-          saveToPhotoAlbum: true
+          saveToPhotoAlbum: true,
+
+          // destinationType: this.camera.DestinationType.DATA_URL,
+          // sourceType: this.camera.PictureSourceType.CAMERA,
+          // encodingType: this.camera.EncodingType.PNG,
+          mediaType: this.camera.MediaType.PICTURE,
+          correctOrientation: true,
+          targetWidth: 600,
+          targetHeight: 600
         })
         .then(
           imageData => {
