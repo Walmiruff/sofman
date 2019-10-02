@@ -37,7 +37,7 @@
     </ion-col>
 
     <div class="wrapper">
-      <ion-datetime displayFormat="DD/MM/YYYY" (ionChange)="dataselcionadata($event)"  ></ion-datetime>
+      <ion-datetime displayFormat="DD/MM/YYYY" (ionChange)="dataselcionadata($event)"></ion-datetime>
       <ion-icon name="funnel"></ion-icon>
     </div>
 
@@ -46,7 +46,7 @@
   <ng-container *ngIf="ordens$ | async as ordens; else elseTemplate">
 
     <ion-list>
-      <ion-item *ngFor="let entities of ordens | filtroOrdem: buscar" [routerLink]="[ '/tabs/tab2', entities.id ]">
+      <ion-item *ngFor="let entities of ordens | filtroOrdem: buscar" [routerLink]="['/tabs/tab2', entities.id ]">
 
         <ion-grid>
 

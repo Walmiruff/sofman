@@ -1,0 +1,39 @@
+<ion-header>
+  <ion-toolbar color="warning">
+    <ion-row>
+      <div>
+        <img class="logo" src="assets/img/logosmall.png">
+      </div>
+      <ion-title color="dark">
+        Assinatura Cliente.
+      </ion-title>
+    </ion-row>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+<ion-card>
+  <ion-card-content [ngClass]="{'drawing-active': isDrawing, 'esconder': showAssinatura}">
+    <signature-pad #Assinaturacliente [options]="signaturePadOptions" (onBeginEvent)="drawStartClient()"
+    (onEndEvent)="drawCompleteClient()">
+  </signature-pad>
+  </ion-card-content>
+  <ion-img *ngIf="signaturecliente" [src]="signaturecliente"></ion-img>
+  <ion-grid class="ion-padding">
+      <ion-row >
+          <ion-col>
+              <ion-button color="danger" fill="block" (click)="clearPadClient()">Limpar</ion-button>
+         </ion-col>
+         <ion-col>
+        </ion-col>
+        <ion-col>
+            <ion-button color="primary"  fill="block" (click)="savePadClient()">Salvar</ion-button>
+        </ion-col>
+        </ion-row>
+  </ion-grid>
+</ion-card>
+
+
+</ion-content>
+
+
+

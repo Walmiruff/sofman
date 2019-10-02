@@ -24,7 +24,8 @@ const routes: Routes = [
     path: 'tab-solicitacao-details/:id',
     loadChildren: './tab-solicitacao-details/tab-solicitacao-details.module#TabSolicitacaoDetailsPageModule'
   },
-  { path: 'tab-form-solicitacao', loadChildren: './tab-form-solicitacao/tab-form-solicitacao.module#TabFormSolicitacaoPageModule' }
+  { path: 'tab-form-solicitacao', loadChildren: './tab-form-solicitacao/tab-form-solicitacao.module#TabFormSolicitacaoPageModule' },
+  { path: 'asscliente', loadChildren: './modais/modal/asscliente/asscliente.module#AssclientePageModule' }
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })],

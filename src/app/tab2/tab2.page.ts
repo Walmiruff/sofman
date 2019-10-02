@@ -70,7 +70,9 @@ export class Tab2Page implements OnInit {
   const dateFormat = data.split('T')[0];
   const newdate = dateFormat.split('/').reverse().join('-');
   console.log(newdate);
-
+  const buscadata = newdate.split('-').reverse().join('/');
+  console.log('por na busca', buscadata)
+  this.buscarpordata = buscadata;
 
 }
 
