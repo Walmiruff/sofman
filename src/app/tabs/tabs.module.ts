@@ -11,6 +11,7 @@ import { Tab2FormAptHoraPageModule } from '../tab2-form-apt-hora/tab2-form-apt-h
 import { Tab2FormTarefaPageModule } from '../tab2-form-tarefa/tab2-form-tarefa.module';
 import { Tab2FormPageModule } from '../tab2-form/tab2-form.module';
 import { Tab2FormImgPageModule } from './../tab2-form-img/tab2-form-img.module';
+import { AssclientePageModule } from '../modais/modal/asscliente/asscliente.module';
 
 @NgModule({
   imports: [
@@ -23,6 +24,7 @@ import { Tab2FormImgPageModule } from './../tab2-form-img/tab2-form-img.module';
     Tab2FormAptHoraPageModule,
     Tab2FormTarefaPageModule,
     Tab2FormImgPageModule,
+    AssclientePageModule
 
   ],
   declarations: [TabsPage]
