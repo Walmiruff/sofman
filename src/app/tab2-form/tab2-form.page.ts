@@ -56,14 +56,18 @@ export class Tab2FormPage implements OnInit {
   ngOnInit() {
     this.configurarFormulario();
     if (this.passedId !== null) {
+
       this.title = 'Editando...';
-      this.store.pipe(select(selectAllOrdens)).subscribe(ordens => {
-        console.log('Rernono tab2 f' + JSON.stringify(ordens));
-        this.assinaturafuncbase64 = ordens[0].signaturefuncionario;
-        this.assinaturaclientebase64 = ordens[0].signaturecliente;
+      this.store.pipe(select(selectAllOrdens)).subscribe((ordens: any) => {
+        //  console.log('Rernono tab2 f' + JSON.stringify(ordens));
+
+
         // tslint:disable-next-line: no-shadowed-variable
         this.ordens = ordens.filter(ordens => ordens.id == this.passedId);
+        this.signaturecliente = ordens.signaturecliente
+        console.log(`Asinatura cliente aqui` + this.signaturecliente)
         this.formulario.patchValue({
+
           filial: this.ordens[0].filial,
           ordem: this.ordens[0].ordem,
           data: this.ordens[0].data,
@@ -147,11 +151,9 @@ export class Tab2FormPage implements OnInit {
     this.isDrawing = true;
   }
   async savePadFunc() {
-    this.signaturefuncionario = await this.assfunc.toDataURL();
+    const af = await this.assfunc.toDataURL();
+    this.signaturefuncionario = af;
 
-    localStorage.setItem('savedSignaturefunc', this.signaturefuncionario);
-
-    //this.assinaturafuncbase64 = this.signaturefuncionario;
     this.assfunc.clear();
     // let toast = this.toastCtrl.create({
     //   message: 'New Signature saved.',
@@ -171,8 +173,10 @@ export class Tab2FormPage implements OnInit {
     this.isDrawing = true;
   }
   async savePadClient() {
-    this.signaturecliente = await this.assclient.toDataURL();
-    localStorage.setItem('savedSignaturecliente', this.signaturecliente);
+    const ac = await this.assclient.toDataURL();
+    this.signaturecliente = ac;
+
+
     this.assclient.clear();
     // let toast = this.toastCtrl.create({
     //   message: 'New Signature saved.',

@@ -53,7 +53,7 @@
         </ion-label>
         <ion-input type="text" formControlName="prioridade" id="prioridade">
         </ion-input>
-      <!--  <ion-select placeholder="Selecione a Prioridade" formControlName="prioridade">
+        <!--  <ion-select placeholder="Selecione a Prioridade" formControlName="prioridade">
            <ion-select-option *ngFor="let prioridade of prioridadearray | keyvalue"
               value="{{prioridade.key}} {{prioridade.value}}">
               {{prioridade.key}} {{prioridade.value}}</ion-select-option>
@@ -66,7 +66,7 @@
         </ion-label>
         <ion-input type="text" formControlName="status" id="status">
         </ion-input>
-       <!--  <ion-select placeholder="Selecione o Status" formControlName="status" id="status">
+        <!--  <ion-select placeholder="Selecione o Status" formControlName="status" id="status">
           <ion-select-option *ngFor="let status of statusarray | keyvalue" [value]="status.key">{{status.key}}
       {{status.value}}</ion-select-option>
         </ion-select> -->
@@ -112,7 +112,7 @@
         </ion-label>
         <ion-input type="text" formControlName="id_setor_executante" id="id_setor_executante">
         </ion-input>
-      <!-- <ion-select placeholder=">Setor executante" formControlName="id_setor_executante" id="id_setor_executante">
+        <!-- <ion-select placeholder=">Setor executante" formControlName="id_setor_executante" id="id_setor_executante">
            <ion-select-option *ngFor="let tipomanutencao of tipomanutencaoarray | keyvalue" value="{{tipomanutencao.key}}">
                       {{tipomanutencao.key}} {{tipomanutencao.value}}</ion-select-option>
         </ion-select>-->
@@ -134,7 +134,7 @@
         <ion-label position="stacked">Sub-Grupo:</ion-label>
         <ion-input type="text" formControlName="id_subgrupo" id="id_subgrupo">
         </ion-input>
-       <!-- <ion-select placeholder="SubGrupo" formControlName="id_subgrupo" id="id_subgrupo">
+        <!-- <ion-select placeholder="SubGrupo" formControlName="id_subgrupo" id="id_subgrupo">
            <ion-select-option *ngFor="let tipomanutencao of tipomanutencaoarray | keyvalue" value="{{tipomanutencao.key}}">
                               {{tipomanutencao.key}} {{tipomanutencao.value}}</ion-select-option>
         </ion-select> -->
@@ -146,9 +146,6 @@
         <ion-input type="textarea" row=6 formControlName="mensagem" id="mensagem">
         </ion-input>
       </ion-item>
-
-
-
       <ion-item>
         <ion-icon style="font-size: 49px;" slot="start" ios="ios-camera" md="md-camera" (click)="selectImageInCamera()">
         </ion-icon>

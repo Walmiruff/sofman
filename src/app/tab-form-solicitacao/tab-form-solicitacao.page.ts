@@ -75,11 +75,11 @@ export class TabFormSolicitacaoPage implements OnInit {
           id_subgrupo: this.solicitacoes[0].id_subgrupo, // Lista suspensa
           id_equipamento: this.solicitacoes[0].id_equipamento, // lista suspensa
           localizacao: this.solicitacoes[0].localizacao,// localizacao?: string;
-          ordem_servico: this.solicitacoes[0].ordem_servico, // lista supensa
+          //ordem_servico: this.solicitacoes[0].ordem_servico, // lista supensa
           id_setor_executante: this.solicitacoes[0].id_cliente,// lista suspensa
-          id_contato_filial: this.solicitacoes[0].id_contato_filial,
-          codigo_solicitacao: this.solicitacoes[0].codigo_solicitacao,
-          categoria: this.solicitacoes[0].categoria,
+          //id_contato_filial: this.solicitacoes[0].id_contato_filial,
+          // codigo_solicitacao: this.solicitacoes[0].codigo_solicitacao,
+          //  categoria: this.solicitacoes[0].categoria,
           assunto: this.solicitacoes[0].assunto,
           mensagem: this.solicitacoes[0].mensagem,
           prioridade: this.solicitacoes[0].prioridade, // Lista suspensa
@@ -105,7 +105,7 @@ export class TabFormSolicitacaoPage implements OnInit {
       id_subgrupo: [null], // Lista suspensa
       id_equipamento: [null], // lista suspensa
       localizacao: [null],
-      ordem_servico: [null], // Lista suspensa
+      //ordem_servico: [null], // Lista suspensa
       id_setor_executante: [null], // lista suspensa
       id_contato_filial: [null],
       codigo_solicitacao: [null],
@@ -117,10 +117,10 @@ export class TabFormSolicitacaoPage implements OnInit {
       imagem: [null],
       data_inicio: [null],
       data_termino: [null],
-     // log_date: [null],
+      // log_date: [null],
       id_problema: [null], // lista suspensa
       maquina_parada: [null],
-    //  notificar: [null],
+      //  notificar: [null],
     });
   }
 
