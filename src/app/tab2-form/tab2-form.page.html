@@ -89,35 +89,48 @@
     </ion-item>
 
     <br>
-    <ion-row [ngClass]="{'drawing-active': isDrawing, 'esconder': showAssinatura}">
-      <ion-col>
-        <ion-label slot="start"> Ass. Cliente:</ion-label>
-        <signature-pad #Assinaturacliente [options]="signaturePadOptions" (onBeginEvent)="drawStartClient()"
-          (onEndEvent)="drawCompleteClient()">
-        </signature-pad>
-      </ion-col>
-      <ion-col>
-        <ion-button color="danger" (click)="clearPadClient()">Limpar</ion-button>
-        <ion-button color="secondary" (click)="savePadClient()">Salvar</ion-button>
-      </ion-col>
-      <ion-col width-100>
-        <!--    <img *ngIf="imageForm.controls.image1.value" formControlName="image1" src="{{imageForm.controls.image1.value}}">
- -->
-        <ion-input type="image" accept="image/*" formControlName="signaturecliente" id="signaturecliente">
-        </ion-input>
-        <ion-input type="image" formControlName="signaturecliente"></ion-input>
+    <ion-label *ngIf="signaturecliente">
+      Ass. Cliente:
+      <ion-img [src]="signaturecliente"></ion-img>
 
-      </ion-col>
-      <ion-img *ngIf="signaturecliente" [src]="signaturecliente"></ion-img>
-    </ion-row>
+    </ion-label>
+    <br>
+    <ion-label *ngIf="signaturefuncionario">
+      Ass. Funcionário:
+      <ion-img [src]="signaturefuncionario"></ion-img>
+    </ion-label>
 
-    <!--  Inicio func-->
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-label slot="start"> Ass. Cliente:</ion-label>
+        </ion-col>
+      </ion-row>
+      <ion-row [ngClass]="{'drawing-active': isDrawing, 'esconder': showAssinatura}">
+
+        <ion-col>
+          <signature-pad #Assinaturacliente [options]="signaturePadOptions" (onBeginEvent)="drawStartClient()"
+            (onEndEvent)="drawCompleteClient()">
+          </signature-pad>
+        </ion-col>
+        <ion-col>
+          <ion-button color="danger" (click)="clearPadClient()">Limpar</ion-button>
+          <ion-button color="secondary" (click)="savePadClient()">Salvar</ion-button>
+        </ion-col>
+        <ion-col width-100>
+          <ion-input type="image" formControlName="signaturecliente" [value]="signaturecliente" name="signaturecliente">
+          </ion-input>
+        </ion-col>
+        <!-- <ion-img *ngIf="signaturecliente" [src]="signaturecliente"></ion-img> -->
+      </ion-row>
+    </ion-grid>
+
+
+    <!--  Inicio func
 
     <ion-row [ngClass]="{'drawing-active': isDrawing, 'esconder2': showAssinatura}">
-
+      <ion-label slot="start"> Ass. Funcionário:</ion-label>
       <ion-col>
-        <ion-label slot="start"> Ass. Funcionário:</ion-label>
-
         <signature-pad #Assfuncionario [options]="signaturePadOptions" (onBeginEvent)="drawStartFunc()"
           (onEndEvent)="drawCompleteFunc()">
         </signature-pad>
@@ -128,19 +141,16 @@
       </ion-col>
 
       <ion-col width-100>
-        <ion-input type="file" accept="image/*" formControlName="signaturefuncionario" id="signaturefuncionario">
+        <ion-input type="image" formControlName="signaturefuncionario" [value]="signaturefuncionario"
+          name="signaturefuncionario">
         </ion-input>
       </ion-col>
-
-      <ion-img *ngIf="signaturefuncionario" [src]="signaturefuncionario">
-      </ion-img>
-
-    </ion-row>
+    </ion-row>-->
 
 
     <!--  -->
 
-    <!-- <ion-row [ngClass]="{'drawing-active': isDrawing, 'esconder2': showAssinatura}">
+    <ion-row [ngClass]="{'drawing-active': isDrawing, 'esconder2': showAssinatura}">
       <ion-col>Ass. Funcionário</ion-col>
       <ion-col>
         <signature-pad #Assfuncionario [options]="signaturePadOptions" (onBeginEvent)="drawStartFunc()"
@@ -152,17 +162,10 @@
         <ion-button color="secondary" (click)="savePadFunc()">Salvar</ion-button>
       </ion-col>
       <ion-col width-100>
-        <ion-input readonly type="text" formControlName="signaturefuncionario" [value]="signaturefuncionario"
+        <ion-input type="image" formControlName="signaturefuncionario" [value]="signaturefuncionario"
           id="signaturefuncionario"></ion-input>
-        <ion-img *ngIf="signaturefuncionario" [src]="signaturefuncionario"></ion-img>
       </ion-col>
-
-      <ion-label *ngIf="assinaturafuncbase64">
-        <p>Ass Func: </p>
-        <img [src]='assinaturafuncbase64'>
-      </ion-label>
-
-    </ion-row> -->
+    </ion-row>
 
     <div class="ion-padding">
       <ion-button expand="block" (click)="sendOrdem()" class="ion-no-margin">Salvar</ion-button>

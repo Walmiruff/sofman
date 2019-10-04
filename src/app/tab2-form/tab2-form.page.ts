@@ -57,16 +57,12 @@ export class Tab2FormPage implements OnInit {
   ngOnInit() {
     this.configurarFormulario();
     if (this.passedId !== null) {
-
       this.title = 'Editando...';
-      this.store.pipe(select(selectAllOrdens)).subscribe((ordens: any) => {
-        //  console.log('Rernono tab2 f' + JSON.stringify(ordens));
-
-
-        // tslint:disable-next-line: no-shadowed-variable
+      this.store.pipe(select(selectAllOrdens)).subscribe(ordens => {
+        console.log(JSON.stringify(ordens))
         this.ordens = ordens.filter(ordens => ordens.id == this.passedId);
-        this.signaturecliente = ordens.signaturecliente
-        console.log(`Asinatura cliente aqui` + this.signaturecliente)
+        this.signaturefuncionario = this.ordens[0].signaturefuncionario,
+          this.signaturecliente = this.ordens[0].signaturecliente
         this.formulario.patchValue({
 
           filial: this.ordens[0].filial,
@@ -82,8 +78,7 @@ export class Tab2FormPage implements OnInit {
           observacao: this.ordens[0].observacao,
           status_da_os: this.ordens[0].status_da_os,
           message: this.ordens[0].message,
-          signaturefuncionario: this.ordens[0].signaturefuncionario,
-          signaturecliente: this.ordens[0].signaturecliente
+
         });
       });
     }
@@ -181,9 +176,7 @@ export class Tab2FormPage implements OnInit {
     this.isDrawing = true;
   }
   async savePadClient() {
-    const ac = await this.assclient.toDataURL();
-    this.signaturecliente = ac;
-
+    this.signaturecliente = await this.assclient.toDataURL();
 
     this.assclient.clear();
     // let toast = this.toastCtrl.create({

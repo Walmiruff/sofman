@@ -53,9 +53,9 @@ export class LoginPage implements OnInit {
     this.user = this.api.getCredentials().login;
     this.authorization = this.api.getCredentials().authorization;
     load.dismiss();
-    if (this.user) {
-      this.navctrl.navigateRoot(['/tabs/tab1'])
-    }
+    // if (this.user) {
+    //   this.navctrl.navigateRoot(['/tabs/tab1'])
+    // }
   }
 
   async login() {

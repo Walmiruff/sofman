@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ModalController, Platform } from '@ionic/angular';
 import { Observable } from 'rxjs';
 import { Store, select } from '@ngrx/store';
@@ -16,7 +16,7 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 })
 export class Tab2Page implements OnInit {
   ordens$: Observable<any>;
-  userFilter: any = { ordem: ''};
+  userFilter: any = { ordem: '' };
 
   public buscar = '';
   public buscarpordata: null;
@@ -27,11 +27,12 @@ export class Tab2Page implements OnInit {
     private modalController: ModalController,
     private barcodescanner: BarcodeScanner,
     private platform: Platform
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.ordens$ = this.store.pipe(select(selectAllOrdens));
- }
+  }
+  ngOnDestroy(): void { }
 
   async openModalCreate() {
     const modal = await this.modalController.create({
@@ -53,27 +54,27 @@ export class Tab2Page implements OnInit {
             this.barcode = JSON.stringify(e);
           });
       }
-    } catch (error) {}
+    } catch (error) { }
   }
   async closeModal() {
     const modalclose = await this.modalController.dismiss();
     return modalclose;
   }
- getSearchItems(env: any) {
-  const val = env.target.value;
-  this.buscar = val;
- }
+  getSearchItems(env: any) {
+    const val = env.target.value;
+    this.buscar = val;
+  }
 
 
- dataselcionadata(env: any) {
-  const data = env.detail.value;
-  const dateFormat = data.split('T')[0];
-  const newdate = dateFormat.split('/').reverse().join('-');
-  console.log(newdate);
-  const buscadata = newdate.split('-').reverse().join('/');
-  console.log('por na busca', buscadata)
-  this.buscarpordata = buscadata;
+  dataselcionadata(env: any) {
+    const data = env.detail.value;
+    const dateFormat = data.split('T')[0];
+    const newdate = dateFormat.split('/').reverse().join('-');
+    console.log(newdate);
+    const buscadata = newdate.split('-').reverse().join('/');
+    console.log('por na busca', buscadata)
+    this.buscarpordata = buscadata;
 
-}
+  }
 
 }

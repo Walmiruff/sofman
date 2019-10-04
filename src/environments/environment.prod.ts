@@ -1,5 +1,5 @@
 export const environment = {
-  api: 'http://localhost:3000/', // mudar para api mySql
+  api: 'http://192.168.25.113:3000/', // mudar para api mySql
 
   //api: 'https://posts.vix.br/apisoftman/index.php',
 

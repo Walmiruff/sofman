@@ -5,7 +5,7 @@
         <img class="logo" src="assets/img/logosmall.png">
       </div>
       <ion-title>
-        Apontamento de Materiais
+        Apontamento de Horas
       </ion-title>
     </ion-row>
   </ion-toolbar>
@@ -19,72 +19,72 @@
       <ion-item *ngFor="let entities of horas | filter: ordemId">
         <ion-grid>
 
-            <ion-row>
-                <ion-col size="5">
-                  <ion-label>Colaborador</ion-label>
-                </ion-col>
-                <ion-col size="7">
-                    <P class="custom"> {{ entities.colaborador }}</P>
-                </ion-col>
-             </ion-row>
+          <ion-row>
+            <ion-col size="5">
+              <ion-label>Colaborador</ion-label>
+            </ion-col>
+            <ion-col size="7">
+              <P class="custom"> {{ entities.colaborador }}</P>
+            </ion-col>
+          </ion-row>
 
-             <ion-row>
-                  <ion-col size="5">
-                    <ion-label>Descrição</ion-label>
-                  </ion-col>
-                  <ion-col size="7">
-                      <P class="custom"> {{ entities.descricao }}</P>
-                  </ion-col>
-              </ion-row>
+          <ion-row>
+            <ion-col size="5">
+              <ion-label>Descrição</ion-label>
+            </ion-col>
+            <ion-col size="7">
+              <P class="custom"> {{ entities.descricao }}</P>
+            </ion-col>
+          </ion-row>
 
-              <ion-row>
-                  <ion-col size="5">
-                    <ion-label>Data Inicial</ion-label>
-                  </ion-col>
-                  <ion-col size="7">
-                      <P class="custom"> {{ entities.data_inicial }}</P>
-                  </ion-col>
-              </ion-row>
-
-            
-              <ion-row>
-                  <ion-col size="5">
-                    <ion-label>Data Final</ion-label>
-                  </ion-col>
-                  <ion-col size="5">
-                      <P class="custom"> {{ entities.data_final }}</P>
-                  </ion-col>
-
-                  <ion-col size="2">
-                      <ion-button color="medium"  (click)="openModalUpdate(entities.id)">
-                          <ion-icon name="refresh"></ion-icon>
-                        </ion-button>
-                  </ion-col>
-              </ion-row>
+          <ion-row>
+            <ion-col size="5">
+              <ion-label>Data Inicial</ion-label>
+            </ion-col>
+            <ion-col size="7">
+              <P class="custom"> {{ entities.data_inicial }}</P>
+            </ion-col>
+          </ion-row>
 
 
-              <ion-row>
-                  <ion-col size="5">
-                    <ion-label>Status</ion-label>
-                  </ion-col>
-                  <ion-col size="5">
-                      <P class="custom"> {{ entities.status }}</P>
-                  </ion-col>
-                  <ion-col size="2">
-                        <ion-button color="medium" (click)="openConfirmRemove(entities.id)">
-                          <ion-icon name="trash"></ion-icon>
-                        </ion-button>
-                  </ion-col>
-              </ion-row>
+          <ion-row>
+            <ion-col size="5">
+              <ion-label>Data Final</ion-label>
+            </ion-col>
+            <ion-col size="5">
+              <P class="custom"> {{ entities.data_final }}</P>
+            </ion-col>
+
+            <ion-col size="2">
+              <ion-button color="medium" (click)="openModalUpdate(entities.id)">
+                <ion-icon name="refresh"></ion-icon>
+              </ion-button>
+            </ion-col>
+          </ion-row>
+
+
+          <ion-row>
+            <ion-col size="5">
+              <ion-label>Status</ion-label>
+            </ion-col>
+            <ion-col size="5">
+              <P class="custom"> {{ entities.status }}</P>
+            </ion-col>
+            <ion-col size="2">
+              <ion-button color="medium" (click)="openConfirmRemove(entities.id)">
+                <ion-icon name="trash"></ion-icon>
+              </ion-button>
+            </ion-col>
+          </ion-row>
 
         </ion-grid>
       </ion-item>
     </ion-list>
 
     <ion-fab horizontal="end" vertical="top" slot="fixed" edge>
-        <ion-fab-button (click)="openModalCreate()">
-          <ion-icon name="add"></ion-icon>
-        </ion-fab-button>
+      <ion-fab-button (click)="openModalCreate()">
+        <ion-icon name="add"></ion-icon>
+      </ion-fab-button>
     </ion-fab>
 
   </ng-container>
