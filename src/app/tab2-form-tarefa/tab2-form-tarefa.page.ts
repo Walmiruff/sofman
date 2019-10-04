@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
-import { ModalController } from '@ionic/angular';
+import { ModalController, Platform } from '@ionic/angular';
 import { Update } from '@ngrx/entity';
 import { Store, select } from '@ngrx/store';
 
+import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 
 import { ITarefa } from '../store/models/tarefa.model';
 import { AppState } from '../store/models/app-state.model';
@@ -17,19 +18,25 @@ import { FirebaseService } from '../shared/services/firebase.service';
   selector: 'app-tab2-form-tarefa',
   templateUrl: './tab2-form-tarefa.page.html',
   styleUrls: ['./tab2-form-tarefa.page.scss'],
+  providers:[
+    Camera
+  ]
 })
 export class Tab2FormTarefaPage implements OnInit {
 
   passedId = null;
   tarefaId = null;
+
   formulario: FormGroup;
   tarefas: ITarefa[];
-
+ public imagembase64: string;
   constructor(
     private modalController: ModalController,
     private formBuilder: FormBuilder,
     private store: Store<AppState>,
     private firebaseService: FirebaseService,
+    private platform: Platform,
+    private camera: Camera
   ) { }
 
   ngOnInit() {
@@ -38,25 +45,54 @@ export class Tab2FormTarefaPage implements OnInit {
     if (this.tarefaId !== null) {
       this.store.pipe(select(selectAllTarefas)).subscribe(tarefas => {
         this.tarefas = tarefas.filter(tarefas => tarefas.id == this.tarefaId);
+        this.imagembase64 = this.tarefas[0].imagem;
         this.formulario.patchValue({
           fk: this.tarefas[0].fk,
           tarefa: this.tarefas[0].tarefa,
           retorno: this.tarefas[0].retorno,
-          status: this.tarefas[0].status
-        });
-      }
-      )
-    }
+          status: this.tarefas[0].status,
 
+        });
+      });
+    }
   }
 
+  async selectImageInCamera() {
+    if (this.platform.is('cordova')) {
+      this.camera
+        .getPicture({
+          quality: 40,
+          allowEdit: true,
+          destinationType: this.camera.DestinationType.DATA_URL,
+          sourceType: this.camera.PictureSourceType.CAMERA,
+          encodingType: this.camera.EncodingType.PNG,
+          //saveToPhotoAlbum: true,
+          mediaType: this.camera.MediaType.PICTURE,
+          correctOrientation: true,
+          targetWidth: 600,
+          targetHeight: 600
+        })
+        .then(
+          imageData => {
+            // this.myPhoto = imageData;
+            const base64data = 'data:image/jpeg;base64,' + imageData;
+            this.imagembase64 = base64data;
+            alert('Foto ' + `<img src="this.imagembase64">`)
+          },
+          error => {
+            alert('ERROR -> ' + JSON.stringify(error));
+          }
+        );
+    }
+  }
   configurarFormulario() {
     this.formulario = this.formBuilder.group({
       id: [null],
       fk: [null],
       tarefa: [null],
       retorno: [null],
-      status: [null]
+      status: [null],
+      imagem: [null]
     });
   }
 

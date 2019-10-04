@@ -4,5 +4,6 @@ export interface ITarefa {
   tarefa: string;
   retorno: string | number;
   status: string | number;
+  imagem: string;
 
 }

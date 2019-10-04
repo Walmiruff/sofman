@@ -8,8 +8,6 @@
 
 
   <form [formGroup]="formulario" class="appointment-form2">
-
-
     <ion-list lines="full" class="ion-no-margin ion-no-padding">
 
       <ion-item>
@@ -28,6 +26,12 @@
         <ion-input type="text" formControlName="status" id="status"></ion-input>
       </ion-item>
 
+      <ion-item>
+        <ion-input type="imagem" formControlName="imagem" ></ion-input>
+        <ion-thumbnail>
+          <ion-img [src]="imagembase64" ></ion-img>
+        </ion-thumbnail>
+      </ion-item>
 
     </ion-list>
 

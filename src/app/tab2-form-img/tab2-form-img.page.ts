@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
-import { ModalController, ActionSheetController, Platform } from '@ionic/angular';
+import { ModalController, Platform } from '@ionic/angular';
 import { Update } from '@ngrx/entity';
 import { Store, select } from '@ngrx/store';
 import { AppState } from '../store/models/app-state.model';
@@ -10,7 +10,7 @@ import { IImg } from '../store/models/img.model';
 import { FirebaseService } from '../shared/services/firebase.service';
 
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
-import { MessageService } from '../shared/services/message.service';
+
 import { AngularFireStorage } from '@angular/fire/storage';
 import { finalize } from 'rxjs/operators';
 import { Observable } from 'rxjs';
