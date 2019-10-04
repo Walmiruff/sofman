@@ -49,14 +49,15 @@ export class LoginPage implements OnInit {
 
   async ngOnInit() {
     /** Fixar login usuario para envio de post... */
-    //const load = await this.message.loading();
+    const load = await this.message.loading();
     this.user = this.api.getCredentials().login;
     this.authorization = this.api.getCredentials().authorization;
 
-    // if (this.user) {
-    //   this.navctrl.navigateRoot(['/tabs/tab1'])
-    // }
-   // load.dismiss();
+    if (this.user) {
+     // this.login();
+      this.navctrl.navigateRoot(['/tabs/tab1']);
+    }
+    load.dismiss();
   }
 
   async login() {

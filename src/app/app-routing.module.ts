@@ -10,7 +10,7 @@ const routes: Routes = [
   {
     path: 'tabs',
     loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule),
-   // canActivate: [AuthGuard]
+    canActivate: [AuthGuard]
   },
   {
     path: 'login',
@@ -18,13 +18,16 @@ const routes: Routes = [
   },
   {
     path: 'tab-solicitacao',
-    loadChildren: './tab-solicitacao/tab-solicitacao.module#TabSolicitacaoPageModule'
+    loadChildren: './tab-solicitacao/tab-solicitacao.module#TabSolicitacaoPageModule', canActivate: [AuthGuard]
   },
   {
     path: 'tab-solicitacao-details/:id',
     loadChildren: './tab-solicitacao-details/tab-solicitacao-details.module#TabSolicitacaoDetailsPageModule'
   },
-  { path: 'tab-form-solicitacao', loadChildren: './tab-form-solicitacao/tab-form-solicitacao.module#TabFormSolicitacaoPageModule' },
+  { path: 'tab-form-solicitacao',
+  loadChildren: './tab-form-solicitacao/tab-form-solicitacao.module#TabFormSolicitacaoPageModule',
+  canActivate: [AuthGuard]
+},
   { path: 'asscliente', loadChildren: './modais/modal/asscliente/asscliente.module#AssclientePageModule' }
 ];
 @NgModule({

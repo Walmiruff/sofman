@@ -18,9 +18,9 @@ export class AuthGuard implements CanActivate {
   codigoUsuario: string;
 
   constructor(private router: Router, private api: ApiService) {
-    // if (this.api.getCredentials().iduser) {
-    //   this.codigoUsuario = api.getCredentials().iduser; // id do login do mySQL
-    // }
+    if (this.api.getCredentials().iduser) {
+      this.codigoUsuario = api.getCredentials().iduser; // id do login do mySQL
+    }
     console.log('CanGuard id user -> ' + api.getCredentials().iduser);
   }
 
@@ -36,12 +36,12 @@ export class AuthGuard implements CanActivate {
   }
 
   verificarAcesso() {
-    // if (this.codigoUsuario) {
-    //    this.router.navigate(['/tabs/tab1']);
-    //   return true;
-    // }
-    // this.router.navigate(['/login']);
-    // localStorage.removeItem('id');
+    if (this.codigoUsuario) {
+     //  this.router.navigate(['/tabs/tab1']);
+      return true;
+    }
+    this.router.navigate(['/login']);
+    localStorage.removeItem('id');
 
     return false;
   }

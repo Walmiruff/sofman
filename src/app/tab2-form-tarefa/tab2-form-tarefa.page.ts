@@ -57,34 +57,7 @@ export class Tab2FormTarefaPage implements OnInit {
     }
   }
 
-  async selectImageInCamera() {
-    if (this.platform.is('cordova')) {
-      this.camera
-        .getPicture({
-          quality: 40,
-          allowEdit: true,
-          destinationType: this.camera.DestinationType.DATA_URL,
-          sourceType: this.camera.PictureSourceType.CAMERA,
-          encodingType: this.camera.EncodingType.PNG,
-          //saveToPhotoAlbum: true,
-          mediaType: this.camera.MediaType.PICTURE,
-          correctOrientation: true,
-          targetWidth: 600,
-          targetHeight: 600
-        })
-        .then(
-          imageData => {
-            // this.myPhoto = imageData;
-            const base64data = 'data:image/jpeg;base64,' + imageData;
-            this.imagembase64 = base64data;
-            alert('Foto ' + `<img src="this.imagembase64">`)
-          },
-          error => {
-            alert('ERROR -> ' + JSON.stringify(error));
-          }
-        );
-    }
-  }
+
   configurarFormulario() {
     this.formulario = this.formBuilder.group({
       id: [null],
@@ -133,6 +106,55 @@ export class Tab2FormTarefaPage implements OnInit {
       dismissed: true
     });
   }
-
+  async selectImageInCamera() {
+    if (this.platform.is('cordova')) {
+      this.camera
+        .getPicture({
+          quality: 100,
+          allowEdit: true,
+          destinationType: this.camera.DestinationType.DATA_URL,
+          sourceType: this.camera.PictureSourceType.CAMERA,
+          encodingType: this.camera.EncodingType.PNG,
+          // saveToPhotoAlbum: true,
+          mediaType: this.camera.MediaType.PICTURE,
+          correctOrientation: true,
+          targetWidth: 600,
+          targetHeight: 600
+        })
+        .then(
+          imageData => {
+            // this.myPhoto = imageData;
+            const base64data = 'data:image/jpeg;base64,' + imageData;
+            this.imagembase64 = base64data;
+            const date = new Date().valueOf();
+            let text = '';
+            const possibleText = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+            for (let i = 0; i < 5; i++) {
+              text += possibleText.charAt(Math.floor(Math.random() *    possibleText.length));
+           }
+            //alert('Foto ' + `<img src="this.imagembase64">`)
+          },
+          error => {
+            alert('ERROR -> ' + JSON.stringify(error));
+          }
+        );
+    }
+  }
 
 }
+/*
+// Base64 url of image trimmed one without data:image/png;base64
+string base64="/9j/4AAQSkZJRgABAQE...";
+// Naming the image
+const date = new Date().valueOf();
+let text = '';
+const possibleText = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+for (let i = 0; i < 5; i++) {
+   text += possibleText.charAt(Math.floor(Math.random() *    possibleText.length));
+}
+// Replace extension according to your media type
+const imageName = date + '.' + text + '.jpeg';
+// call method that creates a blob from dataUri
+const imageBlob = this.dataURItoBlob(base64);
+const imageFile = new File([imageBlob], imageName, { type: 'image/jpeg' });
+*/
