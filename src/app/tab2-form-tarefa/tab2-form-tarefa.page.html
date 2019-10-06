@@ -28,12 +28,8 @@
 
       <ion-item>
         <ion-label position="stacked">Imagem</ion-label>
-        <ion-icon slot="start" style="font-size: 50px" name="star" (click)="selectImageInCamera()"></ion-icon>
-        <ion-input type="image" formControlName="imagem" value="{{imagembase64}}"></ion-input>
-
-        <ion-thumbnail *ngIf="imagembase64">
-          <ion-img [src]="imagembase64" ></ion-img>
-        </ion-thumbnail>
+        <ion-icon slot="start" style="font-size: 50px" name="camera" (click)="selectImageInCamera()"></ion-icon>
+        <ion-input type="image" formControlName="imagem" [value]="imagem" id="imagem"></ion-input>
       </ion-item>
 
     </ion-list>

@@ -1,7 +1,7 @@
 export const environment = {
- // api: 'http://localhost:3000/', // mudar para api mySql
-  api: 'http://10.0.0.92:3000/', // Acesso External IP Trampo...
- // api: 'http://192.168.25.113:3000/', // Acesso External // IP Home Andre
+  api: 'http://localhost:3000/', // mudar para api mySql
+  // api: 'http://10.0.0.92:3000/', // Acesso External IP Trampo...
+  //api: 'http://192.168.25.113:3000/', // Acesso External // IP Home Andre
 
   //api: 'https://posts.vix.br/apisoftman/index.php',
 

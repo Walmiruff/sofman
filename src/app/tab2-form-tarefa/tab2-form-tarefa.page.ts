@@ -12,13 +12,14 @@ import { UPDATETAREFA, ADDTAREFA } from '../store/actions/tarefas.action';
 import { selectAllTarefas } from '../store/selectors/tarefas.selectors';
 
 import { FirebaseService } from '../shared/services/firebase.service';
+import { DomSanitizer } from '@angular/platform-browser';
 
 
 @Component({
   selector: 'app-tab2-form-tarefa',
   templateUrl: './tab2-form-tarefa.page.html',
   styleUrls: ['./tab2-form-tarefa.page.scss'],
-  providers:[
+  providers: [
     Camera
   ]
 })
@@ -29,14 +30,16 @@ export class Tab2FormTarefaPage implements OnInit {
 
   formulario: FormGroup;
   tarefas: ITarefa[];
- public imagembase64: string;
+  public imagembase64: string;
+  public imagem: any;
   constructor(
     private modalController: ModalController,
     private formBuilder: FormBuilder,
     private store: Store<AppState>,
     private firebaseService: FirebaseService,
     private platform: Platform,
-    private camera: Camera
+    private camera: Camera,
+    private dms: DomSanitizer
   ) { }
 
   ngOnInit() {
@@ -45,7 +48,11 @@ export class Tab2FormTarefaPage implements OnInit {
     if (this.tarefaId !== null) {
       this.store.pipe(select(selectAllTarefas)).subscribe(tarefas => {
         this.tarefas = tarefas.filter(tarefas => tarefas.id == this.tarefaId);
-        this.imagembase64 = this.tarefas[0].imagem;
+
+        this.imagem = this.tarefas[0].imagem
+
+        console.log(`Imagem apos formulario `, this.imagem);
+
         this.formulario.patchValue({
           fk: this.tarefas[0].fk,
           tarefa: this.tarefas[0].tarefa,
@@ -108,38 +115,45 @@ export class Tab2FormTarefaPage implements OnInit {
   }
   async selectImageInCamera() {
     if (this.platform.is('cordova')) {
+      const options: CameraOptions = {
+        quality: 40,
+        allowEdit: true,
+        destinationType: this.camera.DestinationType.DATA_URL,
+        sourceType: this.camera.PictureSourceType.CAMERA,
+        encodingType: this.camera.EncodingType.JPEG,
+        saveToPhotoAlbum: true,
+
+        // destinationType: this.camera.DestinationType.DATA_URL,
+        // sourceType: this.camera.PictureSourceType.CAMERA,
+        // encodingType: this.camera.EncodingType.PNG,
+        mediaType: this.camera.MediaType.PICTURE,
+        correctOrientation: true,
+        targetWidth: 600,
+        targetHeight: 600
+      }
       this.camera
-        .getPicture({
-          quality: 100,
-          allowEdit: true,
-          destinationType: this.camera.DestinationType.DATA_URL,
-          sourceType: this.camera.PictureSourceType.CAMERA,
-          encodingType: this.camera.EncodingType.PNG,
-          // saveToPhotoAlbum: true,
-          mediaType: this.camera.MediaType.PICTURE,
-          correctOrientation: true,
-          targetWidth: 600,
-          targetHeight: 600
-        })
-        .then(
-          imageData => {
-            // this.myPhoto = imageData;
-            const base64data = 'data:image/jpeg;base64,' + imageData;
-            this.imagembase64 = base64data;
-            const date = new Date().valueOf();
-            let text = '';
-            const possibleText = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-            for (let i = 0; i < 5; i++) {
-              text += possibleText.charAt(Math.floor(Math.random() *    possibleText.length));
-           }
-            //alert('Foto ' + `<img src="this.imagembase64">`)
-          },
-          error => {
-            alert('ERROR -> ' + JSON.stringify(error));
-          }
-        );
+        .getPicture(options)
+        .then((imageData) => {
+          // this.imagem = imageData;
+          const base64data = 'data:image/jpeg;base64,' + imageData;
+          this.imagem = base64data;
+
+        }).catch(err => console.log(err));
     }
   }
+  display(b64: string) {
+    return this.dms.bypassSecurityTrustUrl('data:image/jpeg;base64,' + b64);
+  }
+  // dataURItoBlob(dataURI) {
+  //   const byteString = window.atob(dataURI);
+  //   const arrayBuffer = new ArrayBuffer(byteString.length);
+  //   const int8Array = new Uint8Array(arrayBuffer);
+  //   for (let i = 0; i < byteString.length; i++) {
+  //     int8Array[i] = byteString.charCodeAt(i);
+  //   }
+  //   const blob = new Blob([int8Array], { type: 'image/jpeg' });
+  //   return blob;
+  // }
 
 }
 /*
