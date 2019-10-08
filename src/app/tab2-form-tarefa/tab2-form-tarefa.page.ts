@@ -123,6 +123,7 @@ export class Tab2FormTarefaPage implements OnInit {
         encodingType: this.camera.EncodingType.JPEG,
         saveToPhotoAlbum: true,
 
+
         // destinationType: this.camera.DestinationType.DATA_URL,
         // sourceType: this.camera.PictureSourceType.CAMERA,
         // encodingType: this.camera.EncodingType.PNG,
