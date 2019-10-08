@@ -14,17 +14,13 @@ import { selectAllTarefas } from '../store/selectors/tarefas.selectors';
 import { FirebaseService } from '../shared/services/firebase.service';
 import { DomSanitizer } from '@angular/platform-browser';
 
-
 @Component({
   selector: 'app-tab2-form-tarefa',
   templateUrl: './tab2-form-tarefa.page.html',
   styleUrls: ['./tab2-form-tarefa.page.scss'],
-  providers: [
-    Camera
-  ]
+  providers: [Camera]
 })
 export class Tab2FormTarefaPage implements OnInit {
-
   passedId = null;
   tarefaId = null;
 
@@ -40,30 +36,26 @@ export class Tab2FormTarefaPage implements OnInit {
     private platform: Platform,
     private camera: Camera,
     private dms: DomSanitizer
-  ) { }
+  ) {}
 
   ngOnInit() {
-    console.log(this.passedId, this.tarefaId)
+    console.log(this.passedId, this.tarefaId);
     this.configurarFormulario();
     if (this.tarefaId !== null) {
       this.store.pipe(select(selectAllTarefas)).subscribe(tarefas => {
         this.tarefas = tarefas.filter(tarefas => tarefas.id == this.tarefaId);
 
-        this.imagem = this.tarefas[0].imagem
-
-        console.log(`Imagem apos formulario `, this.imagem);
+        this.imagem = this.tarefas[0].imagem;
 
         this.formulario.patchValue({
           fk: this.tarefas[0].fk,
           tarefa: this.tarefas[0].tarefa,
           retorno: this.tarefas[0].retorno,
-          status: this.tarefas[0].status,
-
+          status: this.tarefas[0].status
         });
       });
     }
   }
-
 
   configurarFormulario() {
     this.formulario = this.formBuilder.group({
@@ -76,19 +68,15 @@ export class Tab2FormTarefaPage implements OnInit {
     });
   }
 
-
   send() {
-
     this.formulario.patchValue({
       fk: this.passedId
-    })
+    });
 
     if (this.tarefaId !== null) {
-
       this.formulario.patchValue({
         id: this.tarefaId
-      })
-
+      });
 
       const changes = this.formulario.value;
       const tarefa: Update<ITarefa> = {
@@ -97,7 +85,6 @@ export class Tab2FormTarefaPage implements OnInit {
       };
       this.firebaseService.crudFirebase(this.formulario.value, 'tarefa-update');
       this.store.dispatch(new UPDATETAREFA({ tarefa: tarefa }));
-
     } else {
       this.formulario.patchValue({
         id: new Date().getUTCMilliseconds().toString()
@@ -123,7 +110,6 @@ export class Tab2FormTarefaPage implements OnInit {
         encodingType: this.camera.EncodingType.JPEG,
         saveToPhotoAlbum: true,
 
-
         // destinationType: this.camera.DestinationType.DATA_URL,
         // sourceType: this.camera.PictureSourceType.CAMERA,
         // encodingType: this.camera.EncodingType.PNG,
@@ -131,15 +117,15 @@ export class Tab2FormTarefaPage implements OnInit {
         correctOrientation: true,
         targetWidth: 600,
         targetHeight: 600
-      }
+      };
       this.camera
         .getPicture(options)
-        .then((imageData) => {
+        .then(imageData => {
           // this.imagem = imageData;
           const base64data = 'data:image/jpeg;base64,' + imageData;
           this.imagem = base64data;
-
-        }).catch(err => console.log(err));
+        })
+        .catch(err => console.log(err));
     }
   }
   display(b64: string) {
@@ -155,7 +141,6 @@ export class Tab2FormTarefaPage implements OnInit {
   //   const blob = new Blob([int8Array], { type: 'image/jpeg' });
   //   return blob;
   // }
-
 }
 /*
 // Base64 url of image trimmed one without data:image/png;base64

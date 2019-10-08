@@ -27,17 +27,20 @@
       </ion-item>
 
       <ion-item>
-        <ion-label position="stacked">Imagem</ion-label>
-        <ion-icon slot="start" style="font-size: 50px" name="camera" (click)="selectImageInCamera()"></ion-icon>
-        <ion-input type="image" formControlName="imagem" [value]="imagem" id="imagem"></ion-input>
+        <ion-input type="text" readonly=true formControlName="imagem" value="{{imagem}}" id="imagem"></ion-input>
       </ion-item>
 
     </ion-list>
-
     <div class="ion-padding">
       <ion-button expand="block" (click)="send()" class="ion-no-margin">Salvar</ion-button>
     </div>
 
   </form>
+  <ion-card class="ion-padding">
+    <ion-label position="stacked">Imagem</ion-label>
+    <ion-icon slot="start" style="font-size: 50px" name="camera" (click)="selectImageInCamera()"></ion-icon>
+    <ion-img [src]="imagem" id="imagem"></ion-img>
+
+  </ion-card>
 
 </ion-content>
