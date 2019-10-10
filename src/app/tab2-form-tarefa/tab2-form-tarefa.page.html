@@ -37,10 +37,11 @@
 
   </form>
   <ion-card class="ion-padding">
-    <ion-label position="stacked">Imagem</ion-label>
-    <ion-icon slot="start" style="font-size: 50px" name="camera" (click)="selectImageInCamera()"></ion-icon>
+    <ion-label position="stacked">Imagem
+        <ion-icon slot="start" style="font-size: 50px" name="camera" (click)="selectImageInCamera()"></ion-icon>
+    </ion-label>
+    
     <ion-img [src]="imagem" id="imagem"></ion-img>
-
   </ion-card>
 
 </ion-content>

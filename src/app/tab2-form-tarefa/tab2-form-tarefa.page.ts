@@ -51,7 +51,8 @@ export class Tab2FormTarefaPage implements OnInit {
           fk: this.tarefas[0].fk,
           tarefa: this.tarefas[0].tarefa,
           retorno: this.tarefas[0].retorno,
-          status: this.tarefas[0].status
+          status: this.tarefas[0].status,
+          imagem: this.tarefas[0].imagem
         });
       });
     }
@@ -102,9 +103,10 @@ export class Tab2FormTarefaPage implements OnInit {
   }
   async selectImageInCamera() {
     if (this.platform.is('cordova')) {
+      
       const options: CameraOptions = {
-        quality: 40,
-        allowEdit: true,
+        quality: 70,
+        //allowEdit: true,
         destinationType: this.camera.DestinationType.DATA_URL,
         sourceType: this.camera.PictureSourceType.CAMERA,
         encodingType: this.camera.EncodingType.JPEG,

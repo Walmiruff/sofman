@@ -92,7 +92,6 @@
     <ion-label *ngIf="signaturecliente">
       Ass. Cliente:
       <ion-img [src]="signaturecliente"></ion-img>
-
     </ion-label>
     <br>
     <ion-label *ngIf="signaturefuncionario">
@@ -101,26 +100,22 @@
     </ion-label>
 
     <ion-grid>
-      <ion-row>
-        <ion-col>
-          <ion-label slot="start"> Ass. Cliente:</ion-label>
-        </ion-col>
-      </ion-row>
       <ion-row [ngClass]="{'drawing-active': isDrawing, 'esconder': showAssinatura}">
-
         <ion-col>
+            <ion-label slot="start"> Ass. Cliente:</ion-label>
           <signature-pad #Assinaturacliente [options]="signaturePadOptions" (onBeginEvent)="drawStartClient()"
             (onEndEvent)="drawCompleteClient()">
           </signature-pad>
+          <ion-input type="text" readonlye formControlName="signaturecliente" [value]="signaturecliente" name="signaturecliente">
+            </ion-input>
         </ion-col>
-        <ion-col>
-          <ion-button color="danger" (click)="clearPadClient()">Limpar</ion-button>
-          <ion-button color="secondary" (click)="savePadClient()">Salvar</ion-button>
-        </ion-col>
-        <ion-col width-100>
-          <ion-input type="image" formControlName="signaturecliente" [value]="signaturecliente" name="signaturecliente">
-          </ion-input>
-        </ion-col>
+        <ion-row>
+            <ion-button color="danger" (click)="clearPadClient()">Limpar</ion-button>
+            <ion-button color="secondary" (click)="savePadClient()">Salvar</ion-button>
+          
+        </ion-row>
+         
+        
         <!-- <ion-img *ngIf="signaturecliente" [src]="signaturecliente"></ion-img> -->
       </ion-row>
     </ion-grid>

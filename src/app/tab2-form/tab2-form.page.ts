@@ -62,7 +62,7 @@ export class Tab2FormPage implements OnInit {
         console.log(JSON.stringify(ordens))
         this.ordens = ordens.filter(ordens => ordens.id == this.passedId);
         this.signaturefuncionario = this.ordens[0].signaturefuncionario,
-          this.signaturecliente = this.ordens[0].signaturecliente
+        this.signaturecliente = this.ordens[0].signaturecliente;
         this.formulario.patchValue({
 
           filial: this.ordens[0].filial,
@@ -78,6 +78,8 @@ export class Tab2FormPage implements OnInit {
           observacao: this.ordens[0].observacao,
           status_da_os: this.ordens[0].status_da_os,
           message: this.ordens[0].message,
+          signaturefuncionario: this.ordens[0].signaturefuncionario,
+          signaturecliente: this.ordens[0].signaturecliente
 
         });
       });
