@@ -36,12 +36,9 @@
     </div>
 
   </form>
-  <ion-card class="ion-padding">
-    <ion-label position="stacked">Imagem
-        <ion-icon slot="start" style="font-size: 50px" name="camera" (click)="selectImageInCamera()"></ion-icon>
-    </ion-label>
-    
-    <ion-img [src]="imagem" id="imagem"></ion-img>
+  <ion-card class="ion-text-center"><ion-label> <ion-icon style="font-size: 50px" name="camera" (click)="selectImageInCamera()"></ion-icon></ion-label> 
+    <ion-card-subtitle *ngIf="imagem" class="ion-padding"> Imagem:  </ion-card-subtitle>
+     <ion-img class="ion-padding" [src]="imagem" id="imagem"></ion-img>
   </ion-card>
 
 </ion-content>

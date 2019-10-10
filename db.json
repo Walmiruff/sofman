@@ -199,35 +199,40 @@
       "fk": 1,
       "tarefa": "Efetuar limpeza dos evaporadores",
       "retorno": 0,
-      "status": 2
+      "status": 2,
+      "imagem": ""
     },
     {
       "id": 2,
       "fk": 2,
       "tarefa": "Efetuar limpeza dos evaporadores",
       "retorno": 0,
-      "status": 2
+      "status": 2,
+      "imagem": ""
     },
     {
       "id": 3,
       "fk": 3,
       "tarefa": "Efetuar limpeza dos evaporadores",
       "retorno": 0,
-      "status": 2
+      "status": 2,
+      "imagem": ""
     },
     {
       "id": 4,
       "fk": 1,
       "tarefa": "Efetuar limpeza dos evaporadores",
       "retorno": 0,
-      "status": 2
+      "status": 2,
+      "imagem": ""
     },
     {
       "id": 5,
       "fk": 1,
       "tarefa": "Efetuar limpeza dos evaporadores",
       "retorno": 0,
-      "status": 2
+      "status": 2,
+      "imagem": ""
     }
   ],
   "img": [

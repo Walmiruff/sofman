@@ -9,18 +9,13 @@
         <ion-back-button defaultHref="tabs/tab1"></ion-back-button>
       </ion-buttons> -->
     </ion-buttons>
-    <ion-title>{{title}}</ion-title>
+    <ion-title>{{ title }}</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
-
   <form [formGroup]="formulario" class="appointment-form2">
-
-
     <ion-list lines="full" class="ion-no-margin ion-no-padding">
-
       <ion-item>
         <ion-label position="stacked">Filial</ion-label>
         <ion-input type="text" formControlName="filial" id="filial"></ion-input>
@@ -33,139 +28,197 @@
 
       <ion-item>
         <ion-label position="stacked">Data</ion-label>
-        <ion-datetime displayFormat="DD MM YYYY" formControlName="data" id="data"></ion-datetime>
+        <ion-datetime
+          displayFormat="DD MM YYYY"
+          formControlName="data"
+          id="data"
+        ></ion-datetime>
       </ion-item>
 
       <ion-item>
         <ion-label position="stacked">Equipamento</ion-label>
-        <ion-input type="text" formControlName="equipamento" id="equipamento"></ion-input>
+        <ion-input
+          type="text"
+          formControlName="equipamento"
+          id="equipamento"
+        ></ion-input>
       </ion-item>
 
       <ion-item>
         <ion-label position="stacked">Tipo MNT</ion-label>
-        <ion-input type="text" formControlName="tipo_de_mnt" id="tipo_de_mnt"></ion-input>
+        <ion-input
+          type="text"
+          formControlName="tipo_de_mnt"
+          id="tipo_de_mnt"
+        ></ion-input>
       </ion-item>
 
       <ion-item>
         <ion-label position="stacked">Descrição</ion-label>
-        <ion-input type="text" formControlName="descricao" id="descricao"></ion-input>
+        <ion-input
+          type="text"
+          formControlName="descricao"
+          id="descricao"
+        ></ion-input>
       </ion-item>
 
       <ion-item>
         <ion-label position="stacked">Solicitante</ion-label>
-        <ion-input type="text" formControlName="solicitante" id="solicitante"></ion-input>
+        <ion-input
+          type="text"
+          formControlName="solicitante"
+          id="solicitante"
+        ></ion-input>
       </ion-item>
 
       <ion-item>
         <ion-label position="stacked">Data Prog</ion-label>
-        <ion-datetime displayFormat="DD MM YYYY HH:mm" formControlName="data_prog" id="data_prog"></ion-datetime>
+        <ion-datetime
+          displayFormat="DD MM YYYY HH:mm"
+          formControlName="data_prog"
+          id="data_prog"
+        ></ion-datetime>
       </ion-item>
 
       <ion-item>
         <ion-label position="stacked">Data Solic</ion-label>
-        <ion-datetime displayFormat="DD MM YYYY HH:mm" formControlName="data_solic" id="data_solic"></ion-datetime>
+        <ion-datetime
+          displayFormat="DD MM YYYY HH:mm"
+          formControlName="data_solic"
+          id="data_solic"
+        ></ion-datetime>
       </ion-item>
 
       <ion-item>
         <ion-label position="stacked">Setor Solic</ion-label>
-        <ion-input type="text" formControlName="setor_solic" id="setor_solic"></ion-input>
+        <ion-input
+          type="text"
+          formControlName="setor_solic"
+          id="setor_solic"
+        ></ion-input>
       </ion-item>
 
       <ion-item>
         <ion-label position="stacked">Observações</ion-label>
-        <ion-textarea formControlName="observacao" id="observacao"></ion-textarea>
+        <ion-textarea
+          formControlName="observacao"
+          id="observacao"
+        ></ion-textarea>
       </ion-item>
 
       <ion-item>
         <ion-label position="stacked">Status OS</ion-label>
-        <ion-input type="text" formControlName="status_da_os" id="status_da_os"></ion-input>
+        <ion-input
+          type="text"
+          formControlName="status_da_os"
+          id="status_da_os"
+        ></ion-input>
       </ion-item>
-
     </ion-list>
 
     <ion-item>
       <ion-label position="stacked">Assinar Ordem</ion-label>
-      <ion-toggle slot="end" color="tertiary" (ionChange)="checkValue($event)" value="yes"></ion-toggle>
+      <ion-toggle
+        slot="end"
+        color="tertiary"
+        (ionChange)="checkValue($event)"
+        value="yes"
+      ></ion-toggle>
     </ion-item>
+ 
 
-    <br>
-    <ion-label *ngIf="signaturecliente">
-      Ass. Cliente:
-      <ion-img [src]="signaturecliente"></ion-img>
-    </ion-label>
-    <br>
-    <ion-label *ngIf="signaturefuncionario">
-      Ass. Funcionário:
-      <ion-img [src]="signaturefuncionario"></ion-img>
-    </ion-label>
+    <ion-card class="ion-no-padding" [ngClass]="{ 'drawing-active': isDrawing, esconder: showAssinatura }">
+        <ion-grid>
+            <ion-row>
+            <ion-col>Ass:. Cliente :</ion-col>
+            <ion-col size="12">
+              <signature-pad
+              #Assinaturacliente
+              [options]="signaturePadOptions"
+              (onBeginEvent)="drawStartClient()"
+              (onEndEvent)="drawCompleteClient()"
+              >
+              </signature-pad>
+              <ion-input
+              hidden
+            type="text"
+            readonlye
+            formControlName="signaturecliente"
+            [value]="signaturecliente"
+            name="signaturecliente"
+              ></ion-input>
+            </ion-col>    
+                </ion-row>
+            <ion-row color="medium">
+                <ion-col size="4"> <ion-button expand="block" size="small" color="danger" (click)="clearPadClient()"
+                 >Limpar</ion-button
+               ></ion-col>
+                <ion-col size="4"> </ion-col>
 
-    <ion-grid>
-      <ion-row [ngClass]="{'drawing-active': isDrawing, 'esconder': showAssinatura}">
-        <ion-col>
-            <ion-label slot="start"> Ass. Cliente:</ion-label>
-          <signature-pad #Assinaturacliente [options]="signaturePadOptions" (onBeginEvent)="drawStartClient()"
-            (onEndEvent)="drawCompleteClient()">
-          </signature-pad>
-          <ion-input type="text" readonlye formControlName="signaturecliente" [value]="signaturecliente" name="signaturecliente">
-            </ion-input>
-        </ion-col>
-        <ion-row>
-            <ion-button color="danger" (click)="clearPadClient()">Limpar</ion-button>
-            <ion-button color="secondary" (click)="savePadClient()">Salvar</ion-button>
-          
-        </ion-row>
-         
-        
-        <!-- <ion-img *ngIf="signaturecliente" [src]="signaturecliente"></ion-img> -->
-      </ion-row>
-    </ion-grid>
+                <ion-col size="4">  <ion-button expand="block" size="small" color="secondary" (click)="savePadClient()"
+                 >Salvar</ion-button
+               > </ion-col>
+              </ion-row>
+        </ion-grid>
+     
+     </ion-card>
 
-
-    <!--  Inicio func
-
-    <ion-row [ngClass]="{'drawing-active': isDrawing, 'esconder2': showAssinatura}">
-      <ion-label slot="start"> Ass. Funcionário:</ion-label>
-      <ion-col>
-        <signature-pad #Assfuncionario [options]="signaturePadOptions" (onBeginEvent)="drawStartFunc()"
-          (onEndEvent)="drawCompleteFunc()">
-        </signature-pad>
-      </ion-col>
-      <ion-col>
-        <ion-button color="danger" (click)="clearPadFunc()">Limpar</ion-button>
-        <ion-button color="secondary" (click)="savePadFunc()">Salvar</ion-button>
-      </ion-col>
-
-      <ion-col width-100>
-        <ion-input type="image" formControlName="signaturefuncionario" [value]="signaturefuncionario"
-          name="signaturefuncionario">
-        </ion-input>
-      </ion-col>
-    </ion-row>-->
+ 
 
 
-    <!--  -->
 
-    <ion-row [ngClass]="{'drawing-active': isDrawing, 'esconder2': showAssinatura}">
-      <ion-col>Ass. Funcionário</ion-col>
-      <ion-col>
-        <signature-pad #Assfuncionario [options]="signaturePadOptions" (onBeginEvent)="drawStartFunc()"
-          (onEndEvent)="drawCompleteFunc()">
-        </signature-pad>
-      </ion-col>
-      <ion-col>
-        <ion-button color="danger" (click)="clearPadFunc()">Limpar</ion-button>
-        <ion-button color="secondary" (click)="savePadFunc()">Salvar</ion-button>
-      </ion-col>
-      <ion-col width-100>
-        <ion-input type="image" formControlName="signaturefuncionario" [value]="signaturefuncionario"
-          id="signaturefuncionario"></ion-input>
-      </ion-col>
-    </ion-row>
+    <ion-card class="ion-no-padding" [ngClass]="{ 'drawing-active': isDrawing, esconder2: showAssinatura }">
+          <ion-grid>
+              <ion-row>
+              <ion-col>Ass:. Funcionário :</ion-col>
+              <ion-col size="12">
+                <signature-pad
+                  #Assfuncionario
+                  [options]="signaturePadOptions"
+                  (onBeginEvent)="drawStartFunc()"
+                  (onEndEvent)="drawCompleteFunc()"
+                >
+                </signature-pad>
+                <ion-input
+                  hidden
+                  type="text"
+                  readonlye
+                  formControlName="signaturefuncionario"
+                  [value]="signaturefuncionario"
+                  id="signaturefuncionario"
+                ></ion-input>
+              </ion-col>    
+                  </ion-row>
+              <ion-row color="medium">
+                  <ion-col size="4"> <ion-button expand="block" size="small" color="danger" (click)="clearPadFunc()"
+                   >Limpar</ion-button
+                 ></ion-col>
+                  <ion-col size="4"> </ion-col>
+
+                  <ion-col size="4">  <ion-button expand="block" size="small" color="secondary" (click)="savePadFunc()"
+                   >Salvar</ion-button
+                 > </ion-col>
+                </ion-row>
+          </ion-grid>
+       
+       </ion-card>
+
+
+
+    <ion-card color="success" *ngIf="signaturecliente">
+      <ion-card-subtitle class="ion-padding">Ass: Cliente</ion-card-subtitle>
+        <img [src]="signaturecliente"> 
+    </ion-card>
+    <ion-card color="warning" *ngIf="signaturefuncionario">
+        <ion-card-subtitle class="ion-padding">Ass: Funcionário</ion-card-subtitle>
+          <img [src]="signaturefuncionario"> 
+      </ion-card>
+
 
     <div class="ion-padding">
-      <ion-button expand="block" (click)="sendOrdem()" class="ion-no-margin">Salvar</ion-button>
+      <ion-button expand="block" (click)="sendOrdem()" class="ion-no-margin"
+        >Salvar</ion-button
+      >
     </div>
-
   </form>
-
 </ion-content>

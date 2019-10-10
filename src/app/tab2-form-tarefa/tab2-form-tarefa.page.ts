@@ -103,60 +103,25 @@ export class Tab2FormTarefaPage implements OnInit {
   }
   async selectImageInCamera() {
     if (this.platform.is('cordova')) {
-      
-      const options: CameraOptions = {
-        quality: 70,
-        //allowEdit: true,
+       const options: CameraOptions = {
+        quality: 70, 
         destinationType: this.camera.DestinationType.DATA_URL,
         sourceType: this.camera.PictureSourceType.CAMERA,
         encodingType: this.camera.EncodingType.JPEG,
         saveToPhotoAlbum: true,
-
-        // destinationType: this.camera.DestinationType.DATA_URL,
-        // sourceType: this.camera.PictureSourceType.CAMERA,
-        // encodingType: this.camera.EncodingType.PNG,
         mediaType: this.camera.MediaType.PICTURE,
         correctOrientation: true,
         targetWidth: 600,
         targetHeight: 600
       };
-      this.camera
+       this.camera
         .getPicture(options)
         .then(imageData => {
-          // this.imagem = imageData;
           const base64data = 'data:image/jpeg;base64,' + imageData;
-          this.imagem = base64data;
+          return this.imagem = base64data;
         })
         .catch(err => console.log(err));
     }
   }
-  display(b64: string) {
-    return this.dms.bypassSecurityTrustUrl('data:image/jpeg;base64,' + b64);
-  }
-  // dataURItoBlob(dataURI) {
-  //   const byteString = window.atob(dataURI);
-  //   const arrayBuffer = new ArrayBuffer(byteString.length);
-  //   const int8Array = new Uint8Array(arrayBuffer);
-  //   for (let i = 0; i < byteString.length; i++) {
-  //     int8Array[i] = byteString.charCodeAt(i);
-  //   }
-  //   const blob = new Blob([int8Array], { type: 'image/jpeg' });
-  //   return blob;
-  // }
 }
-/*
-// Base64 url of image trimmed one without data:image/png;base64
-string base64="/9j/4AAQSkZJRgABAQE...";
-// Naming the image
-const date = new Date().valueOf();
-let text = '';
-const possibleText = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-for (let i = 0; i < 5; i++) {
-   text += possibleText.charAt(Math.floor(Math.random() *    possibleText.length));
-}
-// Replace extension according to your media type
-const imageName = date + '.' + text + '.jpeg';
-// call method that creates a blob from dataUri
-const imageBlob = this.dataURItoBlob(base64);
-const imageFile = new File([imageBlob], imageName, { type: 'image/jpeg' });
-*/
+ 
