@@ -6,28 +6,34 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class ApiService {
+
+  private urlLogin = environment.api + 'users/autentication';
+
   public url: string = environment.api;
   public header;
-  constructor(public http: HttpClient) { }
-
-  login(endpoint: string, body: any) {
-    const headers = new HttpHeaders();
-    headers.set('Accept', 'application/json');
-    headers.set('Content-Type', 'application/json');
-
-    return this.http.post(this.url + endpoint + body, { headers });
+  constructor(public http: HttpClient) {  }
+ 
+  postLogin(body: any, reqOpts?: any) {
+    this.header = new HttpHeaders();
+    this.header.append('Access-Control-Allow-Origin', '*');
+    this.header.append('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, PUT');
+    this.header.append('Accept', 'application/json');
+    this.header.append('Content-Type', 'application/json');
+    return this.http.post(this.urlLogin, body, {
+      headers: this.header
+    });
   }
 
   getJson(url) {
     return this.http.get(url);
   }
 
-  setCredentials(id, login: string, nome: string, email: string, authorization: string, tipoacesso) {
+  setCredentials(id, login: string, nome: string, email: string, blocked: string, tipoacesso) {
     localStorage.setItem('id', id);
     localStorage.setItem('login', login);
     localStorage.setItem('nome', nome);
     localStorage.setItem('email', email);
-    localStorage.setItem('authorization', authorization);
+    localStorage.setItem('blocked', blocked);
     localStorage.setItem('tipoacesso', tipoacesso);
 
   }
@@ -39,7 +45,7 @@ export class ApiService {
       name: localStorage.getItem('nome'),
       email: localStorage.getItem('email'),
       pass: localStorage.getItem('pass'),
-      authorization: localStorage.getItem('authorization'),
+      blocked: localStorage.getItem('blocked'),
       tipoacesso: localStorage.getItem('tipoacesso'),
     };
   }

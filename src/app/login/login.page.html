@@ -2,25 +2,25 @@
 
   <ion-content fullscreen>
 
-
-    <form [formGroup]="form" (ngSubmit)="login()">
+    <form [formGroup]="form" (ngSubmit)="login(form.value)">
+    
 
       <div class="container">
         <img src="assets/img/logo.png">
       </div>
-
+    
 
       <ion-list lines="full" class="ion-no-margin ion-no-padding">
         <ion-item>
           <ion-label position="stacked">Login <ion-text color="danger">*</ion-text>
           </ion-label>
-          <ion-input required formControlName="login" value="{{api.getCredentials().login}}" type="text"></ion-input>
+          <ion-input required formControlName="usuario" type="text"></ion-input>
         </ion-item>
 
         <ion-item>
           <ion-label position="stacked">Senha <ion-text color="danger">*</ion-text>
           </ion-label>
-          <ion-input required formControlName="senha" value="{{api.getCredentials().authorization}}" type="{{ type }}">
+          <ion-input required formControlName="senha" type="{{ type }}">
 
           </ion-input>
           <ion-button slot="end" class="eye" *ngIf="showPass" (click)="showPassword()" fill="clear">
@@ -33,13 +33,13 @@
         </ion-item>
 
 
+      </ion-list>
+
         <div class="ion-padding">
           <!-- <ion-button [routerLink]="[ '/tabs/tab1' ]" expand="block"   class="ion-no-margin">Entrar
           </ion-button> -->
 
-          <ion-button expand="block" type="submit" class="ion-no-margin">Entrar
-          </ion-button>
+          <ion-button expand="block" type="submit" class="ion-no-margin">Entrar          </ion-button>
         </div>
-      </ion-list>
     </form>
   </ion-content>

@@ -22,9 +22,11 @@ import { Observable } from 'rxjs';
   providers: [Camera]
 })
 export class Tab2FormImgPage implements OnInit {
-  public myPhoto: any;
-  public myPhotoURL: any;
-  public myPorcents: Observable<number>;
+  // public myPhoto: any;
+  // public myPhotoURL: any;
+  // public myPorcents: Observable<number>;
+  public imagembase64: string;
+  public imagem: any;
 
   passedId = null;
   imgId = null;
@@ -52,6 +54,7 @@ export class Tab2FormImgPage implements OnInit {
 
       this.store.pipe(select(selectAllImgs)).subscribe(imgs => {
         this.imgs = imgs.filter(imgs => imgs.id == this.imgId);
+        this.imagem = this.imgs[0].url;
 
         this.formulario.patchValue({
           fk: this.imgs[0].fk,
@@ -103,57 +106,79 @@ export class Tab2FormImgPage implements OnInit {
     });
   }
 
+  // async selectImageInCamera() {
+  //   if (this.platform.is('cordova')) {
+  //     this.camera
+  //       .getPicture({
+  //         quality: 40,
+  //         allowEdit: true,
+  //         destinationType: this.camera.DestinationType.DATA_URL,
+  //         sourceType: this.camera.PictureSourceType.CAMERA,
+  //         encodingType: this.camera.EncodingType.JPEG,
+  //         saveToPhotoAlbum: true, 
+  //         mediaType: this.camera.MediaType.PICTURE,
+  //         correctOrientation: true,
+  //         targetWidth: 600,
+  //         targetHeight: 600
+  //       })
+  //       .then(
+  //         imageData => {
+  //           this.myPhoto = imageData;
+  //           const base64data = 'data:image/jpeg;base64,' + imageData;
+  //           this.foto = base64data;
+  //           this.uploadPhoto();
+  //         },
+  //         error => {
+  //           alert('ERROR -> ' + JSON.stringify(error));
+  //         }
+  //       );
+  //   }
+  // }
   async selectImageInCamera() {
     if (this.platform.is('cordova')) {
-      this.camera
-        .getPicture({
-          quality: 40,
-          allowEdit: true,
-          destinationType: this.camera.DestinationType.DATA_URL,
-          sourceType: this.camera.PictureSourceType.CAMERA,
-          encodingType: this.camera.EncodingType.JPEG,
-          saveToPhotoAlbum: true, 
-          mediaType: this.camera.MediaType.PICTURE,
-          correctOrientation: true,
-          targetWidth: 600,
-          targetHeight: 600
+       const options: CameraOptions = {
+        quality: 70, 
+        destinationType: this.camera.DestinationType.DATA_URL,
+        sourceType: this.camera.PictureSourceType.CAMERA,
+        encodingType: this.camera.EncodingType.JPEG,
+        saveToPhotoAlbum: true,
+        mediaType: this.camera.MediaType.PICTURE,
+        correctOrientation: true,
+        targetWidth: 600,
+        targetHeight: 600
+      };
+       this.camera
+        .getPicture(options)
+        .then(imageData => {
+          const base64data = 'data:image/jpeg;base64,' + imageData;
+          return this.imagem = base64data;
         })
-        .then(
-          imageData => {
-            this.myPhoto = imageData;
-            const base64data = 'data:image/jpeg;base64,' + imageData;
-            this.foto = base64data;
-            this.uploadPhoto();
-          },
-          error => {
-            alert('ERROR -> ' + JSON.stringify(error));
-          }
-        );
+        .catch(err => console.log(err));
     }
   }
 
-  private uploadPhoto(): void {
-    const ref = this.afstore
-      .ref('/SofmanOrdensImg/')
-      .child(this.generateUUID())
-      .child('Sofman.png');
+  // private uploadPhoto(): void {
+  //   const ref = this.afstore
+  //     .ref('/SofmanOrdensImg/')
+  //     .child(this.generateUUID())
+  //     .child('Sofman.png');
 
-    const task = ref.putString(this.myPhoto, 'base64', { contentType: 'image/png' });
-    this.myPorcents = task.percentageChanges();
+  //   const task = ref.putString(this.myPhoto, 'base64', { contentType: 'image/png' });
+  //   this.myPorcents = task.percentageChanges();
 
-    task
-      .snapshotChanges()
-      .pipe(finalize(() => (this.myPhotoURL = ref.getDownloadURL())))
-      .subscribe();
-    // alert(JSON.stringify(this.myPhotoURL));
-  }
-  private generateUUID(): any {
-    var d = new Date().getTime();
-    var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx'.replace(/[xy]/g, function (c) {
-      var r = (d + Math.random() * 16) % 16 | 0;
-      d = Math.floor(d / 16);
-      return (c == 'x' ? r : (r & 0x3) | 0x8).toString(16);
-    });
-    return uuid;
-  }
+  //   task
+  //     .snapshotChanges()
+  //     .pipe(finalize(() => (this.myPhotoURL = ref.getDownloadURL())))
+  //     .subscribe();
+  //   // alert(JSON.stringify(this.myPhotoURL));
+  // }
+  // private generateUUID(): any {
+  //   var d = new Date().getTime();
+  //   var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx'.replace(/[xy]/g, function (c) {
+  //     var r = (d + Math.random() * 16) % 16 | 0;
+  //     d = Math.floor(d / 16);
+  //     return (c == 'x' ? r : (r & 0x3) | 0x8).toString(16);
+  //   });
+  //   return uuid;
+  // }
 }

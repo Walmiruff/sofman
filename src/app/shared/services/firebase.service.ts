@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
-import { ApiService } from './api.service';
-
 import { AngularFirestore } from '@angular/fire/firestore';
-import { AngularFireStorage } from '@angular/fire/storage';
+import { ApiService } from './api.service';
 
 @Injectable({
   providedIn: 'root'

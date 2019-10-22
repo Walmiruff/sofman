@@ -36,16 +36,16 @@
         </ion-input>
       </ion-item>
 
-      <ion-item>
-        <ion-label position="stacked">Tipo de Mt: <ion-text color="danger"> * </ion-text>
+       <!--<ion-item>
+        <ion-label position="stacked">Tipo de Manut: <ion-text color="danger"> * </ion-text>
         </ion-label>
         <ion-input type="text" formControlName="ordem_servico" id="ordem_servico">
-        </ion-input>
+        </ion-input> -->
         <!-- <ion-select placeholder="Selecione Tipo Manutenção" formControlName="ordem_servico" id="ordem_servico">
           <ion-select-option *ngFor="let tipomanutencao of tipomanutencaoarray | keyvalue" value="{{tipomanutencao.key}}">
             {{tipomanutencao.key}} {{tipomanutencao.value}}</ion-select-option>
-        </ion-select>-->
-      </ion-item>
+        </ion-select>
+      </ion-item>-->
 
 
       <ion-item>
@@ -143,24 +143,24 @@
       <ion-item>
         <ion-label position="stacked">Descrição: <ion-text color="danger"> * </ion-text>
         </ion-label>
-        <ion-input type="textarea" row=6 formControlName="mensagem" id="mensagem">
-        </ion-input>
+        <ion-textarea type="textarea" row=6 formControlName="mensagem" id="mensagem">
+        </ion-textarea>
       </ion-item>
       <ion-item>
         <ion-icon style="font-size: 49px;" slot="start" ios="ios-camera" md="md-camera" (click)="selectImageInCamera()">
         </ion-icon>
         <ion-label>Anexar Imagem: <ion-text color="danger"> * </ion-text>
-          <ion-progress-bar *ngIf="myPorcents" [value]="myPorcents | async" [buffer]=myPorcents>
+          <!-- <ion-progress-bar *ngIf="myPorcents" [value]="myPorcents | async" [buffer]=myPorcents>
             {{myPorcents | async }}%
-          </ion-progress-bar>
+          </ion-progress-bar> -->
         </ion-label>
-        <ion-input formControlName="imagem" id="imagem"></ion-input>
-        <ion-input type="text" [value]="myPhotoURL | async" formControlName="imagem" id="imagem">
-        </ion-input>
+        <ion-input hidden formControlName="imagem" [value]="imagem" id="imagem"></ion-input>
+
+        <!-- <ion-input hidden type="text" [value]="myPhotoURL | async" formControlName="imagem" id="imagem">
+        </ion-input> -->
 
         <ion-thumbnail slot="start">
-          <ion-img *ngIf="foto" [src]="foto"></ion-img>
-          <ion-img *ngIf="imagem" [src]="result.imagem"> </ion-img>
+          <ion-img *ngIf="imagem" [src]="imagem"></ion-img>
         </ion-thumbnail>
       </ion-item>
     </ion-list>

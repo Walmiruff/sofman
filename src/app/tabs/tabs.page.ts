@@ -33,7 +33,9 @@ export class TabsPage implements OnInit {
     private firebaseservice: FirebaseService
   ) {
     if (this.platform.is('cordova')) {
-      this.initLocation();
+      this.platform.ready().then(() =>{
+        this.initLocation();
+      })
     }
   }
 
@@ -47,7 +49,7 @@ export class TabsPage implements OnInit {
     this.store.dispatch(new ALLSOLICITATIONREQUESTED());
   }
 
-  async logout() {
+ async logout(): Promise<void> {
     const alert = await this.messageservice.alert({
       header: 'Deseja sair?',
       buttons: [
@@ -61,10 +63,13 @@ export class TabsPage implements OnInit {
         },
         {
           text: 'SIM',
-          handler: () => {
+          handler: data => {
+      
             localStorage.clear();
-            this.navctrl.navigateRoot('login');
             console.log('Confirm Okay');
+            if(!localStorage.getItem('id')){
+              this.navctrl.navigateRoot('/')
+            }
           }
         }
       ]

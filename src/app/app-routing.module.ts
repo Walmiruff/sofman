@@ -7,28 +7,27 @@ const routes: Routes = [
     path: '',
     loadChildren: () => import('./login/login.module').then(m => m.LoginPageModule)
   },
+  
   {
     path: 'tabs',
     loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule),
     canActivate: [AuthGuard]
   },
   {
-    path: 'login',
-    loadChildren: () => import('./login/login.module').then(m => m.LoginPageModule)
-  },
-  {
     path: 'tab-solicitacao',
-    loadChildren: './tab-solicitacao/tab-solicitacao.module#TabSolicitacaoPageModule', canActivate: [AuthGuard]
+    loadChildren: () => import('./tab-solicitacao/tab-solicitacao.module').then(m => m.TabSolicitacaoPageModule),
+    canActivate: [AuthGuard]
   },
   {
     path: 'tab-solicitacao-details/:id',
-    loadChildren: './tab-solicitacao-details/tab-solicitacao-details.module#TabSolicitacaoDetailsPageModule'
+    loadChildren: () => import('./tab-solicitacao-details/tab-solicitacao-details.module').then(m => m.TabSolicitacaoDetailsPageModule),
+    canActivate: [AuthGuard]
   },
-  { path: 'tab-form-solicitacao',
-  loadChildren: './tab-form-solicitacao/tab-form-solicitacao.module#TabFormSolicitacaoPageModule',
-  canActivate: [AuthGuard]
-},
-  { path: 'asscliente', loadChildren: './modais/modal/asscliente/asscliente.module#AssclientePageModule' }
+  {
+    path: 'tab-form-solicitacao',
+    loadChildren: () => import('./tab-form-solicitacao/tab-form-solicitacao.module').then(m => m.TabFormSolicitacaoPageModule),
+    canActivate: [AuthGuard]
+  }
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })],

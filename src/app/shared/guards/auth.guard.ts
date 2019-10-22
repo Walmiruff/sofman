@@ -1,4 +1,3 @@
-import { NavController } from '@ionic/angular';
 import { Injectable } from '@angular/core';
 import {
   CanActivate,
@@ -8,20 +7,19 @@ import {
   CanLoad,
   Route
 } from '@angular/router';
+import { NavController } from '@ionic/angular';
 import { Observable } from 'rxjs';
 import { ApiService } from './../services/api.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AuthGuard implements CanActivate {
+export class AuthGuard implements CanActivate , CanLoad {
   codigoUsuario: string;
 
   constructor(private router: Router, private api: ApiService) {
-    if (this.api.getCredentials().iduser) {
-      this.codigoUsuario = api.getCredentials().iduser; // id do login do mySQL
-    }
-    console.log('CanGuard id user -> ' + api.getCredentials().iduser);
+     this.codigoUsuario = api.getCredentials().iduser; // id do login do mySQL
+     console.log('CanGuard id user -> ' + api.getCredentials().iduser);
   }
 
   canActivate(
@@ -37,12 +35,11 @@ export class AuthGuard implements CanActivate {
 
   verificarAcesso() {
     if (this.codigoUsuario) {
-     //  this.router.navigate(['/tabs/tab1']);
+      // this.router.navigate(['/tabs/tab1']);
       return true;
     }
     this.router.navigate(['/login']);
     localStorage.removeItem('id');
-
     return false;
   }
 }

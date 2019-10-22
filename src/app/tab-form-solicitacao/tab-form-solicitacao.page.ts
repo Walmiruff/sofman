@@ -56,7 +56,7 @@ export class TabFormSolicitacaoPage implements OnInit {
       select(selectAllSolicitations)
     ).subscribe(resSolicitacoes => {
       this.result = resSolicitacoes;
-      console.log('Resultodao' + this.result)
+      console.log('Resultodao' + this.result);
     });
 
     this.configurarFormulario();
@@ -70,16 +70,14 @@ export class TabFormSolicitacaoPage implements OnInit {
 
         this.formulario.patchValue({
           id_cliente: this.solicitacoes[0].id_cliente,
-          // tag_id?: string | number;
+
           id_filial: this.solicitacoes[0].id_filial,
           id_subgrupo: this.solicitacoes[0].id_subgrupo, // Lista suspensa
           id_equipamento: this.solicitacoes[0].id_equipamento, // lista suspensa
-          localizacao: this.solicitacoes[0].localizacao,// localizacao?: string;
-          //ordem_servico: this.solicitacoes[0].ordem_servico, // lista supensa
+          localizacao: this.solicitacoes[0].localizacao, // localizacao?: string;
+
           id_setor_executante: this.solicitacoes[0].id_cliente,// lista suspensa
-          //id_contato_filial: this.solicitacoes[0].id_contato_filial,
-          // codigo_solicitacao: this.solicitacoes[0].codigo_solicitacao,
-          //  categoria: this.solicitacoes[0].categoria,
+
           assunto: this.solicitacoes[0].assunto,
           mensagem: this.solicitacoes[0].mensagem,
           prioridade: this.solicitacoes[0].prioridade, // Lista suspensa
@@ -87,10 +85,10 @@ export class TabFormSolicitacaoPage implements OnInit {
           imagem: this.solicitacoes[0].imagem,
           data_inicio: this.solicitacoes[0].data_inicio,
           data_termino: this.solicitacoes[0].data_termino,
-          // log_date?: Date | number;
+
           id_problema: this.solicitacoes[0].id_problema, // lista suspensa
           maquina_parada: this.solicitacoes[0].maquina_parada,
-          //  notificar?: string;
+
         });
       });
     }
@@ -99,13 +97,13 @@ export class TabFormSolicitacaoPage implements OnInit {
   configurarFormulario() {
     this.formulario = this.formBuilder.group({
       id: [null],
-      //tag_id: [null], // Lista suspensa
+
       id_cliente: [null], // Lista suspensa
       id_filial: [null],
       id_subgrupo: [null], // Lista suspensa
       id_equipamento: [null], // lista suspensa
       localizacao: [null],
-      //ordem_servico: [null], // Lista suspensa
+
       id_setor_executante: [null], // lista suspensa
       id_contato_filial: [null],
       codigo_solicitacao: [null],
@@ -117,10 +115,10 @@ export class TabFormSolicitacaoPage implements OnInit {
       imagem: [null],
       data_inicio: [null],
       data_termino: [null],
-      // log_date: [null],
+
       id_problema: [null], // lista suspensa
       maquina_parada: [null],
-      //  notificar: [null],
+
     });
   }
 
@@ -171,17 +169,12 @@ export class TabFormSolicitacaoPage implements OnInit {
 
       this.camera
         .getPicture({
-          quality: 40,
+          quality: 70,
           allowEdit: true,
-
           destinationType: this.camera.DestinationType.DATA_URL,
           sourceType: this.camera.PictureSourceType.CAMERA,
-          encodingType: this.camera.EncodingType.PNG,
-          saveToPhotoAlbum: true,
-
-          // destinationType: this.camera.DestinationType.DATA_URL,
-          // sourceType: this.camera.PictureSourceType.CAMERA,
-          // encodingType: this.camera.EncodingType.PNG,
+          encodingType: this.camera.EncodingType.JPEG,
+          saveToPhotoAlbum: true, 
           mediaType: this.camera.MediaType.PICTURE,
           correctOrientation: true,
           targetWidth: 600,
@@ -192,7 +185,7 @@ export class TabFormSolicitacaoPage implements OnInit {
           imageData => {
             const base64data = 'data:image/jpeg;base64,' + imageData;
             this.foto = base64data;
-
+            this.imagem = base64data;
             this.myPhoto = imageData;
 
             aler.dismiss();

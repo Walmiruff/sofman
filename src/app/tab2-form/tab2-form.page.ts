@@ -11,8 +11,7 @@ import { selectAllOrdens } from '../store/selectors/ordem.selectors';
 
 import { FirebaseService } from '../shared/services/firebase.service';
 import { SignaturePad } from 'angular2-signaturepad/signature-pad';
-import { AssclientePage } from '../modais/modal/asscliente/asscliente.page';
-
+ 
 @Component({
   selector: 'app-tab2-form',
   templateUrl: './tab2-form.page.html',
@@ -141,12 +140,12 @@ export class Tab2FormPage implements OnInit {
     return modalclose;
   }
 
-  async openModalAsscliente() {
-    const modal = await this.modalController.create({
-      component: AssclientePage
-    });
-    return modal.present();
-  }
+  // async openModalAsscliente() {
+  //   const modal = await this.modalController.create({
+  //     component: AssclientePage
+  //   });
+  //   return modal.present();
+  // }
 
   drawCompleteFunc() {
     this.isDrawing = false;
